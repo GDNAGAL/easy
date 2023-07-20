@@ -306,7 +306,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="AddStudents.php"><i class="fa fa-circle-o"></i> Add Students</a></li>
-            <li><a href="students.php?cls=all"><i class="fa fa-circle-o"></i> View Students</a></li>
+            <li><a href="students.php"><i class="fa fa-circle-o"></i> View Students</a></li>
           </ul>
         </li>
         <li class="treeview">

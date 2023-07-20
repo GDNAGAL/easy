@@ -62,13 +62,15 @@
     <section class="content">
       <!-- Default box -->
       <div class="box">
-        <input type="hidden" value="<?php echo $_GET['cls']; ?>" id="cls">
+        <!-- <input type="hidden" value="<?php echo $_GET['cls']; ?>" id="cls"> -->
             <!-- /.box-header -->
 
             <div class="box-body">
                <div class="form-group">
                 <select class="form-control select2" id="selectclass" style="width: 20%;">
-                  <option value="">Select Class</option>
+                  <option value="" selected>Select Class</option>
+                  <option value="all">All Classes</option>
+
                 </select>
                </div>
               <table id="studenttable" class="table table-bordered table-striped">
@@ -125,20 +127,21 @@
 <script>
 
  $( document ).ready(function() {
-const cls = $('#cls').val();
-console.log(cls)
-getstudents(cls);
-$(`#selectclass `).find(`option[value='${cls}']`).attr('selected', true);
+// const cls = $('#cls').val();
+// console.log(cls)
+//getstudents(cls);
+// $(`#selectclass `).find(`option[value='${cls}']`).attr('selected', true);
 
 //$("#selectclass").val(cls);
 
 $('#selectclass').on('change', function(){
-   window.location = 'students.php?cls=' + $(this).val();
+   //window.location = 'students.php?cls=' + $(this).val();
+   getstudents($(this).val())
 })
 
 
 function getstudents(cls){
-  const dataa = {cls : cls};
+const dataa = {cls : cls};
 $.ajax({
     "url": "getData/get_Students.php",
     "type": "POST",
@@ -147,32 +150,40 @@ $.ajax({
     "success": function (data) {
         //console.log(data)
        if (data == 'null') {
-          return false;
-       }
-        data = JSON.parse(data);  // Parse the JSON strin
         var table = $('#studenttable').DataTable({
             data: data.data,  // Get the data object
             retrieve: true,
-            columns: [
-                { 'data': 'class_name' },
-                { 'data': 'rollno' },
-                { 'data': 'admissionno' },
-                { 'data': 'student_name',
-                  "render": function ( data, type, row, meta ) {
-                          return '<a href="">'+data+'</a>';
-                } 
-                },
-                { 'data': 'father_name' },
-                { 'data': 'mother_name' },
-                { 'data': 'dateofbirth' },
-                { 'data': 'gender' },
-                { 'data': 'category' },
-                { 'data': 'mobile' },
-                { 'data': 'aadhar' },
-      
-                
-            ]
+            destroy: true,
     })
+          return false;
+       }else{
+
+         data = JSON.parse(data);  // Parse the JSON strin
+         var table = $('#studenttable').DataTable({
+           data: data.data,  // Get the data object
+           retrieve: true,
+           destroy: true,
+           columns: [
+             { 'data': 'class_name' },
+             { 'data': 'rollno' },
+             { 'data': 'admissionno' },
+             { 'data': 'student_name',
+              "render": function ( data, type, row, meta ) {
+                return '<a href="">'+data+'</a>';
+              } 
+            },
+            { 'data': 'father_name' },
+            { 'data': 'mother_name' },
+            { 'data': 'dateofbirth' },
+            { 'data': 'gender' },
+            { 'data': 'category' },
+            { 'data': 'mobile' },
+            { 'data': 'aadhar' },
+            
+            
+          ]
+        })
+      }
 }
 
 })
