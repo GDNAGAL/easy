@@ -50,7 +50,7 @@
       right: auto;
       left: auto;
       display: block;
-      z-index: 1;
+      z-index: 2;
     }
 
     .example-modal .modal {
