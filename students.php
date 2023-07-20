@@ -62,7 +62,6 @@
     <section class="content">
       <!-- Default box -->
       <div class="box">
-        <!-- <input type="hidden" value="<?php echo $_GET['cls']; ?>" id="cls"> -->
             <!-- /.box-header -->
 
             <div class="box-body">

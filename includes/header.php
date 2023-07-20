@@ -305,8 +305,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="AddStudents.php"><i class="fa fa-circle-o"></i> Add Students</a></li>
-            <li><a href="students.php"><i class="fa fa-circle-o"></i> View Students</a></li>
+            <li><a href="AddStudents"><i class="fa fa-circle-o"></i> Add Students</a></li>
+            <li><a href="students"><i class="fa fa-circle-o"></i> View Students</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -318,8 +318,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="AddTeacher.php"><i class="fa fa-circle-o"></i> Add Teacher</a></li>
-            <li><a href="teachers.php"><i class="fa fa-circle-o"></i> View Teachers</a></li>
+            <li><a href="AddTeacher"><i class="fa fa-circle-o"></i> Add Teacher</a></li>
+            <li><a href="teachers"><i class="fa fa-circle-o"></i> View Teachers</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -331,7 +331,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="" onclick="window.open('Subjects.php','_self')">
+          <a href="" onclick="window.open('Subjects','_self')">
             <i class="fa fa-book"></i>
             <span>Subjects</span>
             <span class="pull-right-container">
@@ -347,8 +347,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="FillMarksSelectClass.php"><i class="fa fa-circle-o"></i> Fill Marks</a></li>
-            <li><a href="Exams.php"><i class="fa fa-circle-o"></i> Exams Details</a></li>
+            <li><a href="FillMarksSelectClass"><i class="fa fa-circle-o"></i> Fill Marks</a></li>
+            <li><a href="Exams"><i class="fa fa-circle-o"></i> Exams Details</a></li>
             <li><a href=""><i class="fa fa-circle-o"></i> Time-Table</a></li>
             <li><a href=""><i class="fa fa-circle-o"></i> Print Marksheets</a></li>
             <li><a href=""><i class="fa fa-circle-o"></i> Print ResultSheet</a></li>
