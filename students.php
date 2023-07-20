@@ -127,19 +127,19 @@
 <script>
 
  $( document ).ready(function() {
-// const cls = $('#cls').val();
-// console.log(cls)
-//getstudents(cls);
-// $(`#selectclass `).find(`option[value='${cls}']`).attr('selected', true);
-
-//$("#selectclass").val(cls);
+  var table = $('#studenttable').DataTable();
 
 $('#selectclass').on('change', function(){
-   //window.location = 'students.php?cls=' + $(this).val();
+   var table = $('#studenttable').DataTable();
+   //clear datatable
+   table.clear().draw();
+   //destroy datatable
+   table.destroy();
+   //call funtion for get student data from database
    getstudents($(this).val())
 })
 
-
+//function for get data from database
 function getstudents(cls){
 const dataa = {cls : cls};
 $.ajax({
@@ -150,12 +150,8 @@ $.ajax({
     "success": function (data) {
         //console.log(data)
        if (data == 'null') {
-        var table = $('#studenttable').DataTable({
-            data: data.data,  // Get the data object
-            retrieve: true,
-            destroy: true,
-    })
-          return false;
+        var table = $('#studenttable').DataTable();
+          return ;
        }else{
 
          data = JSON.parse(data);  // Parse the JSON strin
@@ -185,11 +181,7 @@ $.ajax({
         })
       }
 }
-
 })
-
-
-
 }
 })
 </script>
