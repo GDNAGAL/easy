@@ -12,7 +12,7 @@ while($row = mysqli_fetch_assoc($getschooldata)){
   $nameofschool=$row['nameofschool'];
 }
 if (!isset($_SESSION['schoolusername'])||!isset($_SESSION['year'])) {
-	header("Location:login.php");
+	header("Location:login");
 }
 
 // create Functions 
