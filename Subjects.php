@@ -75,15 +75,23 @@
     <section class="content">
       <!-- Default box -->
       <div class="box">
-            <div class="box-header" style="max-width: 190px;">
-                  <select class="form-control col-xs-3 select2">
+        <tr>
+            <div class="box-header" >
+              <div class="col-xs-10">
+                  <select class="form-control select2" style="max-width:190px";>
                     <option>Select Class Category</option>
                     <option>Category A (PP3+ - 2nd)</option>
                     <option>Category B (3rd - 4th)</option>
                     <option>Category C (6th - 7th)</option>
                     <option>Category D (9th)</option>
+
                   </select>
+                </div>
+
+                  <button class="btn col-xs-2 btn-flat  btn-success" id="createnewclass" style="position:relative;float: right;" data-target="#addsubjectModal">Add New Subject</button>
              </div>
+           </tr>
+
 
             <!-- /.box-header -->
             <div class="box-body">
@@ -118,7 +126,46 @@
 
 
 <!-- Modal -->
-  <div class="modal fade" id="modal-default">
+  <div class="modal fade" id="addsubjectModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <form action="" method="post" id="editclassform" autocomplete="off">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add New Subject</h4>
+              </div>
+              <form>
+              <div class="modal-body">
+                <label>Subject Name :</label>
+                <input type="hidden" id="modal_class_Id" class="form-control" name="class_id">
+                <input type="text" id="new_subject_name" class="form-control" name="class_name">
+                <div class="form-group">
+                <label>Select Group :</label>
+                <select class="form-control select2" id="group_list" name="class_teacher" style="width: 100%;">
+                   <option value="Group 1">Group 1</option>
+                   <option value="Group 2">Group 2</option>
+                   <option value="Group 3">Group 3</option>
+                   <option value="Group 4">Group 4</option>
+                </select>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+
+                <button type="submit" id="newsubjectsubmit" name="updateclass" class="btn btn-primary">Save Changes</button>
+                </form>
+              </div>
+            </form>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+
+
+          <div class="modal fade" id="modal-default">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -144,6 +191,7 @@
 
 
 
+
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -162,10 +210,43 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- page script -->
+<!-- Assuming you have included jQuery before this script -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#newsubjectsubmit").on("click", function(e) {
+      e.preventDefault();
+      var new_subject_name = $("#new_subject_name").val();
+      var groupname = $("#group_list").val();
+
+      $.ajax({
+        url: "insert/insertnewsubject.php",
+        type: "POST",
+        data: { new_subject_name: new_subject_name, groupname: groupname },
+        success: function(data) {
+          if (data == '1') {
+            alert("success");
+            $('#addsubjectModal').modal('hide');
+          } else {
+            alert("failed");
+          }
+        }
+      });
+    });
+  });
+</script>
+
 <script>
   $(function () {
     $('.select2').select2()
   })
 </script>
+<script>
+$(function() {
+  $('#createnewclass').click(function () {
+    $('#addsubjectModal').modal('show');
+  });
+});
+</script>
+
 </body>
 </html>
