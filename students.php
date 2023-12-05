@@ -126,6 +126,11 @@
 <script>
 
  $( document ).ready(function() {
+  getstudents("all")
+  $(function () {
+    $('.select2').select2()
+  })
+
   var table = $('#studenttable').DataTable();
 
 $('#selectclass').on('change', function(){
@@ -146,6 +151,7 @@ $.ajax({
     "type": "POST",
     "data": dataa,
     "datatype": 'json',
+    "async": false,
     "success": function (data) {
         //console.log(data)
        if (data == 'null') {
