@@ -1,7 +1,4 @@
- <?php require('session.php');
- require("connection.php");
- ?>
- <header class="main-header">
+<header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -218,7 +215,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $name_of_hm; ?></span>
+              <span class="hidden-xs">ml mehar</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -226,8 +223,8 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  <?php echo $name_of_hm; ?> - Web Developer
-                  <small><?php echo $_SESSION['year']; ?></small>
+                  hgfdfg - Web Developer
+                  <small>jhfccvbn</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -271,7 +268,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $name_of_hm; ?></p>
+          <p>ml mehar</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

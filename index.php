@@ -64,12 +64,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>
-              <?php 
-              $sql = mysqli_query($conn, "SELECT * FROM `tbl_student` WHERE `year` = '$year' AND `school_id` = '$schoolid' ");
-              echo mysqli_num_rows($sql);
-              ?>
-              </h3>
+              <h3>785</h3>
 
               <p>Students</p>
             </div>
@@ -84,12 +79,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>
-                <?php 
-              $sql = mysqli_query($conn, "SELECT * FROM `tbl_teachers` WHERE `year` = '$year' AND `school_id` = '$schoolid' ");
-              echo mysqli_num_rows($sql);
-              ?>
-              </h3>
+              <h3>218</h3>
 
               <p>Teachers</p>
             </div>
@@ -181,5 +171,6 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="custom/js/index.js"></script>
 </body>
 </html>

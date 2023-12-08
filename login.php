@@ -19,60 +19,49 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <style>
+    body{
+      background-image: url("dist/img/lback.avif");
+    }
   input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}</style>
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+</style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  
-  <!-- /.login-logo -->
   <div class="login-box-body">
-  <div class="login-logo">
-    <b>School </b>Log In
-  </div>
+    <div class="login-logo">
+      <b>School </b>Log In
+    </div>
     <form action="" id="login_form" method="post">
-      <span id="validate" style="color:red"></span>
+      <span id="validate"></span>
       <div class="form-group has-feedback">
         <input type="number" autocomplete="off" class="form-control" id="username" placeholder="Mobile No." name="username">
         <span class=" glyphicon glyphicon-user form-control-feedback"></span>
       </div>
-      <div class="form-group">
-                  <select class="form-control select2" id="session_year" name="session_year">
-                    <option>Select Session--</option>
-                  </select>
-                </div>
       <div class="form-group has-feedback">
         <input type="password" id="password" class="form-control" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
-        <a href="#">Reset Password</a>
+          <a href="#">Reset Password</a>
         </div>
-        <!-- /.col -->
         <div class="col-xs-4">
           <button type="submit" id="login_submit" class="btn btn-primary btn-block btn-flat" name="login">Log In</button>
         </div>
-        <!-- /.col -->
       </div>
-    </form>
-
-    
+    </form> 
   </div>
-  <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-<script src="custom/login.js"></script>
+<script src="custom/js/login.js"></script>
 <script>
   $(function () {
     $('.select2').select2();
