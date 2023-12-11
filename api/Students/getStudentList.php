@@ -2,37 +2,37 @@
 // Path : api/Students/getStudentList
 include("../connection.php");
 
-if(isset($_POST['getstudent'])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+	$headers = getallheaders();
+	if (array_key_exists('Authorization', $headers) && preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)){
 
-    $student = mysqli_query($conn, "SELECT * FROM `students`");
-    if (mysqli_num_rows($student)>0) {
+		if(verifyToken($matches[1])){
+            $sid = getSchoolID($matches[1]);
+			$class = $_POST['cls'];
 
-		$studentArr = [];
-		while($row = mysqli_fetch_assoc($student)){
-			$studentArr[] = $row;
+			if ($class == 'all') {
+				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.student_class = classrooms.ClassRoomID WHERE students.school_id = '$sid'");
+			}else{
+				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.student_class = classrooms.ClassRoomID WHERE students.school_id = '$sid' AND students.student_class = '$class'");
+			}
+
+			while($row = mysqli_fetch_assoc($selectstudentlist)) {
+			$records["data"][] = $row;
+			}
+			echo json_encode($records);
+
+		}else{
+			http_response_code(401);
+			header('Content-Type: application/json');
+			$data = array ("Message" => "Unauthorized");
+			echo json_encode( $data );
 		}
 
-		http_response_code(200);
-		header('Content-Type: application/json');
-		$data = array ("Status" => "Success", "StudentList" => $studentArr);
-		echo json_encode( $data );
-
 	}else{
-
-		http_response_code(404);
+		http_response_code(401);
 		header('Content-Type: application/json');
-		$data = array ("Status" => "Failed", "Message" => "No Data Found");
+		$data = array ("Message" => "Unauthorized");
 		echo json_encode( $data );
-
 	}
-	
-}else{
-
-	http_response_code(401);
-    header('Content-Type: application/json');
-    $data = array ("Message" => "UnAuthorized Access");
-    echo json_encode( $data );
-	
 }
-
 ?>

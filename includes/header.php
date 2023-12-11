@@ -1,3 +1,43 @@
+<?php
+$url = 'http://localhost:3000/easy';
+if(isset($_COOKIE['Token'])){
+  $token = $_COOKIE['Token'];
+  $curl = curl_init();
+  curl_setopt_array($curl, array(
+    CURLOPT_URL => $url.'/api/getLoginUserData',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HTTPHEADER => array(
+      'Authorization: Bearer '.$token
+    ),
+  ));
+  
+  $response = curl_exec($curl);
+  curl_close($curl);
+  $responseJSON = json_decode($response,true);
+  if($response == "Invalid Token"){
+    setcookie("Token", "", time()-3600);
+    header("Location: login");
+  }
+
+  $SchoolID = $responseJSON[0]['SchoolID'];
+  $SchoolHeadName = $responseJSON[0]['SchoolHeadName'];
+  $CurrentYear = $responseJSON[0]['CurrentYear'];
+  $SchoolName = $responseJSON[0]['SchoolName'];
+  $SchoolAddress = $responseJSON[0]['SchoolAddress'];
+
+}else{
+  header("Location: login");
+}
+
+?>
+<div id="cover-spin"></div>
+
 <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
@@ -215,7 +255,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">ml mehar</span>
+              <span class="hidden-xs"><?php echo $SchoolHeadName; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -223,8 +263,8 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  hgfdfg - Web Developer
-                  <small>jhfccvbn</small>
+                  <?php echo $SchoolName; ?>
+                  <small><?php echo $SchoolAddress; ?></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -268,7 +308,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>ml mehar</p>
+          <p><?php echo $SchoolHeadName; ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -302,8 +342,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="AddStudents"><i class="fa fa-circle-o"></i> Add Students</a></li>
-            <li><a href="students"><i class="fa fa-circle-o"></i> View Students</a></li>
+            <li><a href="AddStudents"><i class="fa fa-dot-circle-o"></i> Add Students</a></li>
+            <li><a href="students"><i class="fa fa-dot-circle-o"></i> View Students</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -315,8 +355,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="AddTeacher"><i class="fa fa-circle-o"></i> Add Teacher</a></li>
-            <li><a href="teachers"><i class="fa fa-circle-o"></i> View Teachers</a></li>
+            <li><a href="AddTeacher"><i class="fa fa-dot-circle-o"></i> Add Teacher</a></li>
+            <li><a href="teachers"><i class="fa fa-dot-circle-o"></i> View Teachers</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -344,11 +384,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="FillMarksSelectClass"><i class="fa fa-circle-o"></i> Fill Marks</a></li>
-            <li><a href="Exams"><i class="fa fa-circle-o"></i> Exams Details</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Time-Table</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Print Marksheets</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Print ResultSheet</a></li>
+            <li><a href="FillMarksSelectClass"><i class="fa fa-dot-circle-o"></i> Fill Marks</a></li>
+            <li><a href="Exams"><i class="fa fa-dot-circle-o"></i> Exams Details</a></li>
+            <li><a href=""><i class="fa fa-dot-circle-o"></i> Time-Table</a></li>
+            <li><a href=""><i class="fa fa-dot-circle-o"></i> Print Marksheets</a></li>
+            <li><a href=""><i class="fa fa-dot-circle-o"></i> Print ResultSheet</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -363,7 +403,11 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-
+<script>
+  if(performance.navigation.type == 2){
+   location.reload(true);
+  }
+</script>
 
  
 

@@ -45,7 +45,7 @@ $("#login_form").on('submit', function(e){
       $("#validate").html(`<span style='color:green'>${result.Message}</span>`)
       $("#login_form")[0].reset() 
       document.cookie=  `Token=${result.Token}`; 
-      window.localStorage.userdata = JSON.stringify(result);
+      //window.localStorage.userdata = JSON.stringify(result);
       window.location = "index";
     },
     error: function(err){

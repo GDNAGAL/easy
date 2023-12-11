@@ -1,37 +1,39 @@
 $( document ).ready(function() {
-
+  getDashboardData();
   function getCookie(cookieName) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
       let [key,value] = el.split('=');
       cookie[key.trim()] = value;
     })
-    return cookie[cookieName];
+    return cookie[cookieName]+"==";
   }
 
-  //Call ajax for login
-  if(getCookie("Token") == undefined){
-    return false;
-  }
-  
-  let data = new FormData();
-  data.append("getDashboardData", "");
-  $.ajax({
-    type: "GET", 
-    url: "api/Dashboard/getDashboardData",              
-    data: data, 
-    contentType: false,       
-    cache: false,             
-    processData:false,
-    headers: {
-      'Authorization': 'Bearer ' + getCookie("Token")
-    },
-    success: function(result){
-
-    },
-    error: function(err){
-
+  function getDashboardData(){
+    if(getCookie("Token") == undefined){
+      // localStorage.removeItem(userdata);
+      window.location = "login";
+      return false;
     }
-  });
 
+    let data = new FormData();
+    data.append("getDashboardData", "");
+    $.ajax({
+      type: "GET", 
+      url: "api/Dashboard/getDashboardData",              
+      data: data, 
+      contentType: false,       
+      cache: false,             
+      processData:false,
+      headers: {
+        'Authorization': 'Bearer ' + getCookie("Token")
+      },
+      success: function(result){
+        $('#cover-spin').hide();
+      },
+      error: function(err){
+
+      }
+    });
+  }
 });

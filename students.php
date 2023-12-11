@@ -33,13 +33,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <link rel="stylesheet" href="custom/css/style.css">
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -121,74 +115,7 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="custom/data.js"></script>
 <!-- page script -->
-<script>
-
- $( document ).ready(function() {
-  getstudents("all")
-  $(function () {
-    $('.select2').select2()
-  })
-
-  var table = $('#studenttable').DataTable();
-
-$('#selectclass').on('change', function(){
-   var table = $('#studenttable').DataTable();
-   //clear datatable
-   table.clear().draw();
-   //destroy datatable
-   table.destroy();
-   //call funtion for get student data from database
-   getstudents($(this).val())
-})
-
-//function for get data from database
-function getstudents(cls){
-const dataa = {cls : cls};
-$.ajax({
-    "url": "getData/get_Students.php",
-    "type": "POST",
-    "data": dataa,
-    "datatype": 'json',
-    "async": false,
-    "success": function (data) {
-        //console.log(data)
-       if (data == 'null') {
-        var table = $('#studenttable').DataTable();
-          return ;
-       }else{
-
-         data = JSON.parse(data);  // Parse the JSON strin
-         var table = $('#studenttable').DataTable({
-           data: data.data,  // Get the data object
-           retrieve: true,
-           destroy: true,
-           columns: [
-             { 'data': 'class_name' },
-             { 'data': 'rollno' },
-             { 'data': 'admissionno' },
-             { 'data': 'student_name',
-              "render": function ( data, type, row, meta ) {
-                return '<a href="">'+data+'</a>';
-              } 
-            },
-            { 'data': 'father_name' },
-            { 'data': 'mother_name' },
-            { 'data': 'dateofbirth' },
-            { 'data': 'gender' },
-            { 'data': 'category' },
-            { 'data': 'mobile' },
-            { 'data': 'aadhar' },
-            
-            
-          ]
-        })
-      }
-}
-})
-}
-})
-</script>
+<script src="custom/js/students.js"></script>
 </body>
 </html>

@@ -7,19 +7,21 @@ if(isset($_POST['login'])){
 	$myusername = mysqli_real_escape_string($conn,$_POST['username']);
     $mypassword = mysqli_real_escape_string($conn,$_POST['password']); 
 
-    $result = mysqli_query($conn, "SELECT SchoolName, SchoolAddress, SchoolHeadName, SchoolHeadMobile, CurrentYear FROM `schools` WHERE `SchoolUserName` = '$myusername' AND `SchoolPassword` = '$mypassword'");
+    $result = mysqli_query($conn, "SELECT SchoolID, SchoolName, SchoolAddress, SchoolHeadName, SchoolHeadMobile, CurrentYear FROM `schools` WHERE `SchoolUserName` = '$myusername' AND `SchoolPassword` = '$mypassword'");
     if (mysqli_num_rows($result)==1) {
-
-		$schoolArray = [];
 		$row = mysqli_fetch_assoc($result);
-		$row['LoginTime'] = date("Y-m-d h:m:s"); 
-		$schoolArray[] = $row;
-		
 
+		$loginDateTime = date("Y-m-d h:m:s"); 
+		$schoolArray = [];
+		$schoolArray[] = $row;
 		$accesstoken = encrypt(json_encode($schoolArray));
+        $schoolID = $row['SchoolID'];
+		mysqli_query($conn, "UPDATE `login_logs` SET `Token`='Session Log Out' WHERE `SchoolID`='$schoolID'");
+		mysqli_query($conn, "INSERT INTO `login_logs`(`SchoolID`, `Token`, `LoginDateTime`) VALUES ('$schoolID','$accesstoken','$loginDateTime')");
+
 		http_response_code(200);
 		header('Content-Type: application/json');
-		$data = array ("Status" => "Success", "Message" => "Login Success", "UserData" => $schoolArray, "Token" => $accesstoken);
+		$data = array ("Status" => "Success", "Message" => "Login Success", "Token" => $accesstoken);
 		echo json_encode( $data );
 
 	}else{

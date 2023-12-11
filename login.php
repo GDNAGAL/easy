@@ -1,3 +1,8 @@
+<?php 
+if(isset($_COOKIE['Token'])){
+  header("Location: index");
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
