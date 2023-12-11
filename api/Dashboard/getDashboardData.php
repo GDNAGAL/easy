@@ -14,11 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 			// Call the stored procedure
 			$sid = getSchoolID($matches[1]);
 			$getDashboardData = mysqli_fetch_assoc(mysqli_query($conn,"CALL getDashboardData($sid)"));
-			$dashboardArray[] = $getDashboardData;
 
 			http_response_code(200);
 			header('Content-Type: application/json');
-			$data = array ("Status" => "Success", "DashboardData" => $dashboardArray);
+			$data = array ("Status" => "Success", "DashboardData" => $getDashboardData);
 			echo json_encode( $data );
 			
 			

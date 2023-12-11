@@ -29,7 +29,11 @@ $( document ).ready(function() {
         'Authorization': 'Bearer ' + getCookie("Token")
       },
       success: function(result){
+        
+        $("#totalStudent").html(result.DashboardData.totalstudent)
+        $("#totalTeacher").html(result.DashboardData.totalteacher)
         $('#cover-spin').hide();
+
       },
       error: function(err){
 

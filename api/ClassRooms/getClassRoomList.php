@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
-			$class = mysqli_query($conn, "SELECT * FROM `classrooms` WHERE `School` = '$sid' ORDER by `ClassRoomID`");
+			$class = mysqli_query($conn, "SELECT * FROM `classrooms` WHERE `SchoolID` = '$sid' ORDER by `ClassRoomID`");
 			while($row = mysqli_fetch_assoc($class)) {
 
 				echo "<option value='$row[ClassRoomID]'>$row[ClassRoomName]</option>";

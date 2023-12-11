@@ -11,15 +11,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$class = $_POST['cls'];
 
 			if ($class == 'all') {
-				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.student_class = classrooms.ClassRoomID WHERE students.school_id = '$sid'");
+				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID WHERE students.SchoolID = '$sid'");
 			}else{
-				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.student_class = classrooms.ClassRoomID WHERE students.school_id = '$sid' AND students.student_class = '$class'");
+				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID WHERE students.SchoolID = '$sid' AND students.ClassRoomID = '$class'");
 			}
 
-			while($row = mysqli_fetch_assoc($selectstudentlist)) {
-			$records["data"][] = $row;
+			http_response_code(200);
+			header('Content-Type: application/json');
+			if(mysqli_num_rows($selectstudentlist)>0){
+				while($row = mysqli_fetch_assoc($selectstudentlist)) {
+					$records[] = $row;
+					}
+				$data = array ("Status"=> "OK","Message" => "Success", "StudentList" => $records);
+				echo json_encode( $data );
+			}else{
+				$data = array ("Status"=> "NOT_FOUND","Message" => "No Student Found");
+				echo json_encode( $data );
 			}
-			echo json_encode($records);
+			
 
 		}else{
 			http_response_code(401);

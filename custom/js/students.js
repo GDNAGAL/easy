@@ -14,21 +14,20 @@ $( document ).ready(function() {
       $('.select2').select2()
     })
   
-    var table = $('#studenttable').DataTable();
+    $('#studenttable').DataTable();
   
   $('#selectclass').on('change', function(){
-     var table = $('#studenttable').DataTable();
-     //clear datatable
-     table.clear().draw();
-     //destroy datatable
-     table.destroy();
-     //call funtion for get student data from database
-     getstudents($(this).val())
+        var table = $('#studenttable').DataTable();
+        table.clear().draw();
+        table.destroy();
+        
+        getstudents($(this).val())
   })
   
   //function for get data from database
   function getstudents(cls){
-  const dataa = {cls : cls};
+        // $('#cover-spin').show(0);
+        const dataa = {cls : cls};
         $.ajax({
             "url": "api/Students/getStudentList",
             "type": "POST",
@@ -40,39 +39,39 @@ $( document ).ready(function() {
             },
             "success": function (data) {
                 $('#cover-spin').hide();
-                //console.log(data)
-                if (data == 'null') {
-                var table = $('#studenttable').DataTable();
-                    return ;
-                }else{
-        
-                data = JSON.parse(data);  // Parse the JSON strin
-                var table = $('#studenttable').DataTable({
-                    data: data.data,  // Get the data object
-                    retrieve: true,
-                    destroy: true,
-                    columns: [
-                    { 'data': 'class_name' },
-                    { 'data': 'rollno' },
-                    { 'data': 'admissionno' },
-                    { 'data': 'student_name',
-                        "render": function ( data, type, row, meta ) {
-                        return '<a href="">'+data+'</a>';
-                        } 
-                    },
-                    { 'data': 'father_name' },
-                    { 'data': 'mother_name' },
-                    { 'data': 'dateofbirth' },
-                    { 'data': 'gender' },
-                    { 'data': 'category' },
-                    { 'data': 'mobile' },
-                    { 'data': 'aadhar' },
+                if (data.Status == 'NOT_FOUND') {
                     
-                    ]
-                })
+                    $('#studenttable').DataTable();
+                    return ;
+                    
+                }else{
+                    
+                    $('#studenttable').DataTable({
+                        data: data.StudentList,  // Get the data object
+                        retrieve: true,
+                        destroy: true,
+                        columns: [
+                        { 'data': 'ClassRoomName' },
+                        { 'data': 'RollNo' },
+                        { 'data': 'AdmissionNo' },
+                        { 'data': 'StudentName',
+                            "render": function ( data, type, row, meta ) {
+                            return '<a href="">'+data+'</a>';
+                            } 
+                        },
+                        { 'data': 'StudentFatherName' },
+                        { 'data': 'StudentMotherName' },
+                        { 'data': 'DateofBirth' },
+                        { 'data': 'Gender' },
+                        { 'data': 'Category' },
+                        { 'data': 'StudentMobileNo' },
+                        { 'data': 'StudentAadhar' },
+                        
+                        ]
+                    })
                 }
             }
-            })
+        })
     }
 
 
@@ -85,7 +84,12 @@ $( document ).ready(function() {
                 },
                 success: function(result){
                     $("#selectclass").append(result);
-                    getstudents("all")
+                    var table = $('#studenttable').DataTable();
+                    //clear datatable
+                    table.clear().draw();
+                    //destroy datatable
+                    table.destroy();
+                    getstudents("all");
                 },
                 error : function(err){
                     $('#cover-spin').hide();
