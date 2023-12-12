@@ -30,14 +30,7 @@
   <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
+  <link rel="stylesheet" href="custom/css/style.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <style>
@@ -55,120 +48,144 @@ input::-webkit-inner-spin-button {
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   <?php require("includes/header.php")?>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  <section class="content-header">
-      <h1>
-        Add New Student 
-        <small>New Admission</small>
-      </h1>
-      
-    </section>
-    <!-- Main content -->
-    <section class="content">
-      <!-- Default box -->
-            <!-- /.box-header -->
-            <div class="box box-default">
-        <div class="box-header with-border">
-          <h3 class="box-title">Basic Information</h3>
-        </div>
+    <section class="content-header">
+        <h1>
+          Add New Student 
+          <small>New Admission</small>
+        </h1>
+        
+      </section>
+      <!-- Main content -->
+      <section class="content">
+        <!-- Default box -->
         <!-- /.box-header -->
-        <div class="box-body">
-          <div class="row">
-            <form action="" method="post" id="addstudentform" autocomplete="off">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Student Name :</label>
-                <input type="text" class="form-control" placeholder="Enter Student Name" name="studentname" required>
-              </div>
-              <div class="form-group">
-                <label>Father Name :</label>
-                <input type="text" class="form-control"  placeholder="Enter Father Name" name="fathername" required>
-              </div>
-              <div class="form-group">
-                <label>Mother Name :</label>
-                <input type="text" class="form-control"  placeholder="Enter Mother Name" name="mothername" required>
-              </div>
-              <div class="form-group">
-                <label>Date of Birth :</label>
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <h3 class="box-title">Basic Information</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <!-- <div class="row"> -->
+              <form action="" method="post" id="addstudentform" autocomplete="off">
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Select Class :</label>
+                      <select class="form-control select2" id="selectclass" style="width: 100%;" name="studentclass" required>
+                        <option selected="selected" value="">Select Class</option>
+                      </select>
+                    </div>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="dob" required>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Admission No. :</label>
+                      <input type="text" class="form-control" placeholder="Enter Admission No." name="adno" required>
+                    </div>
+                  </div>
                 </div>
-               </div>
-                <div class="form-group">
-                <label>Catagory :</label>
-                <select class="form-control select2" style="width: 100%;" name="category">
-                  <option selected="selected" value="">Select Catagory</option>
-                  <option>Genral</option>
-                  <option>OBC</option>
-                  <option>SC</option>
-                  <option>ST</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Address :</label>
-                <input type="text" class="form-control" placeholder="Enter Address" name="address">
-              </div>
-              <!-- /.form-group -->
-           </div>
-            <!-- /.col -->
-            <div class="col-md-6">
-            <div class="form-group">
-                <label>Select Class :</label>
-                <select class="form-control select2" id="selectclass" style="width: 100%;" name="studentclass" required>
-                  <option selected="selected" value="">Select Class</option>
-                </select>
-              </div>
-              <!-- /.form-group -->
-              <div class="form-group">
-                <label>Admission No. :</label>
-                <input type="text" class="form-control" placeholder="Enter Admission No." name="adno" required>
-              </div>
-               <div class="form-group">
-                <label>Roll No. :</label>
-                <input type="number" class="form-control" placeholder="Enter Roll Number" name="rollno" required>
-              </div>
-              <div class="form-group">
-                <label>Select Gender :</label>
-                <select class="form-control select2" style="width: 100%;" name="gender" required>
-                  <option selected="selected" value="">Select Gender</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Mobile Number :</label>
-                <input type="number" class="form-control" placeholder="Enter Mobile Number" name="mobile">
-              </div>
-              <div class="form-group">
-                <label>Aadhar Number :</label>
-                <input type="number" class="form-control" placeholder="Enter Aadhar Number" name="aadhar">
-              </div>
-              <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-          </div>
-          <!-- /.row -->
-          <div class="row">
 
-              <div class="col-md-6">
-                  <button class="btn btn-flat btn-success" name="addstudent" id="addstudent">Save Information</button>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                    <label>Student Name :</label>
+                    <input type="text" class="form-control" placeholder="Enter Student Name" name="studentname" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                    <label>Father Name :</label>
+                    <input type="text" class="form-control"  placeholder="Enter Father Name" name="fathername" required>
+                    </div>
+                  </div>
                 </div>
-            </div>
-         </form>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                    <label>Mother Name :</label>
+                    <input type="text" class="form-control"  placeholder="Enter Mother Name" name="mothername" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Date of Birth :</label>
+                      <div class="input-group date">
+                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                        <input type="text" class="form-control pull-right" id="datepicker" name="dob" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Roll No. :</label>
+                      <input type="number" class="form-control" placeholder="Enter Roll Number" name="rollno" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Select Gender :</label>
+                      <select class="form-control select2" style="width: 100%;" name="gender" required>
+                        <option selected="selected" value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Catagory :</label>
+                      <select class="form-control select2" style="width: 100%;" name="category">
+                        <option selected="selected" value="">Select Catagory</option>
+                        <option>Genral</option>
+                        <option>OBC</option>
+                        <option>SC</option>
+                        <option>ST</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Address :</label>
+                      <input type="text" class="form-control" placeholder="Enter Address" name="address">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Mobile Number :</label>
+                      <input type="number" class="form-control" placeholder="Enter Mobile Number" name="mobile">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Aadhar Number :</label>
+                      <input type="number" class="form-control" placeholder="Enter Aadhar Number" name="aadhar">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <button class="btn btn-flat btn-success" name="addstudent" id="addstudent">Save Information</button>
+                  </div>
+                </div>
+
+          </form>
+          </div>
+          <!-- /.box-body -->
         </div>
-        <!-- /.box-body -->
-      </div>
-            
-            <!-- /.box-body -->
-          </div>
-      <!-- /.box -->
-
-    </section>
+              
+      </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -193,7 +210,7 @@ input::-webkit-inner-spin-button {
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="custom/data.js"></script>
+<script src="custom/js/addStudent.js"></script>
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- page script -->
 

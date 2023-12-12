@@ -1,5 +1,5 @@
 <?php
-// Path : api/ClassRooms/getClassRoomList
+// Path : api/Teachers/getTeacherList
 include("../connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -8,19 +8,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
-			$class = mysqli_query($conn, "SELECT * FROM `classrooms` JOIN teachers ON classrooms.ClassTeacher = teachers.TeacherID WHERE classrooms.SchoolID = '$sid' ORDER by `ClassRoomID`");
+
+			$teacherlist = mysqli_query($conn, "SELECT * FROM `teachers` WHERE SchoolID = '$sid'");
+
 			http_response_code(200);
 			header('Content-Type: application/json');
-			if(mysqli_num_rows($class)>0){
-				while($row = mysqli_fetch_assoc($class)) {
+			if(mysqli_num_rows($teacherlist)>0){
+				while($row = mysqli_fetch_assoc($teacherlist)) {
 					$records[] = $row;
 					}
-				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoomList" => $records);
+				$data = array ("Status"=> "OK","Message" => "Success", "TeacherList" => $records);
 				echo json_encode( $data );
 			}else{
-				$data = array ("Status"=> "NOT_FOUND","Message" => "No Classroom Found");
+				$data = array ("Status"=> "NOT_FOUND","Message" => "No Teacher Found");
 				echo json_encode( $data );
 			}
+			
 
 		}else{
 			http_response_code(401);
@@ -36,5 +39,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		echo json_encode( $data );
 	}
 }
-
 ?>

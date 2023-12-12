@@ -22,6 +22,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="custom/css/style.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Google Font -->
@@ -49,18 +50,39 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   <section class="content-header">
-      <h1>
+      <!-- <h1>
         Classes 
         <small>Details</small>
         <button class="btn btn-flat btn-success" id="createnewclass" style="float: right;">Add New Class</button>
-      </h1>
+      </h1> -->
 
     </section>
     <!-- Main content -->
     <section class="content">
-      <!-- Default box -->
-      <div class="box">
-            <!-- /.box-header -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box">
+            <div class="box-body">
+              <form action="" method="POST" id="addClassRoomForm" autocomplete="off">
+                <h4 class="modal-title">Add Class Room</h4><br>
+                <div class="form-group">
+                  <input type="text" id="classRoomNameInput"placeholder="Enter Class Name" class="form-control" name="classRoomName">
+                  <span class="text-danger" id="validationSpan"></span>
+                </div>
+                <div class="form-group">
+                  <select class="form-control select2" id="ClassTeacherSelectBox" name="classTeacherName" style="width: 100%;">
+                    <option value="" selected>Select Class Teacher</option>
+                  </select>
+                  </div>
+                  <button type="submit" id="" class="btn btn-primary">Add ClassRoom</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-8">
+          <div class="box">
             <div class="box-body">
               <table id="class_table" class="table table-hover">
                 <thead>
@@ -71,31 +93,15 @@
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                  <?php
-                  $n="";
-                   $getclasses = mysqli_query($conn,"SELECT `tbl_school_classes`.`Id`, `class_name`, `class_teacher`, `tbl_teachers`.`teacher_name` FROM `tbl_school_classes` INNER JOIN `tbl_teachers` ON tbl_school_classes.class_teacher = tbl_teachers.Id WHERE tbl_school_classes.school_id = '$schoolid' AND tbl_school_classes.year='$year' ORDER by tbl_school_classes.Id");
-                    while($row = mysqli_fetch_assoc($getclasses)){
-                      $n++;
-                     ?><tr>
-                  <td><?php echo $n; ?></td>
-                  <td style="display: none;"><?php echo $row['Id'];?></td>
-                  <td><?php echo $row['class_name'];?></td>
-                  <td style='display:none;'><?php echo $row['class_teacher'];?></td>
-                  <td><?php echo $row['teacher_name'];?></td>
-                  <td class='text-center'>
-                  <a href='#' id='editclass'><i class='fa fa-pencil'></i></a>
-                  </td>
-                </tr>
-                  <?php  }?>
+                <tbody id="classRoomTableBody">
                   
-                
                 </tbody>
               </table>
             </div>
-            <!-- /.box-body -->
           </div>
-      <!-- /.box -->
+        </div>
+      </div>
+     
 
     </section>
     <!-- /.content -->
@@ -108,34 +114,31 @@
 
 <!-- Modal -->
   <div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <form action="" method="post" id="editclassform" autocomplete="off">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Update Class Name</h4>
-              </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <form action="" method="post" id="editclassform" autocomplete="off">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Update Class Name</h4>
               <div class="modal-body">
                 <label>Class Name :</label>
                 <input type="hidden" id="modal_class_Id" class="form-control" name="class_id">
                 <input type="text" id="modal_class_name" class="form-control" name="class_name">
                 <div class="form-group">
-                <label>Select Class :</label>
-                <select class="form-control select2" id="class_teacher_list" name="class_teacher" style="width: 100%;">
-                </select>
-              </div>
+                  <label>Select Class :</label>
+                  <select class="form-control select2" id="class_teacher_list" name="class_teacher" style="width: 100%;">
+                  </select>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                 <button type="submit" id="editclasssubmit" name="updateclass" class="btn btn-primary">Save Changes</button>
               </div>
-            </form>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
+          </form>
         </div>
+      </div>
+    </div>
+  </div>
 
         <!-- Modal End -->
 
@@ -159,11 +162,11 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="custom/data.js"></script>
+<script src="custom/js/classes.js"></script>
 <!-- page script -->
 <script>
   $(function () {
-    $('.select2').select2()
+    $('#ClassTeacherSelectBox').select2()
   })
 </script>
 </body>

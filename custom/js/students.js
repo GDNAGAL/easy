@@ -83,7 +83,11 @@ $( document ).ready(function() {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
-                    $("#selectclass").append(result);
+
+                    $.each(result.ClassRoomList, function(i, item) {
+                        $("#selectclass").append(`<option value="${item.ClassRoomID}">${item.ClassRoomName}</option>`);
+                    })
+                    
                     var table = $('#studenttable').DataTable();
                     //clear datatable
                     table.clear().draw();
