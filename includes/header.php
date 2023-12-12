@@ -352,17 +352,12 @@ if(isset($_COOKIE['Token'])){
           </ul>
         </li>
         <li class="treeview">
-          <a href="">
-            <i class="fa fa-user"></i>
+          <a href="" onclick="window.open('teachers','_self')">
+            <i class="fa fa-users"></i>
             <span>Teachers</span>
             <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="AddTeacher"><i class="fa fa-dot-circle-o"></i> Add Teacher</a></li>
-            <li><a href="teachers"><i class="fa fa-dot-circle-o"></i> View Teachers</a></li>
-          </ul>
         </li>
         <li class="treeview">
           <a href="" onclick="window.open('Classes','_self')">

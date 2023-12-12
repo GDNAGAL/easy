@@ -40,9 +40,6 @@
 .alert-message {line-height:20px; font-size:15px;padding-bottom: 12px;}
 /* h1{color:#e35154 !important; font-size:18px; margin-left:20px; margin-bottom:20px;font-weight:700; text-transform: uppercase;} */
 
-body a, body #test {
-  color: #fff;
-}
 
 .unstyled {
   margin: 0;

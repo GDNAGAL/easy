@@ -35,7 +35,6 @@ $( document ).ready(function() {
             'Authorization': 'Bearer ' + getCookie("Token")
         },
         success: function(result){
-          console.log(result)
           if(result.Status == "OK"){
             getClassRoomList()
             // success,info,error,warning,trash
@@ -50,6 +49,9 @@ $( document ).ready(function() {
           }
         },
         error : function(err){
+            if(err.status == 401){
+              window.location = "logout";
+            }
             $('#cover-spin').hide();
             // success,info,error,warning,trash
             Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
@@ -96,14 +98,20 @@ $( document ).ready(function() {
               $("#classRoomTableBody").append(
                 `<tr>
                   <td>${i+1}</td>
+                  <td class='text-center'>${item.ClassRoomID}</td>
                   <td>${item.ClassRoomName}</td>
-                  <td>${item.TeacherName}</td>
-                  <td class='text-center'>
-                  <a href='#' id='editclass'><i class='fa fa-pencil'></i></a>
-                  </td>
-                  </tr>`
+                  <td>${item.TeacherName==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.TeacherName}</td>
+                  <td class='text-center'><a href='javascript:void(0)' class='text-primary' id='editClassInfo'><i class='fa fa-pencil'></i></a></td></tr>`
                   );
                 });
+              }else if(result.Status=="NOT_FOUND"){
+                $("#classRoomTableBody").append(
+                  `<tr>
+                    <td colspan='4' style='color:#999'>
+                      ${result.Message}
+                    </td>
+                  </tr>`
+                  );
               }
             },
             error : function(err){

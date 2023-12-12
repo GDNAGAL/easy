@@ -62,21 +62,20 @@
       <div class="row">
         <div class="col-md-4">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Add ClassRoom</h3>
-            </div>
             <div class="box-body">
-              <form action="" method="POST" id="addClassRoomForm" autocomplete="off">
+              <form action="" method="POST" id="addTeacherForm" autocomplete="off">
+                <h4 class="modal-title">Add Teacher</h4><br>
+                <span class="text-danger" id="validationSpan"></span>
                 <div class="form-group">
-                  <input type="text" id="classRoomNameInput"placeholder="Enter Class Name" class="form-control" name="classRoomName">
-                  <span class="text-danger" id="validationSpan"></span>
+                  <input type="text" id="teacherNameInput" placeholder="Enter Teacher Name" class="form-control" name="teacherName">
                 </div>
                 <div class="form-group">
-                  <select class="form-control select2" id="ClassTeacherSelectBox" name="classTeacherName" style="width: 100%;">
-                    <option value="" selected>Select Class Teacher</option>
-                  </select>
-                  </div>
-                  <button type="submit" id="" class="btn btn-primary">Add ClassRoom</button>
+                  <input type="text" id="teacherDesignationInput" placeholder="Enter Designation" class="form-control" name="teacherDesignation">
+                </div>
+                <div class="form-group">
+                  <input type="text" id="teacherMobileInput" placeholder="Enter Mobile No." class="form-control" name="teacherMobile">
+                </div>
+                  <button type="submit" id="" class="btn btn-primary">Add Teacher</button>
               </form>
             </div>
           </div>
@@ -85,15 +84,11 @@
 
         <div class="col-md-8">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">ClassRooms</h3>
-            </div>
             <div class="box-body">
               <table id="class_table" class="table table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th class='text-center'>ClassRoom ID</th>
                   <th>Class Name</th>
                   <th>Class Teacher</th>
                   <th class="text-center">Action</th>
@@ -168,7 +163,7 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="custom/js/classes.js"></script>
+<script src="custom/js/teachers.js"></script>
 <!-- page script -->
 <script>
   $(function () {

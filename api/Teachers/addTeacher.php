@@ -2,37 +2,41 @@
 // Path : api/ClassRooms/addClassRoom
 include("../connection.php");
 
-if(isset($_POST['getclassrooms'])){
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+	$headers = getallheaders();
+	if (array_key_exists('Authorization', $headers) && preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)){
 
-    $class = mysqli_query($conn, "SELECT * FROM `classrooms` WHERE ClassRoomID = 235");
-    if (mysqli_num_rows($class)>0) {
+		if(verifyToken($matches[1])){
+            $sid = getSchoolID($matches[1]);
+			$teacherName = $_POST['teacherName'];
+			$teacherDesignation = $_POST['teacherDesignation'];
+			$teacherMobile = $_POST['teacherMobile'];
+			
+			$addTeacher = mysqli_query($conn, "INSERT INTO `teachers`(`Year`, `SchoolID`, `TeacherName`, `Designation`, `TeacherMobile`) VALUES ('2023','$sid','$teacherName','$teacherDesignation','$teacherMobile')");
+			
+			http_response_code(200);
+			header('Content-Type: application/json');
+			if($addTeacher == TRUE){
+				$data = array ("Status"=> "OK","Message" => "Teacher Added Successfully.");
+				echo json_encode( $data );
+			}else{
+				$data = array ("Status"=> "ERROR","Message" => "Failed");
+				echo json_encode( $data );
+			}
 
-		$classArray = [];
-		while($row = mysqli_fetch_assoc($class)){
-			$classArray[] = $row;
+		}else{
+			http_response_code(401);
+			header('Content-Type: application/json');
+			$data = array ("Message" => "Unauthorized");
+			echo json_encode( $data );
 		}
 
-		http_response_code(200);
-		header('Content-Type: application/json');
-		$data = array ("Status" => "Success", "ClassRoomList" => $classArray);
-		echo json_encode( $data );
-
 	}else{
-
-		http_response_code(404);
+		http_response_code(401);
 		header('Content-Type: application/json');
-		$data = array ("Status" => "Failed", "Message" => "No Data Found");
+		$data = array ("Message" => "Unauthorized");
 		echo json_encode( $data );
-
 	}
-	
-}else{
-
-	http_response_code(401);
-    header('Content-Type: application/json');
-    $data = array ("Message" => "UnAuthorized Access");
-    echo json_encode( $data );
-	
 }
 
 ?>
