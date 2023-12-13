@@ -368,14 +368,6 @@ if(isset($_COOKIE['Token'])){
           </a>
         </li>
         <li class="treeview">
-          <a href="" onclick="window.open('Subjects','_self')">
-            <i class="fa fa-file"></i>
-            <span>Subjects</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
           <a href="#">
             <i class="fa fa-calendar"></i>
             <span>Examination</span>

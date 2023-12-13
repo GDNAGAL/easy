@@ -14,6 +14,7 @@ function verifyToken($token){
   if($log == 1){
     return true;
   }else{
+    echo $log;
     return false;
   }
 }

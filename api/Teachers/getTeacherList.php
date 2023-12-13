@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$data = array ("Status"=> "OK","Message" => "Success", "TeacherList" => $records);
 				echo json_encode( $data );
 			}else{
-				$data = array ("Status"=> "NOT_FOUND","Message" => "No Teacher Found");
+				$data = array ("Status"=> "NOT_FOUND","Message" => "No Teachers Found.");
 				echo json_encode( $data );
 			}
 			

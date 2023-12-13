@@ -73,7 +73,7 @@
                   <input type="text" id="teacherDesignationInput" placeholder="Enter Designation" class="form-control" name="teacherDesignation">
                 </div>
                 <div class="form-group">
-                  <input type="text" id="teacherMobileInput" placeholder="Enter Mobile No." class="form-control" name="teacherMobile">
+                  <input type="number" id="teacherMobileInput" placeholder="Enter Mobile No." class="form-control" name="teacherMobile">
                 </div>
                   <button type="submit" id="" class="btn btn-primary">Add Teacher</button>
               </form>
@@ -89,12 +89,13 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Class Name</th>
-                  <th>Class Teacher</th>
+                  <th>Teacher Name</th>
+                  <th>Designation</th>
+                  <th>Mobile No.</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
-                <tbody id="classRoomTableBody">
+                <tbody id="teacherListTableBody">
                   
                 </tbody>
               </table>

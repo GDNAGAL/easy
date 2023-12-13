@@ -1,12 +1,17 @@
 $( document ).ready(function() {
-  $('#cover-spin').hide();
+  getTeacherList()
+  // $('#cover-spin').hide();
   function getCookie(cookieName) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
-      let [key,value] = el.split('=');
-      cookie[key.trim()] = value;
-    })
-    return cookie[cookieName]+"==";
+        let indexOfEquals = el.indexOf('=');
+        if (indexOfEquals !== -1) {
+            let key = el.substring(0, indexOfEquals).trim();
+            let value = el.substring(indexOfEquals + 1).trim();
+            cookie[key] = value;
+        }
+    });
+    return cookie[cookieName];
   }
 
   $("#addTeacherForm").on("submit", function(e){
@@ -54,7 +59,8 @@ $( document ).ready(function() {
           'Authorization': 'Bearer ' + getCookie("Token")
       },
       success: function(result){
-        $('#cover-spin').hide();
+        // $('#cover-spin').hide();
+        getTeacherList()
         if(result.Status == "OK"){
           // success,info,error,warning,trash
           Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
@@ -76,4 +82,45 @@ $( document ).ready(function() {
       }
     });
   })
+
+
+
+  function getTeacherList(){
+    $("#teacherListTableBody").html("")
+    $.ajax({
+      type: "POST",
+    url: 'api/Teachers/getTeacherList',
+    headers: {
+        'Authorization': 'Bearer ' + getCookie("Token")
+      },
+    success: function(result){
+      $('#cover-spin').hide();
+      if(result.Status=="OK"){
+        $.each(result.TeacherList, function(i, item) {
+          $("#teacherListTableBody").append(
+            `<tr>
+              <td>${i+1}</td>
+              <td>${item.TeacherName}</td>
+              <td>${item.Designation}</td>
+              <td>${item.TeacherMobile}</td>
+              <td class='text-center'><a href='javascript:void(0)' title='Edit Teacher Info' class='text-primary h3' id='editClassInfo'><i class='fa fa-pencil-square'></i></a></td></tr>`
+              );
+            });
+          }else if(result.Status=="NOT_FOUND"){
+            $("#teacherListTableBody").append(
+              `<tr>
+                <td colspan='5' style='color:#999'>
+                  ${result.Message}
+                </td>
+              </tr>`
+              );
+          }
+        },
+        error : function(err){
+          $('#cover-spin').hide();
+        }
+      });
+    }
+
+
 });

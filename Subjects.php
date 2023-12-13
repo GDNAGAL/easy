@@ -22,24 +22,9 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-  <!-- Morris chart -->
-  <link rel="stylesheet" href="bower_components/morris.js/morris.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="bower_components/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href="custom/css/style.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css">
-  <!-- bootstrap wysihtml5 - text editor -->
-  <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <style>
@@ -65,56 +50,68 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   <section class="content-header">
-      <h1>
-        Subjects 
+      <!-- <h1>
+        Classes 
         <small>Details</small>
-      </h1>
-      
+        <button class="btn btn-flat btn-success" id="createnewclass" style="float: right;">Add New Class</button>
+      </h1> -->
+
     </section>
     <!-- Main content -->
     <section class="content">
-      <!-- Default box -->
-      <div class="box">
-        <tr>
-            <div class="box-header" >
-              <div class="col-xs-10">
-                  <select class="form-control select2" style="max-width:190px";>
-                    <option>Select Class Category</option>
-                    <option>Category A (PP3+ - 2nd)</option>
-                    <option>Category B (3rd - 4th)</option>
-                    <option>Category C (6th - 7th)</option>
-                    <option>Category D (9th)</option>
-
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Add Subject</h3>
+            </div>
+            <div class="box-body">
+              <form action="" method="POST" id="addSubjectForm" autocomplete="off">
+                <span class="text-danger" id="validationSpan"></span>
+                <div class="form-group">
+                  <input type="text" id="subjectNameInput" placeholder="Enter Subject Name" class="form-control" name="subjectName">
+                </div>
+                <div class="form-group">
+                  <select class="form-control select2" id="subjectTypeSelectBox" name="subjectTypeName" style="width: 100%;">
+                    <option value="" selected>Select Subject Type</option>
                   </select>
                 </div>
+                <div class="form-group">
+                  <select class="form-control select2" id="subjectTeacherSelectBox" name="subjectTeacherName" style="width: 100%;">
+                    <option value="" selected>Select Subject Teacher</option>
+                  </select>
+                </div>
+                  <button type="submit" id="" class="btn btn-primary">Add Subject</button>
+              </form>
+            </div>
+          </div>
+        </div>
 
-                  <button class="btn col-xs-2 btn-flat  btn-success" id="createnewclass" style="position:relative;float: right;" data-target="#addsubjectModal">Add New Subject</button>
-             </div>
-           </tr>
 
-
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="" class="table table-hover">
+        <div class="col-md-8">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Subject List For Class <strong class='text-red' id="classLabel"></strong></h3>
+            </div>
+            <div class="box-body" style="padding-top:0">
+              <table id="class_table" class="table table-hover">
                 <thead>
                 <tr>
                   <th>#</th>
                   <th>Subject Name</th>
+                  <th>Subject Teacher</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>English</td>
-                  <td class="text-center"><a href="" data-toggle="modal" data-target="#modal-default"><i class="fa fa-pencil"></i></a></td>
-                </tr>
+                <tbody id="subjectListTableBody">
+                  
                 </tbody>
               </table>
             </div>
-            <!-- /.box-body -->
           </div>
-      <!-- /.box -->
+        </div>
+      </div>
+     
 
     </section>
     <!-- /.content -->
@@ -126,68 +123,34 @@
 
 
 <!-- Modal -->
-  <div class="modal fade" id="addsubjectModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <form action="" method="post" id="editclassform" autocomplete="off">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add New Subject</h4>
-              </div>
-              <form>
+  <div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <form action="" method="post" id="editclassform" autocomplete="off">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Update Class Name</h4>
               <div class="modal-body">
-                <label>Subject Name :</label>
+                <label>Class Name :</label>
                 <input type="hidden" id="modal_class_Id" class="form-control" name="class_id">
-                <input type="text" id="new_subject_name" class="form-control" name="class_name">
+                <input type="text" id="modal_class_name" class="form-control" name="class_name">
                 <div class="form-group">
-                <label>Select Group :</label>
-                <select class="form-control select2" id="group_list" name="class_teacher" style="width: 100%;">
-                   <option value="Group 1">Group 1</option>
-                   <option value="Group 2">Group 2</option>
-                   <option value="Group 3">Group 3</option>
-                   <option value="Group 4">Group 4</option>
-                </select>
-              </div>
+                  <label>Select Class :</label>
+                  <select class="form-control select2" id="class_teacher_list" name="class_teacher" style="width: 100%;">
+                  </select>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-
-                <button type="submit" id="newsubjectsubmit" name="updateclass" class="btn btn-primary">Save Changes</button>
-                </form>
+                <button type="submit" id="editclasssubmit" name="updateclass" class="btn btn-primary">Save Changes</button>
               </div>
-            </form>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
+          </form>
         </div>
-
-
-
-          <div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Update Subject Name</h4>
-              </div>
-              <div class="modal-body">
-                <input type="text" class="form-control" name="">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
+      </div>
+    </div>
+  </div>
 
         <!-- Modal End -->
-
 
 
 
@@ -209,44 +172,13 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<script src="custom/js/subjects.js"></script>
 <!-- page script -->
-<!-- Assuming you have included jQuery before this script -->
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#newsubjectsubmit").on("click", function(e) {
-      e.preventDefault();
-      var new_subject_name = $("#new_subject_name").val();
-      var groupname = $("#group_list").val();
-
-      $.ajax({
-        url: "insert/insertnewsubject.php",
-        type: "POST",
-        data: { new_subject_name: new_subject_name, groupname: groupname },
-        success: function(data) {
-          if (data == '1') {
-            alert("success");
-            $('#addsubjectModal').modal('hide');
-          } else {
-            alert("failed");
-          }
-        }
-      });
-    });
-  });
-</script>
-
 <script>
   $(function () {
-    $('.select2').select2()
+    $('#subjectTypeSelectBox').select2()
+    $('#subjectTeacherSelectBox').select2()
   })
 </script>
-<script>
-$(function() {
-  $('#createnewclass').click(function () {
-    $('#addsubjectModal').modal('show');
-  });
-});
-</script>
-
 </body>
 </html>

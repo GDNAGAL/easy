@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+
   function getCookie(cookieName) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
@@ -11,45 +12,59 @@ $( document ).ready(function() {
     });
     return cookie[cookieName];
   }
+  const urlParams = new URLSearchParams(window.location.search);
+  const classID = urlParams.get('classID');
 
-    $("#addClassRoomForm").on("submit", function(e){
+    $("#addSubjectForm").on("submit", function(e){
       e.preventDefault();
       $('#validationSpan').html("")
       $('#cover-spin').show(0);
-      let clsName = $("#classRoomNameInput").val();
-      let clsTName = $("#ClassTeacherSelectBox").val();
-      if(clsName.trim()==""){
+      let subjectName = $("#subjectNameInput").val();
+      let teacherName = $("#subjectTeacherSelectBox").val();
+      let subjectType = $("#subjectTypeSelectBox").val();
+      if(subjectName.trim()==""){
         $('#cover-spin').hide();
-        $('#validationSpan').html("Please Enter Class Room Name")
+        $('#validationSpan').html("Please Enter Subject Name")
+        $("#subjectNameInput").focus()
+        return;
+      }
+      if(subjectType.trim()==""){
+        $('#cover-spin').hide();
+        $('#validationSpan').html("Please Select Subject Type")
+        $("#subjectTypeSelectBox").focus()
         return;
       }
 
       
       let data = new FormData();
-      data.append("classRoomName",clsName)
-      data.append("classTeacherName",clsTName)
+      data.append("subjectName",subjectName)
+      data.append("subjectTeacherName",teacherName)
+      data.append("subjectType",subjectType)
+      data.append("classID",classID)
       $.ajax({
         type: "POST",
         data: data, 
         contentType: false,       
         cache: false,             
         processData:false,
-        url: 'api/ClassRooms/addClassRoom.php',
+        url: 'api/Subjects/addSubject.php',
         headers: {
             'Authorization': 'Bearer ' + getCookie("Token")
         },
         success: function(result){
           if(result.Status == "OK"){
-            getClassRoomList()
+            getSubjectList()
             // success,info,error,warning,trash
             Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
-            $('#addClassRoomForm')[0].reset();
-            $("#ClassTeacherSelectBox").val("").change();;
+            $('#addSubjectForm')[0].reset();
+            $("#subjectTeacherSelectBox").val("").change();
+            $("#subjectTypeSelectBox").val("").change();
           }else if(result.Status == "ERROR"){
             // success,info,error,warning,trash
             Alert.error(`Failed! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
-            $('#addClassRoomForm')[0].reset();
-            $("#ClassTeacherSelectBox").val("").change();;
+            $('#addSubjectForm')[0].reset();
+            $("#subjectTeacherSelectBox").val("").change();
+            $("#subjectTypeSelectBox").val("").change();
           }
         },
         error : function(err){
@@ -59,13 +74,46 @@ $( document ).ready(function() {
             $('#cover-spin').hide();
             // success,info,error,warning,trash
             Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
-            $('#addClassRoomForm')[0].reset();
-            $("#ClassTeacherSelectBox").select2("val", "");
+            $('#addSubjectForm')[0].reset();
+            $("#subjectTeacherSelectBox").select2("val", "");
         }
         });
 
     })
 
+
+    //get Subject Types
+    let data = new FormData();
+    data.append("classID",classID);
+    $.ajax({
+      type: "POST",
+      data: data, 
+      contentType: false,       
+      cache: false,             
+      processData:false,
+      url: 'api/Subjects/getSubjectTypes',
+      headers: {
+          'Authorization': 'Bearer ' + getCookie("Token")
+      },
+      success: function(result){
+        // $('#cover-spin').hide();
+        if(result.ClassDetail == null){
+          window.location = "classes";
+        }else{
+          $('#classLabel').html(result.ClassDetail.ClassRoomName);
+        }
+        if(result.Status=="OK"){
+          $.each(result.SubjectTypes, function(i, item) {
+            $("#subjectTypeSelectBox").append(`<option value="${item.SubjectTypeID}">${item.SubjectType}</option>`);
+          });
+        }
+      },
+      error : function(err){
+          $('#cover-spin').hide();
+      }
+      });
+
+    // get Subject Teacher List
     $.ajax({
       type: "POST",
       url: 'api/Teachers/getTeacherList.php',
@@ -73,13 +121,13 @@ $( document ).ready(function() {
           'Authorization': 'Bearer ' + getCookie("Token")
       },
       success: function(result){
-        $('#cover-spin').hide();
+        // $('#cover-spin').hide();
         if(result.Status=="OK"){
           $.each(result.TeacherList, function(i, item) {
-            $("#ClassTeacherSelectBox").append(`<option value="${item.TeacherID}">${item.TeacherName}</option>`);
+            $("#subjectTeacherSelectBox").append(`<option value="${item.TeacherID}">${item.TeacherName}</option>`);
           });
         }
-        getClassRoomList()
+        getSubjectList()
       },
       error : function(err){
           $('#cover-spin').hide();
@@ -87,33 +135,39 @@ $( document ).ready(function() {
       });
 
 
-      function getClassRoomList(){
-        $("#classRoomTableBody").html("")
+      function getSubjectList(){
+        $("#subjectListTableBody").html("")
+        if(classID=="" || classID==null){
+          window.location = "classes";
+        }
+        let data = new FormData();
+        data.append("classID",classID);
         $.ajax({
           type: "POST",
-        url: 'api/ClassRooms/getClassRoomList',
-        headers: {
+          data: data, 
+          contentType: false,       
+          cache: false,             
+          processData:false,
+          url: 'api/Subjects/getSubjectList',
+          headers: {
             'Authorization': 'Bearer ' + getCookie("Token")
           },
         success: function(result){
           $('#cover-spin').hide();
           if(result.Status=="OK"){
-            $.each(result.ClassRoomList, function(i, item) {
-              $("#classRoomTableBody").append(
+            $.each(result.SubjectList, function(i, item) {
+              $("#subjectListTableBody").append(
                 `<tr>
                   <td>${i+1}</td>
-                  <td class='text-center'>${item.ClassRoomID}</td>
-                  <td>${item.ClassRoomName}</td>
+                  <td>${item.SubjectName}</td>
                   <td>${item.TeacherName==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.TeacherName}</td>
                   <td class='text-center'>
                   <a href='javascript:void(0)' title='Edit ClassRoom' class='text-primary h3' id='editClassInfo'><i class='fa fa-pencil-square'></i></a> &nbsp;&nbsp;&nbsp;
-                  <a href='Subjects?classID=${item.ClassRoomID}' title='View Subjects' class='text-success h3' id='editClassInfo'><i class="fa fa-folder-open" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
-                  <a href='javascript:void(0)' title='Delete ClassRoom' class='h3 text-red' id='editClassInfo'><i class='fa fa-trash'></i></a> &nbsp;&nbsp;&nbsp;
                   </td></tr>`
                   );
                 });
               }else if(result.Status=="NOT_FOUND"){
-                $("#classRoomTableBody").append(
+                $("#subjectListTableBody").append(
                   `<tr>
                     <td colspan='5' style='color:#999'>
                       ${result.Message}

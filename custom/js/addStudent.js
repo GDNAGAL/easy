@@ -3,10 +3,14 @@ $( document ).ready(function() {
     function getCookie(cookieName) {
       let cookie = {};
       document.cookie.split(';').forEach(function(el) {
-        let [key,value] = el.split('=');
-        cookie[key.trim()] = value;
-      })
-      return cookie[cookieName]+"==";
+          let indexOfEquals = el.indexOf('=');
+          if (indexOfEquals !== -1) {
+              let key = el.substring(0, indexOfEquals).trim();
+              let value = el.substring(indexOfEquals + 1).trim();
+              cookie[key] = value;
+          }
+      });
+      return cookie[cookieName];
     }
   
     function getclasslist(){

@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET'){
 			$data = decrypt(json_encode($matches[1]));
 			echo $data;
 		}else{
-			echo "Invalid Token";
+			echo "Invalid Token"; 
 		}
 
 	}else{
