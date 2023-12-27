@@ -8,16 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
-			$examName = $_POST['examName'];
-			$examGroupID = $_POST['examGroupID'];
+			$examGroupName = $_POST['examGroupName'];
 
 			
-			$addExamGroup = mysqli_query($conn, "INSERT INTO `exams`(`ExamGroupID`, `ExamText`) VALUES ('$examGroupID','$examName')");
+			$addExamGroup = mysqli_query($conn, "INSERT INTO `examgroups`(`DisplayText`, `SchoolID`, `Year`) VALUES ('$examGroupName','$sid','2023')");
 			
 			http_response_code(200);
 			header('Content-Type: application/json');
 			if($addExamGroup == TRUE){
-				$data = array ("Status"=> "OK","Message" => "Exam Added Successfully.");
+				$data = array ("Status"=> "OK","Message" => "ExamGroup Added Successfully.");
 				echo json_encode( $data );
 			}else{
 				$data = array ("Status"=> "ERROR","Message" => "Failed");

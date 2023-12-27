@@ -1,5 +1,5 @@
 <?php
-// Path : api/Subjects/addSubject
+// Path : 
 include("../connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -8,21 +8,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
-			$examName = $_POST['examName'];
-			$examGroupID = $_POST['examGroupID'];
+		
 
-			
-			$addExamGroup = mysqli_query($conn, "INSERT INTO `exams`(`ExamGroupID`, `ExamText`) VALUES ('$examGroupID','$examName')");
-			
+			$examlist = mysqli_query($conn, "SELECT * FROM `examgroups` WHERE SchoolID = '$sid'");
+
 			http_response_code(200);
 			header('Content-Type: application/json');
-			if($addExamGroup == TRUE){
-				$data = array ("Status"=> "OK","Message" => "Exam Added Successfully.");
+			if(mysqli_num_rows($examlist)>0){
+				while($row = mysqli_fetch_assoc($examlist)) {
+					$egid = $row['ExamGroupID'];
+					$ecount = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as ext FROM `exams` WHERE ExamGroupID = '$egid'"));
+					$row['TotalExams'] = $ecount['ext'];
+					$records[] = $row;
+					}
+				$data = array ("Status"=> "OK","Message" => "Success", "ExamGroupList" => $records);
 				echo json_encode( $data );
 			}else{
-				$data = array ("Status"=> "ERROR","Message" => "Failed");
+				$data = array ("Status"=> "NOT_FOUND","Message" => "No Exams are Found");
 				echo json_encode( $data );
 			}
+			
 
 		}else{
 			http_response_code(401);
@@ -38,5 +43,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		echo json_encode( $data );
 	}
 }
-
 ?>

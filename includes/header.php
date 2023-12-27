@@ -38,11 +38,6 @@ if(isset($_COOKIE['Token'])){
 ?>
 <div id="cover-spin"></div>
 
-
-
-
-
-
 <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">

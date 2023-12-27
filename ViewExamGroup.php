@@ -22,6 +22,8 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+  
+  <link rel="stylesheet" href="custom/css/style.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="bower_components/morris.js/morris.css">
   <!-- jvectormap -->
@@ -62,15 +64,16 @@
         <div class="col-md-4">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Add Exam Group</h3>
+              <h3 class="box-title">Add Exam </h3>
             </div>
             <div class="box-body">
-              <form action="" method="POST" id="addExamGroupForm" autocomplete="off">
+              <form action="" method="POST" id="addExamForm" autocomplete="off">
                 <div class="form-group">
-                  <input type="text" id="examGroupInput"placeholder="Enter Exam Group Name" class="form-control" name="examGroupName">
+                  <input type="hidden" id="examGroupIDInput"placeholder="Enter Exam Name" class="form-control" value="<?php echo $_GET['examGroupId']; ?>" name="examGroupID">
+                  <input type="text" id="examInput"placeholder="Enter Exam Name" class="form-control" name="examName">
                   <span class="text-danger" id="validationSpan"></span>
                 </div>
-                <button type="submit" id="" class="btn btn-primary">Add Exam Group</button>
+                <button type="submit" id="" class="btn btn-primary">Add Exam</button>
               </form>
             </div>
           </div>
@@ -79,7 +82,7 @@
         <div class="col-md-8">
         <div class="box">
         <div class="box-header">
-              <h3 class="box-title">Exams Groups</h3>
+              <h3 class="box-title">Exams List</h3>
             </div>
             <div class="box-body">
               <table id="" class="table table-bordered table-striped">
@@ -87,11 +90,10 @@
                 <tr>
                   <th>#</th>
                   <th>Exam Name</th>
-                  <th class="text-center">Total Exams</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
-                <tbody id="examgrouptable">
+                <tbody id="examstable">
                 </tbody>
               </table>
             </div>
@@ -159,7 +161,7 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="custom/js/Exams.js"></script>
+<script src="custom/js/ViewExamGroup.js"></script>
 <!-- page script -->
 <script>
   $(function () {
