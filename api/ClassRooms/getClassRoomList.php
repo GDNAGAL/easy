@@ -14,6 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($class)>0){
 				while($row = mysqli_fetch_assoc($class)) {
+					$cid = $row['ClassRoomID'];
+					$noofSubjects = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS totalSubject FROM `subjects` WHERE ClassRoomID = '$cid'"));
+					$row["SubjectCount"] = $noofSubjects['totalSubject'];
 					$records[] = $row;
 					}
 				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoomList" => $records);

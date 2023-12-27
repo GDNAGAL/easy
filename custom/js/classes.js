@@ -105,10 +105,12 @@ $( document ).ready(function() {
                   <td class='text-center'>${item.ClassRoomID}</td>
                   <td>${item.ClassRoomName}</td>
                   <td>${item.TeacherName==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.TeacherName}</td>
+                  <td class='text-center'>${item.SubjectCount==0 ? '<span class="badge label-danger">0</span>' : '<span class="badge label-success">'+ item.SubjectCount +'</span>' }</td>
                   <td class='text-center'>
                   <a href='javascript:void(0)' title='Edit ClassRoom' class='text-primary h3' id='editClassInfo'><i class='fa fa-pencil-square'></i></a> &nbsp;&nbsp;&nbsp;
-                  <a href='Subjects?classID=${item.ClassRoomID}' title='View Subjects' class='text-success h3' id='editClassInfo'><i class="fa fa-folder-open" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
-                  <a href='javascript:void(0)' title='Delete ClassRoom' class='h3 text-red' id='editClassInfo'><i class='fa fa-trash'></i></a> &nbsp;&nbsp;&nbsp;
+                  <a href='Subjects?classID=${item.ClassRoomID}' title='View Subjects' class='text-success h3' id='editClassInfo'><i class="fa fa-book" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
+                  ${item.SubjectCount==0 ? "<a href='javascript:void(0)' title='Delete ClassRoom' class='h3 text-red' cid='"+item.ClassRoomID+"' id='deleteClassBtn'><i class='fa fa-trash'></i></a>" : "<a href='javascript:void(0)' title='You Can not delete this classroom' class='h3 text-muted'><i class='fa fa-trash'></i></a>"}
+                  
                   </td></tr>`
                   );
                 });
@@ -127,7 +129,41 @@ $( document ).ready(function() {
             }
           });
         }
-          
+        
+
+        // Delete Class
+        $(document).on("click","#deleteClassBtn",function(){
+          // console.log($(this).attr("cid"))
+          let cnf = confirm("Are You Sure to Delete Class ?");
+          if(cnf){
+            let data = new FormData();
+            data.append("ClassRoomID", $(this).attr("cid"))
+            $.ajax({
+              type: "POST",
+              data: data, 
+              contentType: false,       
+              cache: false,             
+              processData:false,
+              url: 'api/ClassRooms/deleteClassRoom',
+              headers: {
+                  'Authorization': 'Bearer ' + getCookie("Token")
+              },
+              success: function(result){
+                if(result.Status=="OK"){
+                  // success,info,error,warning,trash
+                  Alert.trash(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                }
+                getClassRoomList()
+              },
+              error : function(err){
+                  $('#cover-spin').hide();
+                  // success,info,error,warning,trash
+                  // Alert.error(`Failed! ${err.Message}`,`${err.Message}`,{displayDuration: 4000})
+              }
+              });
+          }
+
+        })
         
 
     

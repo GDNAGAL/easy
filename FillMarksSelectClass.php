@@ -37,6 +37,7 @@
     input[type="text"]{
   text-transform: capitalize !important;
 }
+
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -62,7 +63,7 @@
               <h3 class="box-title">Select Class And Fill Marks</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body no-padding">
+            <div class="box-body ">
               <table class="table table-condensed">
                 <tr>
                   <th style="width: 20px">#</th>
@@ -70,23 +71,11 @@
                   <th style="width: 30%">Progress</th>
                   <th class="text-center" style="width: 40%">Select Examination</th>
                 </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>PP 3+</td>
-                  <td>
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-success" style="width: 100%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <a href="MarksEntry.php"><button class="btn btn-sm btn-primary btn-flat">1st Test</button></a>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-               <tr>
+                <tbody id='exambody'>
+
+                </tbody>
+                
+               <!-- <tr>
                   <td>2.</td>
                   <td>PP 4+</td>
                   <td>
@@ -229,7 +218,7 @@
                     <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
                     <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
                   </td>
-                </tr>
+                </tr> -->
               </table>
             </div>
             <!-- /.box-body -->
@@ -245,6 +234,29 @@
 <?php //require("includes/footer.php");?>
 </div>
 <!-- ./wrapper -->
+
+
+<!-- Modal -->
+<div class="modal fade rounded" id="addExamModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <form action="" method="post" id="addExamForm" autocomplete="off">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add Exam</h4><br>
+                <label>Enter Exam Name :</label>
+                <input type="hidden" id="classId" class="form-control" placeholder="Enter Class Room" name="ClassRoomID">
+                <input type="text" id="modal_exam_name" class="form-control" placeholder="Enter Exam Name" name="exam_name" required><br>
+              <div>
+                <button type="submit" id="editclasssubmit" name="updateclass" class="btn btn-primary">Save Changes</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        <!-- Modal End -->
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -262,7 +274,7 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="custom/js/FillMarksSelectClass.js"></script>
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- page script -->
 

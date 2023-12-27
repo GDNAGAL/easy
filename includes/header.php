@@ -361,7 +361,7 @@ if(isset($_COOKIE['Token'])){
         </li>
         <li class="treeview">
           <a href="" onclick="window.open('Classes','_self')">
-            <i class="fa fa-window-maximize"></i>
+            <i class="fa fa-graduation-cap"></i>
             <span>Classes</span>
             <span class="pull-right-container">
             </span>
@@ -376,8 +376,8 @@ if(isset($_COOKIE['Token'])){
             </span>
           </a>
           <ul class="treeview-menu">
+            <li><a href="Exams"><i class="fa fa-dot-circle-o"></i> Exams Design</a></li>
             <li><a href="FillMarksSelectClass"><i class="fa fa-dot-circle-o"></i> Fill Marks</a></li>
-            <li><a href="Exams"><i class="fa fa-dot-circle-o"></i> Exams Details</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Time-Table</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Print Marksheets</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Print ResultSheet</a></li>

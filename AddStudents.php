@@ -67,120 +67,133 @@ input::-webkit-inner-spin-button {
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <!-- <div class="row"> -->
-              <form action="" method="post" id="addstudentform" autocomplete="off">
-              <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Select Class :</label>
-                      <select class="form-control select2" id="selectclass" style="width: 100%;" name="studentclass" required>
-                        <option selected="selected" value="">Select Class</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Admission No. :</label>
-                      <input type="text" class="form-control" placeholder="Enter Admission No." name="adno" required>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                    <label>Student Name :</label>
-                    <input type="text" class="form-control" placeholder="Enter Student Name" name="studentname" required>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                    <label>Father Name :</label>
-                    <input type="text" class="form-control"  placeholder="Enter Father Name" name="fathername" required>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                    <label>Mother Name :</label>
-                    <input type="text" class="form-control"  placeholder="Enter Mother Name" name="mothername" required>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Date of Birth :</label>
-                      <div class="input-group date">
-                        <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                        <input type="text" class="form-control pull-right" id="datepicker" name="dob" required>
+            <div class="row">
+              <div class="col-md-8">
+                <!-- <div class="row"> -->
+                <form action="" method="post" id="addstudentform" autocomplete="off">
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Select Class :</label>
+                          <select class="form-control select2" id="selectclass" style="width: 100%;" name="studentclass" required>
+                            <option selected="selected" value="">Select Class</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Admission No. :</label>
+                          <input type="text" class="form-control" placeholder="Enter Admission No." name="adno" required>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Roll No. :</label>
-                      <input type="number" class="form-control" placeholder="Enter Roll Number" name="rollno" required>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                        <label>Student Name :</label>
+                        <input type="text" class="form-control" placeholder="Enter Student Name" name="studentname" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                        <label>Father Name :</label>
+                        <input type="text" class="form-control"  placeholder="Enter Father Name" name="fathername" required>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Select Gender :</label>
-                      <select class="form-control select2" style="width: 100%;" name="gender" required>
-                        <option selected="selected" value="">Select Gender</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Catagory :</label>
-                      <select class="form-control select2" style="width: 100%;" name="category">
-                        <option selected="selected" value="">Select Catagory</option>
-                        <option>Genral</option>
-                        <option>OBC</option>
-                        <option>SC</option>
-                        <option>ST</option>
-                      </select>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                        <label>Mother Name :</label>
+                        <input type="text" class="form-control"  placeholder="Enter Mother Name" name="mothername" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Date of Birth :</label>
+                          <div class="input-group date">
+                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                            <input type="text" class="form-control pull-right" id="datepicker" name="dob" required>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Address :</label>
-                      <input type="text" class="form-control" placeholder="Enter Address" name="address">
-                    </div>
-                  </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Mobile Number :</label>
-                      <input type="number" class="form-control" placeholder="Enter Mobile Number" name="mobile">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Roll No. :</label>
+                          <input type="number" class="form-control" placeholder="Enter Roll Number" name="rollno" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Select Gender :</label>
+                          <select class="form-control select2" style="width: 100%;" name="gender" required>
+                            <option selected="selected" value="">Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Aadhar Number :</label>
-                      <input type="number" class="form-control" placeholder="Enter Aadhar Number" name="aadhar">
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Catagory :</label>
+                          <select class="form-control select2" style="width: 100%;" name="category">
+                            <option selected="selected" value="">Select Catagory</option>
+                            <option>Genral</option>
+                            <option>OBC</option>
+                            <option>SC</option>
+                            <option>ST</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Address :</label>
+                          <input type="text" class="form-control" placeholder="Enter Address" name="address">
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <button class="btn btn-flat btn-success" name="addstudent" id="addstudent">Save Information</button>
-                  </div>
-                </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Mobile Number :</label>
+                          <input type="number" class="form-control" placeholder="Enter Mobile Number" name="mobile">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Aadhar Number :</label>
+                          <input type="number" class="form-control" placeholder="Enter Aadhar Number" name="aadhar">
+                        </div>
+                      </div>
+                    </div>
 
-          </form>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <button class="btn btn-flat btn-success" name="addstudent" id="addstudent">Save Information</button>
+                      </div>
+                    </div>
+
+                </form>
+              </div>
+
+              <div class="col-md-4">
+              <div class="box-header with-border">
+                <h3 class="box-title">
+                <i class="fa fa-upload"></i>  &nbsp;
+                Upload Student File</h3>
+              </div>
+              </div>
+            </div>
+            
           </div>
           <!-- /.box-body -->
         </div>

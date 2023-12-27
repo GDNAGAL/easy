@@ -52,12 +52,24 @@ $( document ).ready(function() {
                     
                     $('#studenttable').DataTable({
                         data: data.StudentList,  // Get the data object
-                        retrieve: true,
-                        destroy: true,
+                        // retrieve: true,
+                        // destroy: true,
+                        filter:true,
+                        lengthMenu : [
+                            [10,20,50,75,100,-1],
+                            [10,20,50,75,100,"ALL"]
+
+                        ],
+                        pageLength : 10,
+                        language : {
+                            lengthMenu: "_MENU_ Records Per Page.",
+                            info: "", 
+                            infoEmpty: "No Student Found.",
+                            zeroRecords: "No Student Found."
+                        },
                         columns: [
                         { 'data': 'ClassRoomName' },
                         { 'data': 'RollNo' },
-                        { 'data': 'AdmissionNo' },
                         { 'data': 'StudentName',
                             "render": function ( data, type, row, meta ) {
                             return '<a href="">'+data+'</a>';
@@ -67,10 +79,10 @@ $( document ).ready(function() {
                         { 'data': 'StudentMotherName' },
                         { 'data': 'DateofBirth' },
                         { 'data': 'Gender' },
-                        { 'data': 'Category' },
-                        { 'data': 'StudentMobileNo' },
-                        { 'data': 'StudentAadhar' },
                         
+                        ],
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print' // Add the buttons you want
                         ]
                     })
                 }

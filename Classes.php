@@ -86,7 +86,9 @@
         <div class="col-md-8">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">ClassRooms</h3>
+              <h3 class="box-title">
+              <img src="custom/img/class.png" width="40px" alt="">  
+              ClassRooms</h3>
             </div>
             <div class="box-body">
               <table id="class_table" class="table table-hover">
@@ -96,6 +98,7 @@
                   <th class='text-center'>ClassRoom ID</th>
                   <th>Class Name</th>
                   <th>Class Teacher</th>
+                  <th class="text-center">No. of Subjects</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>

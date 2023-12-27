@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
    <!-- DataTables -->
    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
    <!-- Select2 -->
 <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
   <!-- Theme style -->
@@ -91,7 +92,9 @@
         <div class="col-md-8">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Subject List For Class <strong class='text-red' id="classLabel"></strong></h3>
+              <h3 class="box-title">
+                <img src="custom/img/book.png" width="20px" alt="">
+                Subject List For Class <strong class='text-red' id="classLabel"></strong></h3>
             </div>
             <div class="box-body" style="padding-top:0">
               <table id="class_table" class="table table-hover">
@@ -100,6 +103,7 @@
                   <th>#</th>
                   <th>Subject Name</th>
                   <th>Subject Teacher</th>
+                  <th>Subject Type</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -162,6 +166,7 @@
 <!-- DataTables -->
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
 <!-- SlimScroll -->
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->

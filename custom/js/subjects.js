@@ -161,6 +161,7 @@ $( document ).ready(function() {
                   <td>${i+1}</td>
                   <td>${item.SubjectName}</td>
                   <td>${item.TeacherName==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.TeacherName}</td>
+                  <td>${item.SubjectType== "MANDATORY" ? `<span class="label label-success">${item.SubjectType}</span>` : `<span class="label label-warning">${item.SubjectType}</span>`}</td>
                   <td class='text-center'>
                   <a href='javascript:void(0)' title='Edit ClassRoom' class='text-primary h3' id='editClassInfo'><i class='fa fa-pencil-square'></i></a> &nbsp;&nbsp;&nbsp;
                   </td></tr>`

@@ -65,21 +65,17 @@
                   <option value="all">All Classes</option>
 
                 </select>
-               </div>
-              <table id="studenttable" class="table table-bordered table-striped">
+               </div><hr>
+              <table id="studenttable" class="table cell-border hover table-bordered" width="100%">
                 <thead>
                 <tr>
                   <th>Class</th>
                   <th>Roll No.</th>
-                  <th>Admission No.</th>
                   <th>Student Name</th>
                   <th>Father Name</th>
                   <th>Mother Name</th>
                   <th>Date of Birth</th>
                   <th>Gender</th>
-                  <th>Category</th>
-                  <th>Mobile</th>
-                  <th>Aadhar No.</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -105,6 +101,7 @@
 <!-- DataTables -->
 <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
 <!-- SlimScroll -->
 <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
@@ -115,6 +112,7 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+
 <!-- page script -->
 <script src="custom/js/students.js"></script>
 </body>
