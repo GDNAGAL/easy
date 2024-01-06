@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$class = mysqli_query($conn, "SELECT SubjectID,subjects.Year,SubjectName,SubjectType,TeacherID,TeacherName FROM `subjects`
 			LEFT JOIN `teachers` ON `subjects`.`SubjectTeacher` = `teachers`.`TeacherID`
 			LEFT JOIN subject_types ON `subjects`.`SubjectTypeID` = `subject_types`.`SubjectTypeID`
-			WHERE subjects.SchoolID = '$sid' AND subjects.SubjectTeacher IS NULL AND ClassRoomID = $classID OR subjects.SchoolID = '$sid' AND teachers.TeacherID IS NOT NULL AND ClassRoomID = $classID");
+			WHERE subjects.SchoolID = '$sid' AND subjects.SubjectTeacher IS NULL AND ClassRoomID = $classID OR subjects.SchoolID = '$sid' AND teachers.TeacherID IS NOT NULL AND ClassRoomID = $classID order by subjects.SubjectTypeID");
 			http_response_code(200);
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($class)>0){

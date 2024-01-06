@@ -1,7 +1,8 @@
 <?php
-$url = 'http://localhost:3000/easy';
-if(isset($_COOKIE['Token'])){
-  $token = $_COOKIE['Token'];
+$url = 'http://localhost:3000/easy/Agent/';
+if(isset($_COOKIE['AToken'])){
+  $token = $_COOKIE['AToken'];
+  //echo $token;
   $curl = curl_init();
   curl_setopt_array($curl, array(
     CURLOPT_URL => $url.'/api/getLoginUserData',
@@ -21,15 +22,12 @@ if(isset($_COOKIE['Token'])){
   curl_close($curl);
   $responseJSON = json_decode($response,true);
   if($response == "Invalid Token"){
-    setcookie("Token", "", time()-3600);
+    setcookie("AToken", "", time()-3600);
     header("Location: login");
   }
-
-  $SchoolID = $responseJSON[0]['SchoolID'];
-  $SchoolHeadName = $responseJSON[0]['SchoolHeadName'];
-  $CurrentYear = $responseJSON[0]['CurrentYear'];
-  $SchoolName = $responseJSON[0]['SchoolName'];
-  $SchoolAddress = $responseJSON[0]['SchoolAddress'];
+ //echo $response;
+  $SchoolID = $responseJSON[0]['AgentID'];
+  $AgentName = $responseJSON[0]['AgentName'];
 
 }else{
   header("Location: login");
@@ -44,7 +42,7 @@ if(isset($_COOKIE['Token'])){
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>S</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>School</b> Admin</span>
+      <span class="logo-lg"><b>Admin</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -68,7 +66,7 @@ if(isset($_COOKIE['Token'])){
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -81,7 +79,7 @@ if(isset($_COOKIE['Token'])){
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         AdminLTE Design Team
@@ -93,7 +91,7 @@ if(isset($_COOKIE['Token'])){
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Developers
@@ -105,7 +103,7 @@ if(isset($_COOKIE['Token'])){
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Sales Department
@@ -117,7 +115,7 @@ if(isset($_COOKIE['Token'])){
                   <li>
                     <a href="#">
                       <div class="pull-left">
-                        <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                        <img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Reviewers
@@ -254,17 +252,15 @@ if(isset($_COOKIE['Token'])){
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $SchoolHeadName; ?></span>
+              <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <span class="hidden-xs"><?php echo $AgentName; ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                <p>
-                  <?php echo $SchoolName; ?>
-                  <small><?php echo $SchoolAddress; ?></small>
+                <p>sdlkgh
                 </p>
               </li>
               <!-- Menu Body -->
@@ -305,10 +301,10 @@ if(isset($_COOKIE['Token'])){
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?php echo $SchoolHeadName; ?></p>
+          <p><?php echo $AgentName; ?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -327,57 +323,19 @@ if(isset($_COOKIE['Token'])){
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
-          <a href="" onclick="window.open('index.php','_self')">
+          <a href="" onclick="window.open('index','_self')">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li class="treeview">
-          <a href="">
+          <a href="" onclick="window.open('Schools','_self')">
             <i class="fa fa-users"></i>
-            <span>Students</span>
-            <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="AddStudents"><i class="fa fa-dot-circle-o"></i> Add Students</a></li>
-            <li><a href="students"><i class="fa fa-dot-circle-o"></i> View Students</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="" onclick="window.open('teachers','_self')">
-            <i class="fa fa-users"></i>
-            <span>Teachers</span>
+            <span>Schools</span>
             <span class="pull-right-container">
             </span>
           </a>
-        </li>
-        <li class="treeview">
-          <a href="" onclick="window.open('Classes','_self')">
-            <i class="fa fa-graduation-cap"></i>
-            <span>Classes</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-calendar"></i>
-            <span>Examination</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="Exams"><i class="fa fa-dot-circle-o"></i> Exams Groups</a></li>
-            <li><a href="Exams"><i class="fa fa-dot-circle-o"></i> Exams Design</a></li>
-            <li><a href="FillMarksSelectClass"><i class="fa fa-dot-circle-o"></i> Fill Marks</a></li>
-            <li><a href=""><i class="fa fa-dot-circle-o"></i> Time-Table</a></li>
-            <li><a href=""><i class="fa fa-dot-circle-o"></i> Print Marksheets</a></li>
-            <li><a href=""><i class="fa fa-dot-circle-o"></i> Print ResultSheet</a></li>
-          </ul>
         </li>
         <li class="treeview">
           <a href="#">

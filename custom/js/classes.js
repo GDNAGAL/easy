@@ -102,13 +102,14 @@ $( document ).ready(function() {
               $("#classRoomTableBody").append(
                 `<tr>
                   <td>${i+1}</td>
-                  <td class='text-center'>${item.ClassRoomID}</td>
                   <td>${item.ClassRoomName}</td>
                   <td>${item.TeacherName==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.TeacherName}</td>
+                  <td class='text-center'>${item.ExamGroupDisplayText==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.ExamGroupDisplayText}</td>
                   <td class='text-center'>${item.SubjectCount==0 ? '<span class="badge label-danger">0</span>' : '<span class="badge label-success">'+ item.SubjectCount +'</span>' }</td>
                   <td class='text-center'>
                   <a href='javascript:void(0)' title='Edit ClassRoom' class='text-primary h3' id='editClassInfo'><i class='fa fa-pencil-square'></i></a> &nbsp;&nbsp;&nbsp;
                   <a href='Subjects?classID=${item.ClassRoomID}' title='View Subjects' class='text-success h3' id='editClassInfo'><i class="fa fa-book" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
+                  <a href='DesignExam?ClassID=${item.ClassRoomID}' title='Design Exam' class='text-info h3' id='editClassInfo'><i class='fa fa-cogs'></i></a> &nbsp;&nbsp;&nbsp;
                   ${item.SubjectCount==0 ? "<a href='javascript:void(0)' title='Delete ClassRoom' class='h3 text-red' cid='"+item.ClassRoomID+"' id='deleteClassBtn'><i class='fa fa-trash'></i></a>" : "<a href='javascript:void(0)' title='You Can not delete this classroom' class='h3 text-muted'><i class='fa fa-trash'></i></a>"}
                   
                   </td></tr>`

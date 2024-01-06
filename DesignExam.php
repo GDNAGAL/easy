@@ -60,35 +60,12 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-4">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Add ClassRoom</h3>
-            </div>
-            <div class="box-body">
-              <form action="" method="POST" id="addClassRoomForm" autocomplete="off">
-                <div class="form-group">
-                  <input type="text" id="classRoomNameInput"placeholder="Enter Class Name" class="form-control" name="classRoomName">
-                  <span class="text-danger" id="validationSpan"></span>
-                </div>
-                <div class="form-group">
-                  <select class="form-control select2" id="ClassTeacherSelectBox" name="classTeacherName" style="width: 100%;">
-                    <option value="" selected>Select Class Teacher</option>
-                  </select>
-                  </div>
-                  <button type="submit" id="" class="btn btn-primary">Add ClassRoom</button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">
-              <img src="custom/img/class.png" width="40px" alt="">  
-              ClassRooms</h3>
+              <img src="custom/img/tree.png" width="40px" alt="">  
+              Design Exam</h3>
             </div>
             <div class="box-body">
               <table id="class_table" class="table table-hover">
