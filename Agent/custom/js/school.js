@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-  getTeacherList()
+  getSchoolList()
   // $('#cover-spin').hide();
   function getCookie(cookieName) {
     let cookie = {};
@@ -86,7 +86,7 @@ $( document ).ready(function() {
 
 
 
-  function getTeacherList(){
+  function getSchoolList(){
     $("#teacherListTableBody").html("")
     $.ajax({
       type: "POST",
@@ -116,7 +116,8 @@ $( document ).ready(function() {
               columns: [
               { 'data': 'SchoolName',
                   "render": function ( data, type, row, meta ) {
-                  return '<a href="">'+data+'</a>';
+                    var schoolID = row.SchoolID; 
+                  return '<a href="SchoolDashboard?schoolID=' + schoolID + '">'+data+'</a>';
                   } 
               },
               { 'data': 'SchoolHeadName' },

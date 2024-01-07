@@ -110,7 +110,7 @@ $( document ).ready(function() {
                   <a href='javascript:void(0)' title='Edit ClassRoom' class='text-primary h3' id='editClassInfo'><i class='fa fa-pencil-square'></i></a> &nbsp;&nbsp;&nbsp;
                   <a href='Subjects?classID=${item.ClassRoomID}' title='View Subjects' class='text-success h3' id='editClassInfo'><i class="fa fa-book" aria-hidden="true"></i></a> &nbsp;&nbsp;&nbsp;
                   <a href='DesignExam?ClassID=${item.ClassRoomID}' title='Design Exam' class='text-info h3' id='editClassInfo'><i class='fa fa-cogs'></i></a> &nbsp;&nbsp;&nbsp;
-                  ${item.SubjectCount==0 ? "<a href='javascript:void(0)' title='Delete ClassRoom' class='h3 text-red' cid='"+item.ClassRoomID+"' id='deleteClassBtn'><i class='fa fa-trash'></i></a>" : "<a href='javascript:void(0)' title='You Can not delete this classroom' class='h3 text-muted'><i class='fa fa-trash'></i></a>"}
+                  ${item.SubjectCount==0 ? "<a href='javascript:void(0)' title='Delete ClassRoom' class='h3 text-red' style='display:none' cid='"+item.ClassRoomID+"' id='deleteClassBtn'><i class='fa fa-trash'></i></a>" : "<a href='javascript:void(0)' title='You Can not delete this classroom' class='h3 text-muted' style='display:none'><i class='fa fa-trash'></i></a>"}
                   
                   </td></tr>`
                   );
