@@ -76,185 +76,19 @@ input::-webkit-inner-spin-button {
         <div class="col-md-12">
           <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Hindi</a></li>
+            <ul class="nav nav-tabs" id="subjectTabs">
+              <!-- <li class="active"><a href="#tab_1" data-toggle="tab">Hindi</a></li>
               <li><a href="#tab_2" data-toggle="tab">English</a></li>
               <li><a href="#tab_3" data-toggle="tab">Maths</a></li>
               <li><a href="#tab_3" data-toggle="tab">Sanskrit</a></li>
               <li><a href="#tab_4" data-toggle="tab">Science</a></li>
-              <li><a href="#tab_4" data-toggle="tab">Social Science</a></li>
+              <li><a href="#tab_4" data-toggle="tab">Social Science</a></li> -->
             </ul>
             <span style="color:red;">** Please Do Not Reload This Page</span>  
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-                 <table class="table table-condensed">
-          <tr>
-            <th class="text-center" style="width:60px">Roll No.</th>
-            <th style="width:250px">Student Name</th>
-            <th style="width:100px" class="text-center">First Test<br>M.M.(50)</th>
-            <th><button style="margin-left: 10px;" class="btn btn-flat btn-success">Save Changes</button></th>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td class="text-center">1001</td>
-            <td>Rahul Kumar</td>
-            <td><input type="number" class="form-control"></td>
-            <td></td>
-          </tr>
-
-        </table>
-              </div>
+            <div class="tab-content" id="tabcontent">
+              
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2">
+              <!-- <div class="tab-pane" id="tab_2">
                 The European languages are members of the same family. Their separate existence is a myth.
                 For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
                 in their grammar, their pronunciation and their most common words. Everyone realizes why a
@@ -262,9 +96,9 @@ input::-webkit-inner-spin-button {
                 achieve this, it would be necessary to have uniform grammar, pronunciation and more common
                 words. If several languages coalesce, the grammar of the resulting language is more simple
                 and regular than that of the individual languages.
-              </div>
+              </div> -->
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_3">
+              <!-- <div class="tab-pane" id="tab_3">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                 when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -272,7 +106,7 @@ input::-webkit-inner-spin-button {
                 remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
                 sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
                 like Aldus PageMaker including versions of Lorem Ipsum.
-              </div>
+              </div> -->
               <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
@@ -312,7 +146,7 @@ input::-webkit-inner-spin-button {
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="custom/js/MarksEntry.js"></script>
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- page script -->
 

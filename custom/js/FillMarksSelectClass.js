@@ -55,13 +55,12 @@ $( document ).ready(function() {
         $("#exambody").html("")
         $.ajax({
                 type: "POST",
-                url: 'api/Examination/getClassWiseExamList',
+                url: 'api/Examination/getClassWisExamList',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
-                //  console.log(result)
-                 $.each(result.ClassRoomList, function(i, item) {
+                 $.each(result.ClassRoom, function(i, item) {
                     
                     var rawhtml = `<tr>
                     <td>${i+1}</td>
@@ -73,14 +72,15 @@ $( document ).ready(function() {
                     </td>
                     <td class="text-right">`;
                        
-                    if(item.ExamsDetail !== undefined){
-                        $.each(item.ExamsDetail , function(j, k){
-                            rawhtml += `<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&ExamID=${k.ExamID}"><button class="btn btn-sm btn-primary btn-flat">${k.ExamName}</button></a> &nbsp;`;
+                        // console.log(item.ExamList)
+                        $.each(item.ExamList , function(j, k){
+                            let ename = k.ExamText.split("~")[0];
+                            // console.log(k.ExamText.split("~"))
+                            rawhtml += `<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&ExamID=${k.ExamID}"><button class="btn btn-sm btn-primary btn-flat">${ename}</button></a> &nbsp;`;
                         })
-                    }
                     // <a href="MarksEntry.php"><button class="btn btn-sm btn-primary btn-flat">1st Test</button></a>
-                rawhtml += `<button class="btn btn-sm btn-info btn-flat" cid="${item.ClassRoomID}" title="Add Exam" id="addExambtn">+</button>`;        
-                rawhtml += `</td></tr>`;
+                    // rawhtml += `<button class="btn btn-sm btn-info btn-flat" cid="${item.ClassRoomID}" title="Add Exam" id="addExambtn">+</button>`;        
+                    rawhtml += `</td></tr>`;
                     $("#exambody").append(rawhtml)
                  })
                 },
