@@ -9,9 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
 			// $class = mysqli_query($conn, "SELECT * FROM `classrooms` JOIN teachers ON classrooms.ClassTeacher = teachers.TeacherID WHERE classrooms.SchoolID = '$sid' ORDER by `ClassRoomID`");
-			$class = mysqli_query($conn, "SELECT ClassRoomID,classrooms.Year,ClassRoomName,examgroups.DisplayText as ExamGroupDisplayText,TeacherID,TeacherName FROM `classrooms`
+			$class = mysqli_query($conn, "SELECT ClassRoomID,classrooms.Year,ClassRoomName,TeacherID,TeacherName FROM `classrooms`
 			 LEFT JOIN `teachers` ON `classrooms`.`ClassTeacher` = `teachers`.`TeacherID`
-			 LEFT JOIN `examgroups` ON classrooms.ExamGroupID = examgroups.ExamGroupID
 			 WHERE classrooms.SchoolID = '$sid' AND classrooms.ClassTeacher IS NULL OR classrooms.SchoolID = '$sid' AND teachers.TeacherID IS NOT NULL");
 			http_response_code(200);
 			header('Content-Type: application/json');

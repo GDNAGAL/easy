@@ -1,3 +1,5 @@
+
+console.log("sdgs")
 getExamGroupList()
 function getCookie(cookieName) {
     let cookie = {};
@@ -21,9 +23,9 @@ $("#addExamGroupForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/Examination/addExamGroup',
+            url: 'api/Default/addExamGroup',
             headers: {
-                'Authorization': 'Bearer ' + getCookie("Token")
+                'Authorization': 'Bearer ' + getCookie("AToken")
             },
             success: function(result){
                 $('#addExamGroupForm').trigger("reset");
@@ -43,9 +45,9 @@ function getExamGroupList(){
     $("#examgrouptable").html("")
     $.ajax({
         type: "POST",
-        url: 'api/Examination/getExamGroupList',
+        url: 'api/Default/getExamGroupList',
         headers: {
-            'Authorization': 'Bearer ' + getCookie("Token")
+            'Authorization': 'Bearer ' + getCookie("AToken")
         },
         success: function(result){
             // $('#cover-spin').hide();
@@ -53,10 +55,9 @@ function getExamGroupList(){
                 $.each(result.ExamGroupList, function(i, item) {
                     $("#examgrouptable").append(`<tr>
                     <td>${i+1}</td>
-                    <td>${item.DisplayText}</td>
-                    <td class="text-center">${item.TotalExams}</td>
+                    <td>${item.GroupName}</td>
                     <td class="text-center">
-                    <a href="ViewExamGroup?examGroupId=${item.ExamGroupID}"><button class="btn btn-primary">View</button></a></td>
+                    <a href="ViewExamGroup?examGroupId=${item.ID}"><button class="btn btn-primary">View</button></a></td>
                     </tr>`);
                 });
             }

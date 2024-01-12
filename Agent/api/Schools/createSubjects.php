@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 						}
 
 						//for compulsory subjects
-						foreach ($subjectComp as $subject) {
-							$addSchool = mysqli_query($conn, "INSERT INTO `subjects`(`Year`, `SchoolID`, `ClassRoomID`, `SubjectName`, `SubjectTypeID`, `SubjectTeacher`) VALUES ('2023','$schoolID','$classRoomID','$subject',1,NULL)");
+						foreach ($subjectComp as $index => $subject) {
+							$addSchool = mysqli_query($conn, "INSERT INTO `subjects`(`Year`, `SchoolID`, `ClassRoomID`, `SubjectName`, `SubjectTypeID`, `SubjectTeacher`, `SubjectIndex`) VALUES ('2023','$schoolID','$classRoomID','$subject',1,NULL,'$index')");
 						}
 
 						//for optional subjects
-						foreach ($subjectOptional as $subject) {
-							$addSchool = mysqli_query($conn, "INSERT INTO `subjects`(`Year`, `SchoolID`, `ClassRoomID`, `SubjectName`, `SubjectTypeID`, `SubjectTeacher`) VALUES ('2023','$schoolID','$classRoomID','$subject',2,NULL)");
+						foreach ($subjectOptional as $index => $subject) {
+							$addSchool = mysqli_query($conn, "INSERT INTO `subjects`(`Year`, `SchoolID`, `ClassRoomID`, `SubjectName`, `SubjectTypeID`, `SubjectTeacher`, `SubjectIndex`) VALUES ('2023','$schoolID','$classRoomID','$subject',2,NULL,'$index')");
 						}
 					}
 				}

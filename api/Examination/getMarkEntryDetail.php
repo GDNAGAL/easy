@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$ClassRoomID = $_POST['ClassRoomID'];
 			$ExamID = $_POST['ExamID'];
 
-			$selectSubject = mysqli_query($conn, "SELECT SubjectID, SubjectName FROM `subjects` WHERE SchoolID = '$sid' AND ClassRoomID = '$ClassRoomID'");
+			$selectSubject = mysqli_query($conn, "SELECT Distinct ed.SubjectID, su.SubjectName FROM examdesign ed JOIN subjects su ON ed.SubjectID = su.SubjectID WHERE ed.ClassRoomID = '$ClassRoomID'");
 			http_response_code(200);
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($selectSubject)>0){
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				}
 				$records[] = $subjectRow;
 			}
-				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoom" => $records);
+				$data = array ("Status"=> "OK","Message" => "Success", "Subjects" => $records);
 				echo json_encode( $data );
 			}else{
 				$data = array ("Status"=> "NOT_FOUND","Message" => "No Data Found");

@@ -16,18 +16,51 @@ $( document ).ready(function() {
     function getclasslist(){
         $.ajax({
                 type: "POST",
-                url: 'api/ClassRooms/getClassRoomList.php',
+                url: 'api/ClassRooms/getClassRoomList',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
                     $('#cover-spin').hide();
-                    $("#selectclass").append(result);
+                    $.each(result.ClassRoomList, function(i, item) {
+                        $("#selectclass").append(`<option value="${item.ClassRoomID}">${item.ClassRoomName}</option>`);
+                    })
                 },
                 error : function(err){
                     $('#cover-spin').hide();
                 }
           });
     }
+
+
+    $("#addstudentform").on("submit",function(e){
+        e.preventDefault();
+        let data = new FormData(this);
+        $.ajax({
+            type: "POST",
+            data: data,
+            url: 'api/Students/addStudent',
+            headers: {
+                'Authorization': 'Bearer ' + getCookie("Token")
+            },
+            contentType: false,       
+            cache: false,             
+            processData:false,
+            success: function(result){
+                $('#cover-spin').hide();
+                // success,info,error,warning,trash
+                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                $('#addstudentform')[0].reset();
+                $("#selectclass").val("").change();
+                $("#genderSelectBox").val("").change();
+                $("#categorySelectBox").val("").change();
+            },
+            error : function(err){
+                $('#cover-spin').hide();
+                // success,info,error,warning,trash
+                Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+            }
+      });
+    })
     
   });

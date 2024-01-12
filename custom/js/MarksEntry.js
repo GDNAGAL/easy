@@ -68,9 +68,9 @@ $( document ).ready(function() {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
-                 $.each(result.ClassRoom, function(i, item) {
+                 $.each(result.Subjects, function(i, item) {
                     if(i==0){
-                        $("#subjectTabs").append(`<li class="active"><a href="#${item.SubjectID}" data-toggle="tab">${item.SubjectName}</a></li>`)
+                        $("#subjectTabs").append(`<li class="active"><a href="#${item.SubjectID}" data-toggle="tab"><i class="fa fa-check-circle text-green"></i> ${item.SubjectName}</a></li>`)
                         $("#tabcontent").append(`<div class="tab-pane active" id="${item.SubjectID}">
                         <table class="table table-condensed">
                          <tr>
@@ -239,7 +239,7 @@ $( document ).ready(function() {
                        </table>
                      </div>`)
                     }else{
-                        $("#subjectTabs").append(`<li><a href="#${item.SubjectID}" data-toggle="tab">${item.SubjectName}</a></li>`)
+                        $("#subjectTabs").append(`<li><a href="#${item.SubjectID}" data-toggle="tab"><i class="fa fa-check-circle text-green"></i> ${item.SubjectName}</a></li>`)
                         $("#tabcontent").append(`<div class="tab-pane" id="${item.SubjectID}">
                         <table class="table table-condensed">
                          <tr>

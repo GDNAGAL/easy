@@ -7,11 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if (array_key_exists('Authorization', $headers) && preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)){
 
 		if(verifyToken($matches[1])){
-            $sid = getSchoolID($matches[1]);
 			$examGroupName = $_POST['examGroupName'];
 
 			
-			$addExamGroup = mysqli_query($conn, "INSERT INTO `examgroups`(`DisplayText`, `SchoolID`, `Year`) VALUES ('$examGroupName','$sid','2023')");
+			$addExamGroup = mysqli_query($conn, "INSERT INTO `defaultexamgroups`(`GroupName`) VALUES ('$examGroupName')");
 			
 			http_response_code(200);
 			header('Content-Type: application/json');

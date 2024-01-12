@@ -330,6 +330,14 @@ if(isset($_COOKIE['AToken'])){
           </a>
         </li>
         <li class="treeview">
+          <a href="" onclick="window.open('Exams','_self')">
+            <i class="fa fa-building-o"></i>
+            <span>Exams</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
           <a href="" onclick="window.open('AddSchool','_self')">
             <i class="fa fa-building-o"></i>
             <span>Add Schools</span>

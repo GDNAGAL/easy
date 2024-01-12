@@ -131,7 +131,7 @@ input::-webkit-inner-spin-button {
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Select Gender :</label>
-                          <select class="form-control select2" style="width: 100%;" name="gender" required>
+                          <select class="form-control select2" id="genderSelectBox" style="width: 100%;" name="gender" required>
                             <option selected="selected" value="">Select Gender</option>
                             <option>Male</option>
                             <option>Female</option>
@@ -144,7 +144,7 @@ input::-webkit-inner-spin-button {
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Catagory :</label>
-                          <select class="form-control select2" style="width: 100%;" name="category">
+                          <select class="form-control select2" id="categorySelectBox" style="width: 100%;" name="category">
                             <option selected="selected" value="">Select Catagory</option>
                             <option>Genral</option>
                             <option>OBC</option>
@@ -222,7 +222,6 @@ input::-webkit-inner-spin-button {
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
 <script src="custom/js/addStudent.js"></script>
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- page script -->
