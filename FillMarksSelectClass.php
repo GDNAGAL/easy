@@ -66,10 +66,10 @@
             <div class="box-body ">
               <table class="table table-condensed">
                 <tr>
-                  <th style="width: 20px">#</th>
-                  <th style="width: 20%">Class</th>
-                  <th style="width: 30%">Progress</th>
-                  <th class="text-center" style="width: 40%">Select Examination</th>
+                  <th>#</th>
+                  <th>Class</th>
+                  <th>Progress</th>
+                  <th class="text-center">Action</th>
                 </tr>
                 <tbody id='exambody'>
 

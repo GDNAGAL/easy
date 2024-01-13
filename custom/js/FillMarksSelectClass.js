@@ -60,26 +60,29 @@ $( document ).ready(function() {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
-                 $.each(result.ClassRoom, function(i, item) {
-                    
+                 $.each(result.ClassRoom, function(i, item) {  
+                    let bar; 
+                    if(item.CompletedPercent == 0){
+                        bar = `<div class="progress">
+                                        <div class="progress-bar progress-bar-success" style="width: 0%"></div>
+                                    </div>`
+                    }else if(item.CompletedPercent == 100){
+                        bar = `<div class="progress">
+                                    <div class="progress-bar progress-bar-success" style="width: ${item.CompletedPercent}%">${item.CompletedPercent}%</div>
+                                </div>`
+                    }else{
+                        bar = `<div class="progress progress-striped active">
+                                    <div class="progress-bar progress-bar-danger" style="width: ${item.CompletedPercent}%">${item.CompletedPercent}%</div>
+                                </div>`
+                    }
                     var rawhtml = `<tr>
                     <td>${i+1}</td>
                     <td>${item.ClassRoomName}</td>
                     <td>
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-success" style="width: 100%"></div>
-                      </div>
+                      ${bar}
                     </td>
-                    <td class="text-right">`;
-                       
-                        // console.log(item.ExamList)
-                        $.each(item.ExamList , function(j, k){
-                            let ename = k.ExamText.split("~")[0];
-                            // console.log(k.ExamText.split("~"))
-                            rawhtml += `<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&ExamID=${k.ExamID}"><button class="btn btn-sm btn-primary btn-flat">${ename}</button></a> &nbsp;`;
-                        })
-                    // <a href="MarksEntry.php"><button class="btn btn-sm btn-primary btn-flat">1st Test</button></a>
-                    // rawhtml += `<button class="btn btn-sm btn-info btn-flat" cid="${item.ClassRoomID}" title="Add Exam" id="addExambtn">+</button>`;        
+                    <td class="text-center">
+                    <a href="MarksEntry?ClassRoomID=${item.ClassRoomID}"><button class="btn btn-sm btn-primary btn-flat">Fill Marks</button></a>`;       
                     rawhtml += `</td></tr>`;
                     $("#exambody").append(rawhtml)
                  })

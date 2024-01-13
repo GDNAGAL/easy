@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-   
+   let changes = false;
     
     const urlParams = new URLSearchParams(window.location.search);
     const ClassRoomID = urlParams.get('ClassRoomID');
@@ -20,36 +20,101 @@ $( document ).ready(function() {
       }
 
   
-    $(document).on("click","#addExambtn",function(){
-        $('#addExamModal').modal();
-          $("#classId").val($(this).attr("cid"))
-          $("#modal_exam_name").val('')
+    $(document).on("click","#savebtn", function(){
+      let marksArr = new Array();
+      var markInputs = document.querySelectorAll('#markInputBox');
+      markInputs.forEach(function(input) {
+        let studentid = $(input).attr("studentid");
+        let subjectid = $(input).attr("subjectid");
+        let paperid = $(input).attr("paperid");
+        let marks = input.value;
+        let mobj = {
+          "StudentId" : studentid,
+          "SubjectId" : subjectid,
+          "PaperId" : paperid,
+          "Marks" : marks,
+          "ClassRoomID" :ClassRoomID,
+        }
+        marksArr.push(mobj)
+      });
+      let datajson = JSON.stringify(marksArr);
+      console.log(datajson)
+      let dataa = new FormData();
+      dataa.append("MarksArr", datajson);
+      $.ajax({
+                type: "POST",
+                data: dataa, 
+                contentType: false,       
+                cache: false,             
+                processData:false,
+                url: 'api/Examination/saveStudentMarks',
+                headers: {
+                    'Authorization': 'Bearer ' + getCookie("Token")
+                },
+                success:function(result){
+                  // success,info,error,warning,trash
+                  //Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                },
+                error:function(){
+                  // success,info,error,warning,trash
+                  //Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+                }
+      })
     })
 
-    $("#addExamForm").on("submit",function(e){
-        console.log("submiited")
-        e.preventDefault()
-        let data = new FormData(this);
-        $.ajax({
-            type: "POST",
-            data: data, 
-            contentType: false,       
-            cache: false,             
-            processData:false,
-            url: 'api/Examination/addExam',
-            headers: {
-                'Authorization': 'Bearer ' + getCookie("Token")
-            },
-            success: function(result){
-                getlist()
-                $('#addExamModal').modal('hide');
+    function disableAllInputs() {
+      var numberInputs = document.querySelectorAll('input[type="number"]');
+      numberInputs.forEach(function(input) {
+        input.disabled = true;
+      });
+    }
+    function enableByPidInputs(pid) {
+      disableAllInputs();
+      let numberInputs = document.querySelectorAll(`[PaperID="${pid}"]`);
+      numberInputs.forEach(function(input) {
+        input.disabled = false;
+      });
+    }
 
-            },
-            error : function(err){
-
-            }
-        })
+    //Enable Disable inputs
+    $(document).on("change","#enableRadio",function(){
+      enableByPidInputs($(this).attr("ppid"))
     })
+
+    $(document).on("blur","#markInputBox",function(){
+      if(!changes){
+        $("#subjectTabs").append(`<button class="btn btn-success" id="savebtn" style='float:right' type="submit"><i class="fa fa-save"></i> &nbsp;Save</button>`)
+      }
+      changes = true;
+      $(this).removeClass("v-danger");
+        $(this).removeClass("v-success");
+      let mm = $(this).attr("MM");
+      let inputVal = $(this).val();
+      if(inputVal>mm){
+        $(this).addClass("v-danger");
+        // alert("Cannot Fill More than Maximum Marks : "+ mm)
+        $(this).focus();
+        $(this).val('')
+      }else if(inputVal<0){
+        $(this).addClass("v-danger");
+        // alert("Cannot Fill Less than 0")
+        $(this).focus();
+        $(this).val('')
+      }else if(inputVal==0 || inputVal == ""){
+        $(this).removeClass("v-danger");
+        $(this).removeClass("v-success");
+      }else{
+        $(this).removeClass("v-danger");
+        $(this).addClass("v-success");
+      }
+    })
+
+    // Assuming you have a form with an ID, let's say 'myForm'
+$("#myForm").submit(function(event) {
+  event.preventDefault();
+  let allInputValues = [];
+      allInputValues.push(rowValues);
+});
 
 
     function getlist(){
@@ -69,345 +134,54 @@ $( document ).ready(function() {
                 },
                 success: function(result){
                  $.each(result.Subjects, function(i, item) {
-                    if(i==0){
-                        $("#subjectTabs").append(`<li class="active"><a href="#${item.SubjectID}" data-toggle="tab"><i class="fa fa-check-circle text-green"></i> ${item.SubjectName}</a></li>`)
-                        $("#tabcontent").append(`<div class="tab-pane active" id="${item.SubjectID}">
-                        <table class="table table-condensed">
-                         <tr>
-                           <th class="text-center" style="width:60px">Roll No.  ${item.SubjectName}</th>
-                           <th style="width:250px">Student Name</th>
-                           <th style="width:100px" class="text-center">First Test<br>M.M.(50)</th>
-                           <th><button style="margin-left: 10px;" class="btn btn-flat btn-success">Save Changes</button></th>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-       
-                       </table>
-                     </div>`)
-                    }else{
-                        $("#subjectTabs").append(`<li><a href="#${item.SubjectID}" data-toggle="tab"><i class="fa fa-check-circle text-green"></i> ${item.SubjectName}</a></li>`)
-                        $("#tabcontent").append(`<div class="tab-pane" id="${item.SubjectID}">
-                        <table class="table table-condensed">
-                         <tr>
-                           <th class="text-center" style="width:60px">Roll No.  ${item.SubjectName}</th>
-                           <th style="width:250px">Student Name</th>
-                           <th style="width:100px" class="text-center">First Test<br>M.M.(50)</th>
-                           <th><button style="margin-left: 10px;" class="btn btn-flat btn-success">Save Changes</button></th>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-                         <tr>
-                           <td class="text-center">1001</td>
-                           <td>Rahul Kumar</td>
-                           <td><input type="number" class="form-control"></td>
-                           <td></td>
-                         </tr>
-       
-                       </table>
-                     </div>`)
-                    }
+                      let color = ["#EFEFEF","#FBF1F1","#EFEFEF","#FBF1F1","#EFEFEF","#FBF1F1","#EFEFEF","#FBF1F1","#EFEFEF","#FBF1F1","#EFEFEF","#FBF1F1","#EFEFEF"];
+                      let papershead = "";
+                      let table = `<table class="cell-border hover table-bordered no-footer" style="margin-top:15px">
+                                    <tr>
+                                      <th style="padding:5px" rowspan="2" class="text-center">Roll No.</th>
+                                      <th style="padding:5px" rowspan="2" class="text-center">Student Name</th>`;
+                                      $.each(item.Exams, function(ei,eitem){
+                                        eitem.Papers.forEach(paperitem => {
+                                            let pname = paperitem.PaperDisplayText.split("~")[0];
+                                            papershead += `<td style=" background:${color[ei]}" class="text-center">${pname}<br> (${paperitem.PaperMM})<br><input id="enableRadio" ppid="${paperitem.PaperID}" type="radio" name="enable"></td>`;
+                                        })
+                                        let paperLength = eitem.Papers.length;
+                                        let ename = eitem.ExamText.split("~")[0];
+                                        if(paperLength == 1){
+                                          table += `<th style="width:100px; background:${color[ei]}" colspan="${paperLength}" class="text-center"></th>`;
+                                        }else{
+                                          table += `<th style="width:100px; background:${color[ei]}" colspan="${paperLength}" class="text-center">${ename}</th>`;
+                                        }
+                                      })
+                        table += `</tr>`;
+                        table += `<tr>${papershead}</tr>`;
+
+                        // item.Exams.forEach(eitem => {
+                        //   let ename = eitem.PaperDisplayText.split("~")[0];
+                        //   table += `<th style="width:100px" class="text-center">${ename} (${eitem.PaperMM})<br><input id="enableRadio" ppid="${eitem.PaperID}" type="radio" name="enable"></th>`;
+                        // })
+                        
+                        item.Students.forEach(sitem => {
+                        let inputs = "";
+                                          $.each(item.Exams, function(ei,eitem){
+                                            eitem.Papers.forEach(paperitem => {
+                                              inputs += `<td class="text-center" style="width:100px;padding:4px; background:${color[ei]}"><input id="markInputBox" type="number" StudentID="${sitem.StudentID}" SubjectID="${item.SubjectID}" PaperID="${paperitem.PaperID}" MM="${paperitem.PaperMM}" class="form-control" disabled></td>`;
+                                            })
+                                          })
+                                          table += `<tr>
+                                          <td class="text-center">${sitem.RollNo}</td>
+                                          <td style="padding:5px; padding-right:20px;">${sitem.StudentName}</td>
+                                          ${inputs}
+                                        </tr> `;      
+                      })
+                        table += `</table>`;
+                        if(i==0){
+                          $("#subjectTabs").append(`<li class="active"><a href="#${item.SubjectID}" data-toggle="tab"><i class="fa fa-check-circle text-green"></i> ${item.SubjectName}</a></li>`)
+                          $("#tabcontent").html(`<div class="tab-pane active" id="${item.SubjectID}">${table}</div>`)
+                        }else{
+                          $("#subjectTabs").append(`<li><a href="#${item.SubjectID}" data-toggle="tab"><i class="fa fa-check-circle text-green"></i> ${item.SubjectName}</a></li>`)
+                          $("#tabcontent").append(`<div class="tab-pane" id="${item.SubjectID}">${table}</div>`)
+                        }
 
                  })
                 },

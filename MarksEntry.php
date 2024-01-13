@@ -30,20 +30,18 @@
   <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <style>
     input[type="number"]{
   text-align: center;
   
+}
+.v-danger{
+  background:#f0afaa;
+}
+.v-success{
+  background:#b6f0aa;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -56,7 +54,6 @@ input::-webkit-inner-spin-button {
 <div class="wrapper">
   <?php require("includes/header.php")?>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
   <section class="content-header">
       <h1>
@@ -65,70 +62,26 @@ input::-webkit-inner-spin-button {
       </h1>
       
     </section>
-    <!-- Main content -->
     <section class="content">
-      <!-- Default box -->
-            <!-- /.box-header -->
         <div class="box box-default">
-        <!-- /.box-header -->
         <div class="box-body">
           <div class="row">
         <div class="col-md-12">
-          <!-- Custom Tabs -->
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs" id="subjectTabs">
-              <!-- <li class="active"><a href="#tab_1" data-toggle="tab">Hindi</a></li>
-              <li><a href="#tab_2" data-toggle="tab">English</a></li>
-              <li><a href="#tab_3" data-toggle="tab">Maths</a></li>
-              <li><a href="#tab_3" data-toggle="tab">Sanskrit</a></li>
-              <li><a href="#tab_4" data-toggle="tab">Science</a></li>
-              <li><a href="#tab_4" data-toggle="tab">Social Science</a></li> -->
-            </ul>
-            <span style="color:red;">** Please Do Not Reload This Page</span>  
-            <div class="tab-content" id="tabcontent">
               
-              <!-- /.tab-pane -->
-              <!-- <div class="tab-pane" id="tab_2">
-                The European languages are members of the same family. Their separate existence is a myth.
-                For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-                in their grammar, their pronunciation and their most common words. Everyone realizes why a
-                new common language would be desirable: one could refuse to pay expensive translators. To
-                achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-                words. If several languages coalesce, the grammar of the resulting language is more simple
-                and regular than that of the individual languages.
-              </div> -->
-              <!-- /.tab-pane -->
-              <!-- <div class="tab-pane" id="tab_3">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                It has survived not only five centuries, but also the leap into electronic typesetting,
-                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
-                like Aldus PageMaker including versions of Lorem Ipsum.
-              </div> -->
-              <!-- /.tab-pane -->
+            </ul>
+            <div class="tab-content" id="tabcontent">
             </div>
-            <!-- /.tab-content -->
           </div>
-          <!-- nav-tabs-custom -->
         </div>
-        <!-- /.col -->
       </div>
-       
-        <!-- /.box-body -->
       </div>
 
-      <!-- /.box-header -->
       </div>
-      <!-- /.box -->
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-<?php //require("includes/footer.php");?>
 </div>
-<!-- ./wrapper -->
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
