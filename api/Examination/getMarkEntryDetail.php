@@ -11,12 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$ClassRoomID = $_POST['ClassRoomID'];
 			$ExamID = $_POST['ExamID'];
 			$StudentArr = [];
-			$studentList = mysqli_query($conn, "SELECT * From Students WHERE ClassRoomID = '$ClassRoomID'");
-			if(mysqli_num_rows($studentList)>0){
-				while($studentRow = mysqli_fetch_assoc($studentList)){
-					$StudentArr[] = $studentRow; 
-				}
-			}
+			
 
 			$selectSubject = mysqli_query($conn, "SELECT Distinct ed.SubjectID, su.SubjectName FROM examdesign ed JOIN subjects su ON ed.SubjectID = su.SubjectID WHERE ed.ClassRoomID = '$ClassRoomID'");
 			http_response_code(200);
@@ -24,6 +19,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if(mysqli_num_rows($selectSubject)>0){
 			while($subjectRow = mysqli_fetch_assoc($selectSubject)){
 				$subjectID = $subjectRow['SubjectID'];
+				$totalPaper = mysqli_num_rows(mysqli_query($conn, "SELECT * From examdesign WHERE SubjectID = '$subjectID'"));
+				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE SubjectID = '$subjectID' AND MarksObtained IS NOT NULL"));
+				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE ClassRoomID = '$ClassRoomID'"));
+				$s = $totalPaper * $totalStudents;
+				$c_percent = 0;
+				if($s != 0){
+					$c_percent = ($totalPaperMarks * 100) / ($totalPaper * $totalStudents);
+				}
+				$subjectRow['CompletedPercent'] = round($c_percent,2);
+				
+				$StudentArr = [];
+				$subjectID = $subjectRow['SubjectID'];
+				$studentList = mysqli_query($conn, "SELECT StudentID, RollNo, StudentName From Students WHERE ClassRoomID = '$ClassRoomID'");
+				if(mysqli_num_rows($studentList)>0){
+					while($studentRow = mysqli_fetch_assoc($studentList)){
+						$StudentID = $studentRow['StudentID'];
+						$studentRow['Marks'] = [];
+						$studentMarks = mysqli_query($conn, "SELECT PaperID, MarksObtained From student_paper_marks WHERE StudentID = '$StudentID'");
+						if(mysqli_num_rows($studentMarks)>0){
+							while($marksRow = mysqli_fetch_assoc($studentMarks)){
+								$studentRow['Marks'][] = $marksRow;
+							}
+						}
+						$StudentArr[] = $studentRow; 
+					}
+				}
 				$subjectRow['Students'] = $StudentArr;
 				$subjectRow['Exams'] = [];
 				$examName = mysqli_query($conn, "SELECT * FROM exams WHERE ExamID IN (SELECT DISTINCT ExamID FROM `examdesign` WHERE ClassRoomID = '$ClassRoomID' AND SubjectID = '$subjectID')");

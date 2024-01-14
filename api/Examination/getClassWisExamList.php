@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			while($classRow = mysqli_fetch_assoc($selectClass)){
 				$ClassRoomID = $classRow['ClassRoomID'];
 				$totalPaper = mysqli_num_rows(mysqli_query($conn, "SELECT * From examdesign WHERE ClassRoomID = '$ClassRoomID'"));
-				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE ClassRoomID = '$ClassRoomID'"));
+				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE ClassRoomID = '$ClassRoomID' AND MarksObtained IS NOT NULL"));
 				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE ClassRoomID = '$ClassRoomID'"));
 				$s = $totalPaper * $totalStudents;
 				$c_percent = 0;

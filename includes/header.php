@@ -371,8 +371,6 @@ if(isset($_COOKIE['Token'])){
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="Exams"><i class="fa fa-dot-circle-o"></i> Exams Groups</a></li>
-            <li><a href="Exams"><i class="fa fa-dot-circle-o"></i> Exams Design</a></li>
             <li><a href="FillMarksSelectClass"><i class="fa fa-dot-circle-o"></i> Fill Marks</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Time-Table</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Print Marksheets</a></li>

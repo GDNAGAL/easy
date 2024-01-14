@@ -18,14 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 					$PaperId = $value['PaperId'];
 					$Marks = $value['Marks'];
 					$ClassRoomID = $value['ClassRoomID'];
-					if($Marks == ""){
-						$Marks = NULL;
-					}
 					$validate = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as RowC FROM `student_paper_marks` WHERE PaperID = '$PaperId' AND StudentID = '$StudentId'"));
 					if($validate['RowC']==0){
-						$saveMarks = mysqli_query($conn, "INSERT INTO `student_paper_marks`(`PaperID`, `SchoolID`, `ClassRoomID`, `StudentID`, `MarksObtained`, `SubjectID`) VALUES ('$PaperId','$sid','$ClassRoomID','$StudentId',$Marks,'$SubjectId')");
+						if($Marks == ""){
+							$saveMarks = mysqli_query($conn, "INSERT INTO `student_paper_marks`(`PaperID`, `SchoolID`, `ClassRoomID`, `StudentID`, `MarksObtained`, `SubjectID`) VALUES ('$PaperId','$sid','$ClassRoomID','$StudentId',NULL,'$SubjectId')");
+						}else{
+							$saveMarks = mysqli_query($conn, "INSERT INTO `student_paper_marks`(`PaperID`, `SchoolID`, `ClassRoomID`, `StudentID`, `MarksObtained`, `SubjectID`) VALUES ('$PaperId','$sid','$ClassRoomID','$StudentId','$Marks','$SubjectId')");
+						}
 					}else{
-						$updateMarks = mysqli_query($conn, "UPDATE `student_paper_marks` SET `MarksObtained` = '$Marks' WHERE `PaperID` = '$PaperId' AND `StudentID` = '$StudentId'");
+						if($Marks == ""){
+							$updateMarks = mysqli_query($conn, "UPDATE `student_paper_marks` SET `MarksObtained` = NULL WHERE `PaperID` = '$PaperId' AND `StudentID` = '$StudentId'");
+						}else{
+							$updateMarks = mysqli_query($conn, "UPDATE `student_paper_marks` SET `MarksObtained` = '$Marks' WHERE `PaperID` = '$PaperId' AND `StudentID` = '$StudentId'");
+						}
 					}
 					
 				}
