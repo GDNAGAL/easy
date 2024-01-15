@@ -50,7 +50,7 @@ $(function(){
                         }else{
                             isSubjects = false;
                         }
-                        $("#classlist").append(`<span class="label label-success" style="margin-right:5px">${item.ClassRoomName}</span>`)
+                        $("#classlist").append(`<span class="label label-success" style="margin-right:5px">${item.ClassRoomName} (${item.SectionText})</span>`)
                     })
                     
                     
@@ -115,7 +115,7 @@ $(function(){
                     }
                 });
                 $("#subjectTable").append(`<tr>
-                    <td class="text-center text-green text-bold">${item.ClassRoomName}</td>
+                    <td class="text-center text-green text-bold">${item.ClassRoomName} ${item.SectionText}</td>
                     <td>
                         <div>${CsubjectsHtml}</div>
                         <div>${OsubjectsHtml}</div>

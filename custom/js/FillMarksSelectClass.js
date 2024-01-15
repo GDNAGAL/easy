@@ -77,12 +77,12 @@ $( document ).ready(function() {
                     }
                     var rawhtml = `<tr>
                     <td>${i+1}</td>
-                    <td>${item.ClassRoomName}</td>
+                    <td>${item.ClassRoomName} ${item.SectionText}</td>
                     <td>
                       ${bar}
                     </td>
                     <td class="text-center">
-                    <a href="MarksEntry?ClassRoomID=${item.ClassRoomID}"><button class="btn btn-sm btn-primary btn-flat">Fill Marks</button></a>`;       
+                    <a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-primary btn-flat">Fill Marks</button></a>`;       
                     rawhtml += `</td></tr>`;
                     $("#exambody").append(rawhtml)
                  })

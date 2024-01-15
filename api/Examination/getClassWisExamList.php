@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sid = getSchoolID($matches[1]);
 
 
-			$selectClass = mysqli_query($conn, "SELECT ClassRoomName, ClassRoomID FROM `classrooms` WHERE SchoolID = '$sid'");
+			$selectClass = mysqli_query($conn, "SELECT classrooms_sections.ClassRoomID, ClassRoomName, SectionText, SectionID FROM `classrooms_sections` JOIN `classrooms` ON classrooms_sections.ClassRoomID = classrooms.ClassRoomID WHERE SchoolID = '$sid' order by ClassRoomID");
 			http_response_code(200);
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($selectClass)>0){

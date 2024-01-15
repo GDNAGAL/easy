@@ -169,14 +169,14 @@ function getObjectByKeyValue(arr, key, value) {
                                       $.each(item.Exams, function(ei,eitem){
                                         eitem.Papers.forEach(paperitem => {
                                             let pname = paperitem.PaperDisplayText.split("~")[0];
-                                            papershead += `<td style=" background:${color[ei]}" class="text-center">${pname}<br> (${paperitem.PaperMM})<br><input id="enableRadio" ppid="${paperitem.PaperID}" type="radio" name="enable"></td>`;
+                                            papershead += `<td style=" background:${color[ei]}; border-bottom:1px solid #333" class="text-center">${pname}<br> (${paperitem.PaperMM})<br><input id="enableRadio" ppid="${paperitem.PaperID}" type="radio" name="enable"></td>`;
                                         })
                                         let paperLength = eitem.Papers.length;
                                         let ename = eitem.ExamText.split("~")[0];
                                         if(paperLength == 1){
                                           table += `<th style="width:100px; background:${color[ei]}" colspan="${paperLength}" class="text-center"></th>`;
                                         }else{
-                                          table += `<th style="width:100px; background:${color[ei]}" colspan="${paperLength}" class="text-center">${ename}</th>`;
+                                          table += `<th style="width:100px; background:${color[ei]}; border-bottom:1px solid #333" colspan="${paperLength}" class="text-center">${ename}</th>`;
                                         }
                                       })
                         table += `</tr>`;

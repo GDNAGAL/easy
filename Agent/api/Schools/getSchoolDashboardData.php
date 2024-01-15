@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$classArray = [];
 			$schoolslist = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SchoolName, SchoolHeadName, SchoolHeadMobile, SchoolAddress FROM `schools` WHERE SchoolID = '$schoolID'"));
 
-			$classlist = mysqli_query($conn, "SELECT ClassRoomName,ClassRoomID FROM `classrooms` WHERE SchoolID = '$schoolID'");
+			$classlist = mysqli_query($conn, "SELECT classrooms_sections.ClassRoomID, ClassRoomName, SectionText FROM `classrooms_sections` JOIN `classrooms` ON classrooms_sections.ClassRoomID = classrooms.ClassRoomID WHERE SchoolID = '$schoolID' ORDER by ClassRoomID");
 			if(mysqli_num_rows($classlist)>0){
 				while($row = mysqli_fetch_assoc($classlist)) {
 					$cid = $row['ClassRoomID'];

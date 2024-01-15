@@ -102,7 +102,7 @@ $( document ).ready(function() {
               $("#classRoomTableBody").append(
                 `<tr>
                   <td>${i+1}</td>
-                  <td>${item.ClassRoomName}</td>
+                  <td>${item.ClassRoomName} ${item.SectionText}</td>
                   <td>${item.TeacherName==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.TeacherName}</td>
                   <td class='text-center'>${item.ExamGroupDisplayText==null ? '<span style="color:#999">NOT ASSIGNED</span>': item.ExamGroupDisplayText}</td>
                   <td class='text-center'>${item.SubjectCount==0 ? '<span class="badge label-danger">0</span>' : '<span class="badge label-success">'+ item.SubjectCount +'</span>' }</td>
