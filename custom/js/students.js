@@ -99,9 +99,9 @@ $( document ).ready(function() {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
-
+                    $('#cover-spin').hide();
                     $.each(result.ClassRoomList, function(i, item) {
-                        $("#selectclass").append(`<option value="${item.ClassRoomID}">${item.ClassRoomName}</option>`);
+                        $("#selectclass").append(`<option value="${item.SectionID}">${item.ClassRoomName} ${item.SectionText}</option>`);
                     })
                     
                     var table = $('#studenttable').DataTable();
@@ -109,7 +109,7 @@ $( document ).ready(function() {
                     table.clear().draw();
                     //destroy datatable
                     table.destroy();
-                    getstudents("all");
+                    // getstudents("all");
                 },
                 error : function(err){
                     $('#cover-spin').hide();

@@ -23,7 +23,7 @@ $( document ).ready(function() {
                 success: function(result){
                     $('#cover-spin').hide();
                     $.each(result.ClassRoomList, function(i, item) {
-                        $("#selectclass").append(`<option value="${item.ClassRoomID}">${item.ClassRoomName}</option>`);
+                        $("#selectclass").append(`<option value="${item.SectionID}">${item.ClassRoomName} ${item.SectionText}</option>`);
                     })
                 },
                 error : function(err){

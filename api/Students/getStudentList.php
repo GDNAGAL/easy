@@ -8,18 +8,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
-			$class = $_POST['cls'];
+			$SectionID = $_POST['cls'];
 
-			if ($class == 'all') {
-				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID WHERE students.SchoolID = '$sid'");
+			if ($SectionID == 'all') {
+				$selectstudentlist = mysqli_query($conn, "SELECT AdmissionNo,Category,ClassRoomName,DateofBirth,Gender,RollNo,SectionText,StudentAadhar,StudentAddress,StudentFatherName,StudentID,StudentMobileNo,StudentMotherName,StudentName,StudentName FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID INNER JOIN `classrooms_sections` ON students.SectionID = classrooms_sections.SectionID WHERE students.SchoolID = '$sid'");
 			}else{
-				$selectstudentlist = mysqli_query($conn, "SELECT * FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID WHERE students.SchoolID = '$sid' AND students.ClassRoomID = '$class'");
+				$selectstudentlist = mysqli_query($conn, "SELECT AdmissionNo,Category,ClassRoomName,DateofBirth,Gender,RollNo,SectionText,StudentAadhar,StudentAddress,StudentFatherName,StudentID,StudentMobileNo,StudentMotherName,StudentName,StudentName FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID INNER JOIN `classrooms_sections` ON students.SectionID = classrooms_sections.SectionID  WHERE students.SchoolID = '$sid' AND students.SectionID = '$SectionID'");
 			}
 
 			http_response_code(200);
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($selectstudentlist)>0){
 				while($row = mysqli_fetch_assoc($selectstudentlist)) {
+					$row['ClassRoomName'] = $row['ClassRoomName'].' '. $row['SectionText'];
 					$records[] = $row;
 					}
 				$data = array ("Status"=> "OK","Message" => "Success", "StudentList" => $records);

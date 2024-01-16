@@ -1,6 +1,4 @@
-
-console.log("sdgs")
-getExamGroupList()
+getClassRoomGroupList()
 function getCookie(cookieName) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
@@ -14,7 +12,7 @@ function getCookie(cookieName) {
     return cookie[cookieName];
   }
 
-$("#addExamGroupForm").on("submit",function(e){
+$("#addClassRoomGroupForm").on("submit",function(e){
     e.preventDefault();
     let data = new FormData(this);
         $.ajax({
@@ -23,13 +21,15 @@ $("#addExamGroupForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/Default/addExamGroup',
+            url: 'api/Default/addClassRoomGroup',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
             success: function(result){
-                $('#addExamGroupForm').trigger("reset");
-                getExamGroupList()  
+                $('#addClassRoomGroupForm').trigger("reset");
+                // success,info,error,warning,trash
+                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                getClassRoomGroupList()  
 
             },
             error : function(err){
@@ -41,24 +41,21 @@ $("#addExamGroupForm").on("submit",function(e){
 
 
 
-function getExamGroupList(){
+function getClassRoomGroupList(){
     $("#examgrouptable").html("")
     $.ajax({
         type: "POST",
-        url: 'api/Default/getExamGroupList',
+        url: 'api/Default/getClassRoomGroupList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },
         success: function(result){
-            // $('#cover-spin').hide();
+            $('#cover-spin').hide();
             if(result.Status=="OK"){
-                $.each(result.ExamGroupList, function(i, item) {
-                    $("#examgrouptable").append(`<tr>
-                    <td>${i+1}</td>
-                    <td>${item.GroupName}</td>
-                    <td class="text-center">
-                    <a href="ViewExamGroup?examGroupId=${item.ID}"><button class="btn btn-primary">View</button></a></td>
-                    </tr>`);
+                $("#classRoomGroupSelectBox").html("")
+                $("#classRoomGroupSelectBox").append(`<option value="">Select ClassRoom Group</option>`)
+                $.each(result.ClassRoomGroupList, function(i, item) {
+                    $("#classRoomGroupSelectBox").append(`<option value="${item.ClassRoomGroupID}">${item.GroupName}</option>`)
                 });
             }
         },

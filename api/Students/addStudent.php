@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
-			$studentclass = $_POST['studentclass'];
+			$SectionID = $_POST['studentclass'];
 			$adno = $_POST['adno'];
 			$studentname = ucfirst($_POST['studentname']);
 			$fathername = ucfirst($_POST['fathername']);
@@ -22,9 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$mobile = $_POST['mobile'];
 			$aadhar = $_POST['aadhar'];
 
+			$getClassRoom = mysqli_fetch_assoc(mysqli_query($conn, "SELECT ClassRoomID FROM `classrooms_sections` WHERE SectionID = '$SectionID' LIMIT 1"));
+			$classRoomID = $getClassRoom['ClassRoomID'];
 			
-			$addExamGroup = mysqli_query($conn, "INSERT INTO `students`(`Year`, `SchoolID`, `StudentName`, `StudentFatherName`, `StudentMotherName`, `DateofBirth`, `Category`, `StudentAddress`, `ClassRoomID`, `AdmissionNo`, `Gender`, `RollNo`, `StudentMobileNo`, `StudentAadhar`, `StudentPhoto`)
-			 VALUES ('2023','$sid','$studentname','$fathername','$mothername','$dob','$category','$address','$studentclass','$adno','$gender','$rollno','$mobile','$aadhar','')");
+			$addExamGroup = mysqli_query($conn, "INSERT INTO `students`(`Year`, `SchoolID`, `StudentName`, `StudentFatherName`, `StudentMotherName`, `DateofBirth`, `Category`, `StudentAddress`, `ClassRoomID`, `SectionID`, `AdmissionNo`, `Gender`, `RollNo`, `StudentMobileNo`, `StudentAadhar`, `StudentPhoto`)
+			 VALUES ('2023','$sid','$studentname','$fathername','$mothername','$dob','$category','$address','$classRoomID','$SectionID','$adno','$gender','$rollno','$mobile','$aadhar','')");
 			
 			http_response_code(200);
 			header('Content-Type: application/json');

@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if(verifyToken($matches[1])){
 		
 
-			$examlist = mysqli_query($conn, "SELECT * FROM `defaultexamgroups`");
+			$examlist = mysqli_query($conn, "SELECT * FROM `defaultclassroomgroups`");
 
 			http_response_code(200);
 			header('Content-Type: application/json');
@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				while($row = mysqli_fetch_assoc($examlist)) {
 					$records[] = $row;
 					}
-				$data = array ("Status"=> "OK","Message" => "Success", "ExamGroupList" => $records);
+				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoomGroupList" => $records);
 				echo json_encode( $data );
 			}else{
-				$data = array ("Status"=> "NOT_FOUND","Message" => "No Exams are Found");
+				$data = array ("Status"=> "NOT_FOUND","Message" => "No ClassRoom Group Found");
 				echo json_encode( $data );
 			}
 			

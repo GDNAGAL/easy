@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-
+  <link rel="stylesheet" href="custom/css/style.css">
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <style>
@@ -55,89 +55,77 @@
 <div class="wrapper">
   <?php require("includes/header.php")?>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <section class="content">
       <div class="row">
         <div class="col-md-4">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Add Exam Group</h3>
-            </div>
-            <div class="box-body">
-              <form action="" method="POST" id="addExamGroupForm" autocomplete="off">
-                <div class="form-group">
-                  <input type="text" id="examGroupInput"placeholder="Enter Exam Group Name" class="form-control" name="examGroupName">
-                  <span class="text-danger" id="validationSpan"></span>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Add Class Room Group</h3>
                 </div>
-                <button type="submit" id="" class="btn btn-primary">Add Exam Group</button>
-              </form>
+                <div class="box-body">
+                  <form action="" method="POST" id="addClassRoomGroupForm" autocomplete="off">
+                    <div class="form-group">
+                      <input type="text" placeholder="Enter ClassRoom Group Name" class="form-control" name="classRoomGroupName">
+                      <span class="text-danger" id="validationSpan"></span>
+                    </div>
+                    <button type="submit" id="" class="btn btn-primary">Add ClassRoom Group</button>
+                  </form>
+                </div>
+              </div>
             </div>
-          </div>
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Add Class Room</h3>
+                </div>
+                <div class="box-body">
+                  <form action="" method="POST" id="addClassRoomForm" autocomplete="off">
+                    <div class="form-group">
+                      <select class="form-control" id="classRoomGroupSelectBox" name="classRoomNameGroupName">
+                        <option value="">Select ClassRoom Group</option>
+                      </select>
+                      <span class="text-danger" id="validationSpan"></span>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" placeholder="Enter ClassRoom Name" class="form-control" name="classRoomName">
+                      <span class="text-danger" id="validationSpan"></span>
+                    </div>
+                    <button type="submit" id="" class="btn btn-primary">Add ClassRoom</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div> 
         </div>
 
         <div class="col-md-8">
-        <div class="box">
-        <div class="box-header">
-              <h3 class="box-title">Exams Groups</h3>
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">ClassRooms</h3>
             </div>
             <div class="box-body">
               <table id="" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Exam Name</th>
+                  <th>Class Room Name</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
-                <tbody id="examgrouptable">
+                <tbody id="classRoomTable">
                 </tbody>
               </table>
             </div>
-            <!-- /.box-body -->
           </div>
-      <!-- /.box -->
         </div>
+
       </div>
-      
-
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-<?php //require("includes/footer.php");?>
 </div>
-<!-- ./wrapper -->
-
-
-<!-- Modal -->
-  <div class="modal fade" id="modal-default">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Update Exam Name</h4>
-              </div>
-              <div class="modal-body">
-                <input type="text" class="form-control" name="">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-
-        <!-- Modal End -->
-
-
-
-
-
 
 
 
@@ -157,7 +145,7 @@
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="custom/js/Exams.js"></script>
+<script src="custom/js/Defaults.js"></script>
 <!-- page script -->
 <script>
   $(function () {
