@@ -60,8 +60,12 @@ $( document ).ready(function() {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
+                let CompletedMarksAverage = 0;
+                let ccount = result.ClassRoom.length;
+                let fillbtn = "";
                  $.each(result.ClassRoom, function(i, item) {  
                     let bar; 
+                    CompletedMarksAverage+=Number(item.CompletedPercent);
                     if(item.CompletedPercent == 0){
                         bar = `<div class="progress">
                                         <div class="progress-bar progress-bar-success" style="width: 0%"></div>
@@ -75,17 +79,24 @@ $( document ).ready(function() {
                                     <div class="progress-bar progress-bar-danger" style="width: ${item.CompletedPercent}%">${item.CompletedPercent}%</div>
                                 </div>`
                     }
+                    if(item.Students>0){
+                        fillbtn =`<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-primary btn-flat">Fill Marks</button></a>`; 
+                    }else{
+                        fillbtn = `<span class="text-danger">Add Student First.</span>`;
+                    }
                     var rawhtml = `<tr>
                     <td>${i+1}</td>
                     <td>${item.ClassRoomName} ${item.SectionText}</td>
+                    <td class="text-center">${item.Students}</td>
                     <td>
                       ${bar}
                     </td>
-                    <td class="text-center">
-                    <a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-primary btn-flat">Fill Marks</button></a>`;       
+                    <td>
+                    ${fillbtn}`;       
                     rawhtml += `</td></tr>`;
                     $("#exambody").append(rawhtml)
                  })
+                 $("#mfper").html((CompletedMarksAverage/ccount).toFixed(2)+" %")
                 },
                 error : function(err){
                     $('#cover-spin').hide();

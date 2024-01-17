@@ -61,164 +61,21 @@
             <div class="box">
             <div class="box-header">
               <h3 class="box-title">Select Class And Fill Marks</h3>
+              <h3 class="box-title pull-right">Marks Filling Completed : <span id="mfper" class="text-green text-bold"></span></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body ">
-              <table class="table table-condensed">
+              <table class="table table-condensed text-center">
                 <tr>
                   <th>#</th>
                   <th>Class</th>
+                  <th>No. of Students</th>
                   <th>Progress</th>
-                  <th class="text-center">Action</th>
+                  <th>Action</th>
                 </tr>
                 <tbody id='exambody'>
 
                 </tbody>
-                
-               <!-- <tr>
-                  <td>2.</td>
-                  <td>PP 4+</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>PP 5+</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>First</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5.</td>
-                  <td>Second</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>6.</td>
-                  <td>Third</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 30%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7.</td>
-                  <td>Fourth</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8.</td>
-                  <td>Sixth</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 0%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9.</td>
-                  <td>Seventh</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>10.</td>
-                  <td>Eighth</td>
-                  <td>
-                    <div class="progress progress-striped active">
-                      <div class="progress-bar progress-bar-danger" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm btn-primary btn-flat">1st Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">2nd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">3rd Test</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Half-Yearly</button>
-                    <button class="btn btn-sm btn-primary btn-flat">Yearly</button>
-                  </td>
-                </tr> -->
               </table>
             </div>
             <!-- /.box-body -->

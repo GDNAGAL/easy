@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 					$validate = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as RowC FROM `student_paper_marks` WHERE PaperID = '$PaperId' AND StudentID = '$StudentId'"));
 					if($validate['RowC']==0){
 						if($Marks == ""){
-							$saveMarks = mysqli_query($conn, "INSERT INTO `student_paper_marks`(`PaperID`, `SchoolID`, `ClassRoomID`, `StudentID`, `MarksObtained`, `SubjectID`) VALUES ('$PaperId','$sid','$ClassRoomID','$StudentId',NULL,'$SubjectId')");
+							$saveMarks = mysqli_query($conn, "INSERT INTO `student_paper_marks`(`PaperID`, `StudentID`, `MarksObtained`, `SubjectID`) VALUES ('$PaperId','$StudentId',NULL,'$SubjectId')");
 						}else{
-							$saveMarks = mysqli_query($conn, "INSERT INTO `student_paper_marks`(`PaperID`, `SchoolID`, `ClassRoomID`, `StudentID`, `MarksObtained`, `SubjectID`) VALUES ('$PaperId','$sid','$ClassRoomID','$StudentId','$Marks','$SubjectId')");
+							$saveMarks = mysqli_query($conn, "INSERT INTO `student_paper_marks`(`PaperID`, `StudentID`, `MarksObtained`, `SubjectID`) VALUES ('$PaperId','$StudentId','$Marks','$SubjectId')");
 						}
 					}else{
 						if($Marks == ""){

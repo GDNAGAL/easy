@@ -79,10 +79,10 @@ $("#addPaperForm").on("submit",function(e){
             },
             success: function(result){
                 $("#addPaperModal").modal('hide')
-                getPaperList(ClassRoomGroupID)
+                getPaperList($("#setSubjectID").val())
                 $('#addPaperForm').trigger("reset");
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000}) 
+                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 2500}) 
 
             },
             error : function(err){
@@ -145,6 +145,7 @@ function getPaperList(subjectId){
         },
         success: function(result){
             $('#cover-spin').hide();
+            var total = 0;
             if(result.Status=="OK"){
                 var table = `Papers For <b>${subjectId}</b>`;
                 table += `<table class="table table-bordered table-striped text-center align-middle">
@@ -153,9 +154,11 @@ function getPaperList(subjectId){
                     var length = item.PaperList.length;
                     table += `<tr><td rowspan="${length + 1}">${i + 1}</td><td rowspan="${length + 1}">${item.ExamText}</td></tr>`
                     $.each(item.PaperList, function(j, pitem){
+                        total+=Number(pitem.PaperMM);
                         table += `<tr><td>${pitem.PaperDisplayText}</td><td>${pitem.PaperMM}</td><td><a href="javascript:void(0)">Edit</a></td></tr>`;
                     })
                 });
+                table+=`<tr><th colspan="3">Total Marks : </th><th>${total}</th><td></td></tr>`;
                 table += `</table>`;
                 $("#paperTableBody").html(table)
             }

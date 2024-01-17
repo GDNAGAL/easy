@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sid = getSchoolID($matches[1]);
 			$classID = $_POST['classID'];
 			// $class = mysqli_query($conn, "SELECT * FROM `classrooms` JOIN teachers ON classrooms.ClassTeacher = teachers.TeacherID WHERE classrooms.SchoolID = '$sid' ORDER by `ClassRoomID`");
-			$class = mysqli_query($conn, "SELECT SubjectID,subjects.Year,SubjectName,SubjectType,TeacherID,TeacherName FROM `subjects`
+			$class = mysqli_query($conn, "SELECT SubjectID,SubjectName,SubjectType,TeacherID,TeacherName FROM `subjects`
 			LEFT JOIN `teachers` ON `subjects`.`SubjectTeacher` = `teachers`.`TeacherID`
 			LEFT JOIN subject_types ON `subjects`.`SubjectTypeID` = `subject_types`.`SubjectTypeID`
 			WHERE subjects.SchoolID = '$sid' AND subjects.SubjectTeacher IS NULL AND ClassRoomID = $classID OR subjects.SchoolID = '$sid' AND teachers.TeacherID IS NOT NULL AND ClassRoomID = $classID order by subjects.SubjectTypeID");

@@ -1,9 +1,18 @@
 $( document ).ready(function() {
    let changes = false;
     
+   window.addEventListener('keydown', function (event) {
+    if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+        event.preventDefault()
+          if(changes){
+            saveData()
+          }
+        }
+    });
+
     const urlParams = new URLSearchParams(window.location.search);
     const ClassRoomID = urlParams.get('ClassRoomID');
-    const ExamID = urlParams.get('ExamID');
+    const SectionID = urlParams.get('SectionID');
     let activeTab = "";
     getlist();
 
@@ -32,6 +41,10 @@ $( document ).ready(function() {
 
   
     $(document).on("click","#savebtn", function(){
+      saveData();
+    })
+
+    function saveData(){
       $('#cover-spin').show();
       activeTab = $("li.active").children().attr("href").split("#")[1];
 
@@ -42,6 +55,7 @@ $( document ).ready(function() {
         let subjectid = $(input).attr("subjectid");
         let paperid = $(input).attr("paperid");
         let marks = input.value;
+        let mm = $(input).attr("mm");
         let mobj = {
           "StudentId" : studentid,
           "SubjectId" : subjectid,
@@ -70,11 +84,11 @@ $( document ).ready(function() {
                   getlist()
                 },
                 error:function(){
-                  // success,info,error,warning,trash
-                  //Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+                  success,info,error,warning,trash
+                  Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
                 }
       })
-    })
+    }
 
     function disableAllInputs() {
       var numberInputs = document.querySelectorAll('input[type="number"]');
@@ -145,7 +159,7 @@ function getObjectByKeyValue(arr, key, value) {
         $("#tabcontent").html('')
         let dataa = new FormData();
         dataa.append("ClassRoomID", ClassRoomID);
-        dataa.append("ExamID",ExamID);
+        dataa.append("SectionID",SectionID);
         $.ajax({
                 type: "POST",
                 data: dataa, 

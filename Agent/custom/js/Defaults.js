@@ -166,7 +166,7 @@ function getClassRoomGroupList(){
                 var table = ``;
                 $.each(result.ClassRoomGroupList, function(i, citem) {
                     var length = citem.ClassRoomList.length;
-                    table += `<tr><td rowspan="${length}">${i + 1}</td><td rowspan="${length}">${citem.GroupName}</td><td>${citem.ClassRoomList[0].ClassRoomName}</td><td rowspan="${length}" class="text-center"><a href="DefaultView?ClassRoomGroupID=${citem.ClassRoomGroupID}"><button class="btn btn-success btn-flat">View</button></a></td></tr>`
+                    table += `<tr><td rowspan="${length}">${i + 1}</td><td rowspan="${length}">${citem.GroupName}</td><td>${citem.ClassRoomList[0].ClassRoomName}</td><td rowspan="${length}" class="text-center"><a href="DefaultView?ClassRoomGroupID=${citem.ClassRoomGroupID}&Titile=${citem.GroupName}"><button class="btn btn-success btn-flat">View</button></a></td></tr>`
                     $.each(citem.ClassRoomList, function(j, pitem){
                         if (j > 0) {
                             table += `<tr><td>${pitem.ClassRoomName}</td></tr>`;

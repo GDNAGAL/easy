@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				while($row = mysqli_fetch_assoc($examlist)) {
 						$ExamID = $row['ExamID'];
 						$row['PaperList'] = [];
-						$paperListq = mysqli_query($conn, "SELECT * FROM `defaultpaper` WHERE ExamIndex = '$ExamID'");
+						$paperListq = mysqli_query($conn, "SELECT * FROM `defaultpaper` WHERE ExamIndex = '$ExamID' AND SubjectIndex = '$SubjectID'");
 						while($paperRow = mysqli_fetch_assoc($paperListq)){
 							$row['PaperList'][] = $paperRow;
 						}

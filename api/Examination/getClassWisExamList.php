@@ -15,9 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($selectClass)>0){
 			while($classRow = mysqli_fetch_assoc($selectClass)){
+				$SectionID = $classRow['SectionID'];
 				$ClassRoomID = $classRow['ClassRoomID'];
 				$totalPaper = mysqli_num_rows(mysqli_query($conn, "SELECT * From examdesign WHERE ClassRoomID = '$ClassRoomID'"));
-				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE ClassRoomID = '$ClassRoomID' AND MarksObtained IS NOT NULL"));
+				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE StudentID IN(Select StudentID From students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID') AND MarksObtained IS NOT NULL"));
 				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE ClassRoomID = '$ClassRoomID'"));
 				$s = $totalPaper * $totalStudents;
 				$c_percent = 0;
@@ -25,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 					$c_percent = ($totalPaperMarks * 100) / ($totalPaper * $totalStudents);
 				}
 				$classRow['CompletedPercent'] = round($c_percent,2);
+				$classRow['Students'] = $totalStudents;
 				$records[] = $classRow;
 			}
 				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoom" => $records);

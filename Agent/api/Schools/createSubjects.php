@@ -15,33 +15,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 					while($row = mysqli_fetch_assoc($classRoom)){
 						$ClassIndex = $row['ClassIndex'];
 						$classRoomID = $row['ClassRoomID'];
+						$findClassGroup = mysqli_fetch_assoc(mysqli_query($conn, "SELECT ClassRoomGroupID as gid FROM `defaultclassrooms` WHERE ClassIndex = '$ClassIndex'"));
+						$ClassRoomGroupID = $findClassGroup['gid'];
 
-						//for up to second class
-						if($ClassIndex>=0 && $ClassIndex<=4){
-							$subjectComp = ["HINDI", "ENGLISH","MATHEMATICS"];
-							$subjectOptional = ["EVS", "HEALTH EDUCATION","WORK EXPERIENCE","ART EDUCATION"];
-						//for 3rd and 4th class
-						}elseif($ClassIndex>=5 && $ClassIndex<=6){
-							$subjectComp = ["HINDI", "ENGLISH","MATHEMATICS","EVS"];
-							$subjectOptional = ["HEALTH EDUCATION","WORK EXPERIENCE","ART EDUCATION"];
-						//for 6th and 7th class
-						}elseif($ClassIndex>=7 && $ClassIndex<=8){
-							$subjectComp = ["HINDI", "ENGLISH","MATHEMATICS","SOCIAL SCIENCE","SCIENCE","SANSKRIT"];
-							$subjectOptional = ["H & P EDUCATION","WORK EXPERIENCE","ART EDUCATION"];
-						//for 9th class
-						}elseif($ClassIndex==9){
-							$subjectComp = ["HINDI", "ENGLISH","MATHEMATICS","SOCIAL SCIENCE","SCIENCE","SANSKRIT"];
-							$subjectOptional = ["राज. की शौर्य प. एंव स्वतंत्रता संग्राम","H & P EDUCATION","Fou. Of Info. Tech.","SUPW","ART EDUCATION"];
-						}
-
-						//for compulsory subjects
-						foreach ($subjectComp as $index => $subject) {
-							$addSchool = mysqli_query($conn, "INSERT INTO `subjects`(`Year`, `SchoolID`, `ClassRoomID`, `SubjectName`, `SubjectTypeID`, `SubjectTeacher`, `SubjectIndex`) VALUES ('2023','$schoolID','$classRoomID','$subject',1,NULL,'$index')");
-						}
-
-						//for optional subjects
-						foreach ($subjectOptional as $index => $subject) {
-							$addSchool = mysqli_query($conn, "INSERT INTO `subjects`(`Year`, `SchoolID`, `ClassRoomID`, `SubjectName`, `SubjectTypeID`, `SubjectTeacher`, `SubjectIndex`) VALUES ('2023','$schoolID','$classRoomID','$subject',2,NULL,'$index')");
+						$subjectQuery = mysqli_query($conn, "SELECT * FROM `defaultsubjects` WHERE ClassRoomGroupID = '$ClassRoomGroupID'");
+						while($subrow = mysqli_fetch_assoc($subjectQuery)){
+							$SubjectID = $subrow['SubjectID'];
+							$SubjectName = $subrow['SubjectName'];
+							$SubjectTypeID = $subrow['SubjectTypeID'];
+							mysqli_query($conn, "INSERT INTO `subjects`(`SchoolID`, `ClassRoomID`, `SubjectName`, `SubjectTypeID`, `SubjectTeacher`, `SubjectIndex`) VALUES ('$schoolID','$classRoomID','$SubjectName','$SubjectTypeID',NULL,'$SubjectID')");
 						}
 					}
 				}

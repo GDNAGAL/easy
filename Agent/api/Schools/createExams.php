@@ -10,12 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$schoolID = $_POST['SchoolID'];
 			$checkDuplicateExams = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as sc FROM `exams` WHERE SchoolID = '$schoolID'"));
 			if($checkDuplicateExams['sc'] == 0){
-				$Exams = ["1st Test~प्रथम परख", "2nd Test~द्वितीय परख ","3rd Test~तृतीय परख","Half-Yearly~अर्द्धवार्षिक","Yearly~वार्षिक"];
-				foreach ($Exams as $index => $examss) {
-					$addExam = mysqli_query($conn, "INSERT INTO `Exams`(`ExamText`, `ExamIndex`, `SchoolID`) VALUES ('$examss','$index','$schoolID')");
-				}
+				$addExam = mysqli_query($conn, "INSERT INTO `exams`(`ExamText`, `ExamTextHindi`, `ExamIndex`, `SchoolID`) SELECT ExamText, ExamTextHindi, ExamID, $schoolID FROM `defaultexams`");
 				
-
 				function getExamID($ExamIndex){
 					global $conn, $schoolID;
 					$eRow = mysqli_fetch_assoc(mysqli_query($conn, "SELECT ExamID FROM `exams` WHERE ExamIndex = '$ExamIndex' AND SchoolID = '$schoolID'"));
@@ -26,24 +22,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$classRoom = mysqli_query($conn, "SELECT * FROM `classrooms` WHERE SchoolID = '$schoolID'");
 				while($row = mysqli_fetch_assoc($classRoom)){
 					$classRoomID = $row['ClassRoomID'];
+					// echo $classRoomID;
 					$classRoomIndex = $row['ClassIndex'];
+					$classGID = mysqli_fetch_assoc(mysqli_query($conn, "SELECT ClassRoomGroupID FROM `defaultclassrooms` WHERE ClassIndex = '$classRoomIndex'"));
+					$ClassRoomGroupID = $classGID['ClassRoomGroupID'];
 					//select Subjects
-					$subjects = mysqli_query($conn, "SELECT * FROM `subjects` WHERE SubjectTypeID = 1 AND ClassRoomID = '$classRoomID'");
+					$subjects = mysqli_query($conn, "SELECT * FROM `subjects` WHERE ClassRoomID = '$classRoomID'");
 					if(mysqli_num_rows($subjects)>0){
 						while($subjectrow = mysqli_fetch_assoc($subjects)){
 							$subjectID = $subjectrow['SubjectID'];
 							$subjectIndex = $subjectrow['SubjectIndex'];
-							//select Exams
 
-							$papers = mysqli_query($conn, "SELECT * FROM `defaultpaper` WHERE ClassRoomIndex = '$classRoomIndex' AND SubjectIndex = '$subjectIndex'");
+							$papers = mysqli_query($conn, "SELECT * FROM `defaultpaper` WHERE ClassRoomIndex = '$ClassRoomGroupID' AND SubjectIndex = '$subjectIndex'");
 							if(mysqli_num_rows($papers)>0){
 								while($paperRow = mysqli_fetch_assoc($papers)){
 									$ExamID = getExamID($paperRow['ExamIndex']);
-									
 									$p = $paperRow['PaperDisplayText'];
+									$pH = $paperRow['PaperDisplayTextHindi'];
 									$mm = $paperRow['PaperMM'];
-									$addPaper = mysqli_query($conn, "INSERT INTO `examdesign`(`ClassRoomID`, `SubjectID`, `ExamID`, `PaperDisplayText`, `PaperMM`) VALUES ('$classRoomID','$subjectID','$ExamID','$p','$mm')");
-
+									$addPaper = mysqli_query($conn, "INSERT INTO `examdesign`(`ClassRoomID`, `SubjectID`, `ExamID`, `PaperDisplayText`, `PaperDisplayTextHindi`, `PaperMM`) VALUES ('$classRoomID','$subjectID','$ExamID','$p','$pH','$mm')");
 								}
 							}
 						}

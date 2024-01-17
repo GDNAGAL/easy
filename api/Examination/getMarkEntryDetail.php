@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
 			$ClassRoomID = $_POST['ClassRoomID'];
-			$ExamID = $_POST['ExamID'];
+			$SectionID = $_POST['SectionID'];
 			$StudentArr = [];
 			
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$subjectID = $subjectRow['SubjectID'];
 				$totalPaper = mysqli_num_rows(mysqli_query($conn, "SELECT * From examdesign WHERE SubjectID = '$subjectID'"));
 				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE SubjectID = '$subjectID' AND MarksObtained IS NOT NULL"));
-				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE ClassRoomID = '$ClassRoomID'"));
+				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID'"));
 				$s = $totalPaper * $totalStudents;
 				$c_percent = 0;
 				if($s != 0){
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				
 				$StudentArr = [];
 				$subjectID = $subjectRow['SubjectID'];
-				$studentList = mysqli_query($conn, "SELECT StudentID, RollNo, StudentName From Students WHERE ClassRoomID = '$ClassRoomID'");
+				$studentList = mysqli_query($conn, "SELECT StudentID, RollNo, StudentName From Students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID'");
 				if(mysqli_num_rows($studentList)>0){
 					while($studentRow = mysqli_fetch_assoc($studentList)){
 						$StudentID = $studentRow['StudentID'];
