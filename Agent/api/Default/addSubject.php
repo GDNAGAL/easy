@@ -1,5 +1,5 @@
 <?php
-// Path : 
+// Path : api/Subjects/addSubject
 include("../connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -7,29 +7,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if (array_key_exists('Authorization', $headers) && preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)){
 
 		if(verifyToken($matches[1])){
-		
+			$ClassRoomGroupID = $_POST['ClassRoomGroupID'];
+			$subjectName = $_POST['subjectName'];
+			$subjectTypeName = $_POST['subjectTypeName'];
 
-			$classGroupList = mysqli_query($conn, "SELECT * FROM `defaultclassroomgroups` Order By ClassRoomGroupID");
-
+			
+			$addExamGroup = mysqli_query($conn, "INSERT INTO `defaultsubjects`(`ClassRoomGroupID`, `SubjectName`, `SubjectTypeID`) VALUES ('$ClassRoomGroupID','$subjectName','$subjectTypeName')");
+			
 			http_response_code(200);
 			header('Content-Type: application/json');
-			if(mysqli_num_rows($classGroupList)>0){
-				while($row = mysqli_fetch_assoc($classGroupList)) {
-					$ClassRoomGroupID = $row['ClassRoomGroupID'];
-					$row['ClassRoomList'] = [];
-					$classList = mysqli_query($conn, "SELECT * FROM `defaultclassrooms` WHERE ClassRoomGroupID = $ClassRoomGroupID");
-					while($crow = mysqli_fetch_assoc($classList)){
-						$row['ClassRoomList'][] = $crow;
-					}
-					$records[] = $row;
-					}
-				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoomGroupList" => $records);
+			if($addExamGroup == TRUE){
+				$data = array ("Status"=> "OK","Message" => "Subject Added Successfully.");
 				echo json_encode( $data );
 			}else{
-				$data = array ("Status"=> "NOT_FOUND","Message" => "No ClassRoom Group Found");
+				$data = array ("Status"=> "ERROR","Message" => "Failed");
 				echo json_encode( $data );
 			}
-			
 
 		}else{
 			http_response_code(401);
@@ -45,4 +38,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		echo json_encode( $data );
 	}
 }
+
 ?>

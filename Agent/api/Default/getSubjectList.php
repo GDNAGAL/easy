@@ -7,26 +7,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if (array_key_exists('Authorization', $headers) && preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)){
 
 		if(verifyToken($matches[1])){
-		
+			$ClassRoomGroupID = $_POST['ClassRoomGroupID'];
 
-			$classGroupList = mysqli_query($conn, "SELECT * FROM `defaultclassroomgroups` Order By ClassRoomGroupID");
+			$subjectlist = mysqli_query($conn, "SELECT * FROM `defaultsubjects` inner join subject_types on defaultsubjects.SubjectTypeID = subject_types.SubjectTypeID Where ClassRoomGroupID = '$ClassRoomGroupID'");
 
 			http_response_code(200);
 			header('Content-Type: application/json');
-			if(mysqli_num_rows($classGroupList)>0){
-				while($row = mysqli_fetch_assoc($classGroupList)) {
-					$ClassRoomGroupID = $row['ClassRoomGroupID'];
-					$row['ClassRoomList'] = [];
-					$classList = mysqli_query($conn, "SELECT * FROM `defaultclassrooms` WHERE ClassRoomGroupID = $ClassRoomGroupID");
-					while($crow = mysqli_fetch_assoc($classList)){
-						$row['ClassRoomList'][] = $crow;
-					}
+			if(mysqli_num_rows($subjectlist)>0){
+				while($row = mysqli_fetch_assoc($subjectlist)) {
 					$records[] = $row;
 					}
-				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoomGroupList" => $records);
+				$data = array ("Status"=> "OK","Message" => "Success", "SubjectList" => $records);
 				echo json_encode( $data );
 			}else{
-				$data = array ("Status"=> "NOT_FOUND","Message" => "No ClassRoom Group Found");
+				$data = array ("Status"=> "NOT_FOUND","Message" => "No Subject Found");
 				echo json_encode( $data );
 			}
 			

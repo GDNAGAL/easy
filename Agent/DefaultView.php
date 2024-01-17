@@ -61,21 +61,23 @@
         <div class="col-md-6">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">ClassRooms</h3>
-              <button type="button" id="addClassRoomGroupBtn" class="btn btn-success btn-flat pull-right" style="margin-left:10px">Add Class Room Group</button> 
-              <button type="button" id="addClassRoomBtn" class="btn btn-success btn-flat pull-right" >Add Class Room</button>
+              <div style="display:inline-block">
+                <h3 class="box-title">Subjects</h3>
+                <h4 class="box-title" style="display:block;"><b style="color:#3c8dbc">ClassRoomGroup : </b><span id="ClassRoomGroupTitle"></span></h4>
+              </div>
+              <button type="button" id="addSubjectBtn" class="btn btn-success btn-flat pull-right" >Add Subject</button>
             </div>
             <div class="box-body">
               <table id="" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th class="text-center">#</th>
-                  <th>Class Room Name</th>
-                  <th class="text-center">Class Room Group</th>
+                  <th>Subject Name</th>
+                  <th class="text-center">Subject Type</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
-                <tbody id="classRoomTable">
+                <tbody id="subjectTable">
                 </tbody>
               </table>
             </div>
@@ -85,22 +87,11 @@
         <div class="col-md-6">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Exams</h3>
-              <button type="button" id="addExamModalBtn" class="btn btn-success btn-flat pull-right">Add Exam</button>
+              <h3 class="box-title">Papers</h3>
+              <button type="button" id="addPaperBtn" style="display:none" class="btn btn-success btn-flat pull-right">Add Paper</button>
             </div>
-            <div class="box-body">
-              <table id="" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th class="text-center">#</th>
-                  <th>Class Room Name</th>
-                  <th class="text-center">Class Room Group</th>
-                  <th class="text-center">Action</th>
-                </tr>
-                </thead>
-                <tbody id="examTable">
-                </tbody>
-              </table>
+            <div class="box-body" id="paperTableBody">
+              Select Subject To View Papers.
             </div>
           </div>
         </div>  
@@ -112,44 +103,26 @@
 
 
 
-<!-- Add classRoomGroup Modal -->
-<div class="modal fade" id="addClassRoomGroupModal">
+<!-- Add Subject Modal -->
+<div class="modal fade" id="addSubjectModal">
   <div class="modal-dialog">
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Add Class Room Group</h3>
+        <h3 class="box-title">Add Subjects</h3>
       </div>
       <div class="box-body">
-        <form action="" method="POST" id="addClassRoomGroupForm" autocomplete="off">
+        <form action="" method="POST" id="addSubjectForm" autocomplete="off">
           <div class="form-group">
-            <input type="text" placeholder="Enter ClassRoom Group Name" class="form-control" name="classRoomGroupName" required>
+            <input type="text" placeholder="Enter Subject Name" class="form-control" name="subjectName" required>
           </div>
-          <button type="submit" id="" class="btn btn-success btn-flat">Add ClassRoom Group</button>
-          <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add classRoom Modal -->
-<div class="modal fade" id="addClassRoomModal">
-  <div class="modal-dialog">
-    <div class="box">
-      <div class="box-header">
-        <h3 class="box-title">Add Class Room</h3>
-      </div>
-      <div class="box-body">
-        <form action="" method="POST" id="addClassRoomForm" autocomplete="off">
           <div class="form-group">
-            <select class="form-control" id="classRoomGroupSelectBox" name="classRoomNameGroupName" required>
-              <option value="">Select ClassRoom Group</option>
+            <select class="form-control" name="subjectTypeName" required>
+              <option value="">Select Subject Type</option>
+              <option value="1">Mandatory</option>
+              <option value="2">Optional</option>
             </select>
           </div>
-          <div class="form-group">
-            <input type="text" placeholder="Enter ClassRoom Name" class="form-control" name="classRoomName" required>
-          </div>
-          <button type="submit" id="" class="btn btn-success btn-flat">Add ClassRoom</button>
+          <button type="submit" id="" class="btn btn-success btn-flat">Add Subject</button>
           <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
         </form>
       </div>
@@ -158,22 +131,32 @@
 </div>
 
 
-<!-- Add classRoom Modal -->
-<div class="modal fade" id="addExamModal">
+
+<!-- Add Paper Modal -->
+<div class="modal fade" id="addPaperModal">
   <div class="modal-dialog">
     <div class="box">
       <div class="box-header">
         <h3 class="box-title">Add Exams</h3>
       </div>
       <div class="box-body">
-        <form action="" method="POST" id="addExamForm" autocomplete="off">
+        <form action="" method="POST" id="addPaperForm" autocomplete="off">
           <div class="form-group">
-            <input type="text" placeholder="Enter Exam Name (In English)" class="form-control" name="examName" required>
+            <select id="ExamSelect" class="form-control" name="ExamID" required>
+
+            </select>
           </div>
           <div class="form-group">
-            <input type="text" placeholder="परीक्षा का नाम (हिंदी में)" class="form-control" name="examNameHindi" required>
+            <input type="hidden" id="setSubjectID" class="form-control" name="subjectIDName" required>
+            <input type="text" placeholder="Enter Paper Name (In English)" class="form-control" name="paperName" required>
           </div>
-          <button type="submit" id="" class="btn btn-success btn-flat">Add Exam</button>
+          <div class="form-group">
+            <input type="text" placeholder="परीक्षा का नाम (हिंदी में)" class="form-control" name="paperNameHindi" required>
+          </div>
+          <div class="form-group">
+            <input type="number" placeholder="Maximun Marks" class="form-control" name="MaxMarksName" required>
+          </div>
+          <button type="submit" id="" class="btn btn-success btn-flat">Add Paper</button>
           <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Close</button>
         </form>
       </div>
@@ -201,7 +184,7 @@
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="custom/js/Defaults.js"></script>
+<script src="custom/js/DefaultView.js"></script>
 <!-- page script -->
 <script>
   $(function () {
