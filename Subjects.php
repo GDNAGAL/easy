@@ -102,8 +102,8 @@
                 <tr>
                   <th>#</th>
                   <th>Subject Name</th>
-                  <th>Subject Teacher</th>
-                  <th>Subject Type</th>
+                  <th class="text-center">Subject Teacher</th>
+                  <th class="text-center">Subject Type</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>

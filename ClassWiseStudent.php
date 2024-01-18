@@ -41,6 +41,12 @@
     .example-modal .modal {
       background: transparent !important;
     }
+    .studentIamge{
+      border : 1px solid #333;
+      padding: 3px;
+      border-radius:50%;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -65,21 +71,21 @@
             <div class="box-header">
               <h3 class="box-title">
               <img src="custom/img/tree.png" width="40px" alt="">  
-              Design Exam</h3>
+              Studetns For Class <b class="text-danger" id="setClassName"></b></h3>
             </div>
             <div class="box-body">
-              <table id="class_table" class="table table-hover">
+              <table class="table table-hover">
                 <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Class Name</th>
-                  <th>Class Teacher</th>
-                  <th class='text-center'>Exam Group</th>
-                  <th class="text-center">No. of Subjects</th>
-                  <th class="text-center">Action</th>
+                  <th>Roll No.</th>
+                  <th>Student Photo</th>
+                  <th>Student Name</th>
+                  <th class='text-center'>Father Name</th>
+                  <th class="text-center">Mother Name</th>
+                  <th class="text-center">DOB</th>
                 </tr>
                 </thead>
-                <tbody id="classRoomTableBody">
+                <tbody id="studentTableBody">
                   
                 </tbody>
               </table>
@@ -148,7 +154,7 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="custom/js/classes.js"></script>
+<script src="custom/js/classwisestudent.js"></script>
 <!-- page script -->
 <script>
   $(function () {

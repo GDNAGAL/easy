@@ -373,7 +373,7 @@ if(isset($_COOKIE['Token'])){
           <ul class="treeview-menu">
             <li><a href="FillMarksSelectClass"><i class="fa fa-dot-circle-o"></i> Fill Marks</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Time-Table</a></li>
-            <li><a href=""><i class="fa fa-dot-circle-o"></i> Print Marksheets</a></li>
+            <li><a href="CustomMarksheetList"><i class="fa fa-dot-circle-o"></i> Design Marksheets</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Print ResultSheet</a></li>
           </ul>
         </li>

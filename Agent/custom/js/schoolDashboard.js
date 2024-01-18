@@ -1,6 +1,9 @@
 $(function(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const schoolID = urlParams.get('schoolID');
 
     getSchoolDashboardData()
+    
     
     function getCookie(cookieName) {
         let cookie = {};
@@ -31,6 +34,7 @@ $(function(){
             'Authorization': 'Bearer ' + getCookie("AToken")
             },
             success: function(result){
+                getstudents()
                 $('#cover-spin').hide();
                 $("#idSchoolName").html(result.SchoolList[0].SchoolName)
                 $("#idHMName").html(result.SchoolList[0].SchoolHeadName)
@@ -256,4 +260,32 @@ $(function(){
         });
     })
 
+function getstudents(){
+    //$('#cover-spin').show(0);
+    let data = new FormData()
+    data.append("schoolID",schoolID)
+    $.ajax({
+        "url": "api/getStudentList",
+        "type": "POST",
+        "data": data,
+        contentType: false,       
+        cache: false,             
+        processData:false,
+        headers: {
+            'Authorization': 'Bearer ' + getCookie("AToken")
+        },
+        "success": function (data) {
+            $('#cover-spin').hide();
+            if (data.Status == 'NOT_FOUND') {
+                return ;
+                
+            }else{
+            
+            }
+        }
+    })
+}
+
 })
+
+

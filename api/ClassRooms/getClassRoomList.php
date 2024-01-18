@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if(verifyToken($matches[1])){
             $sid = getSchoolID($matches[1]);
 			// $class = mysqli_query($conn, "SELECT * FROM `classrooms` JOIN teachers ON classrooms.ClassTeacher = teachers.TeacherID WHERE classrooms.SchoolID = '$sid' ORDER by `ClassRoomID`");
-			$class = mysqli_query($conn, "SELECT classrooms_sections.ClassRoomID, ClassRoomName, SectionText, SectionID FROM `classrooms_sections` JOIN `classrooms` ON classrooms_sections.ClassRoomID = classrooms.ClassRoomID
+			$class = mysqli_query($conn, "SELECT classrooms_sections.ClassRoomID, ClassRoomName, SectionText, SectionID, ClassTeacher, TeacherName FROM `classrooms_sections` JOIN `classrooms` ON classrooms_sections.ClassRoomID = classrooms.ClassRoomID
 			 LEFT JOIN `teachers` ON `classrooms_sections`.`ClassTeacher` = `teachers`.`TeacherID`
 			 WHERE classrooms.SchoolID = '$sid' AND classrooms_sections.ClassTeacher IS NULL OR classrooms.SchoolID = '$sid' AND teachers.TeacherID IS NOT NULL ORDER by ClassRoomID");
 			http_response_code(200);
@@ -17,8 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if(mysqli_num_rows($class)>0){
 				while($row = mysqli_fetch_assoc($class)) {
 					$cid = $row['ClassRoomID'];
+					$SectionID = $row['SectionID'];
 					$noofSubjects = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS totalSubject FROM `subjects` WHERE ClassRoomID = '$cid'"));
 					$row["SubjectCount"] = $noofSubjects['totalSubject'];
+					$noofStudents = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS totalStudents FROM `students` WHERE ClassRoomID = '$cid' AND SectionID = '$SectionID'"));
+					$row["StudentCount"] = $noofStudents['totalStudents'];
 					$records[] = $row;
 					}
 				$data = array ("Status"=> "OK","Message" => "Success", "ClassRoomList" => $records);

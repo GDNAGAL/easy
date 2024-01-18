@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			while($subjectRow = mysqli_fetch_assoc($selectSubject)){
 				$subjectID = $subjectRow['SubjectID'];
 				$totalPaper = mysqli_num_rows(mysqli_query($conn, "SELECT * From examdesign WHERE SubjectID = '$subjectID'"));
-				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE SubjectID = '$subjectID' AND MarksObtained IS NOT NULL"));
+				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE SubjectID = '$subjectID' AND StudentID IN (SELECT StudentID From Students WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID') AND MarksObtained IS NOT NULL"));
 				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID'"));
 				$s = $totalPaper * $totalStudents;
 				$c_percent = 0;

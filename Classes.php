@@ -60,29 +60,6 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <!-- <div class="col-md-4">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Add ClassRoom</h3>
-            </div>
-            <div class="box-body">
-              <form action="" method="POST" id="addClassRoomForm" autocomplete="off">
-                <div class="form-group">
-                  <input type="text" id="classRoomNameInput"placeholder="Enter Class Name" class="form-control" name="classRoomName">
-                  <span class="text-danger" id="validationSpan"></span>
-                </div>
-                <div class="form-group">
-                  <select class="form-control select2" id="ClassTeacherSelectBox" name="classTeacherName" style="width: 100%;">
-                    <option value="" selected>Select Class Teacher</option>
-                  </select>
-                  </div>
-                  <button type="submit" id="" class="btn btn-primary">Add ClassRoom</button>
-              </form>
-            </div>
-          </div>
-        </div> -->
-
-
         <div class="col-md-12">
           <div class="box">
             <div class="box-header">
@@ -97,8 +74,6 @@
                   <th>#</th>
                   <th>Class Name</th>
                   <th>Class Teacher</th>
-                  <th class='text-center'>Exam Group</th>
-                  <th class="text-center">No. of Subjects</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
@@ -122,26 +97,31 @@
 
 
 <!-- Modal -->
-  <div class="modal fade" id="modal-default">
+  <div class="modal fade" id="classEditModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <form action="" method="post" id="editclassform" autocomplete="off">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title">Update Class Name</h4>
-              <div class="modal-body">
-                <label>Class Name :</label>
-                <input type="hidden" id="modal_class_Id" class="form-control" name="class_id">
-                <input type="text" id="modal_class_name" class="form-control" name="class_name">
+              <h4 class="modal-title" style="margin-bottom:10px">Update Class Room</h4>
+              <div class="">
                 <div class="form-group">
-                  <label>Select Class :</label>
-                  <select class="form-control select2" id="class_teacher_list" name="class_teacher" style="width: 100%;">
+                  <label>Class Room Name :</label>
+                  <input type="hidden" id="ClassRoomID" class="form-control" name="ClassRoomID">
+                  <input type="text" id="ClassRoomName" class="form-control" name="ClassRoomName">
+                </div>
+                <div class="form-group">
+                  <label>Section Text :</label>
+                  <input type="hidden" id="SectionID" class="form-control" name="SectionID">
+                  <input type="text" id="SectionText" class="form-control" name="SectionText">
+                </div>
+                <div class="form-group">
+                  <label>Select Class Teacher :</label>
+                  <select class="form-control select2" id="ClassTeacher" name="ClassTeacher" style="width: 100%;">
                   </select>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="submit" id="editclasssubmit" name="updateclass" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-success">Update Class Info</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
           </form>
         </div>
