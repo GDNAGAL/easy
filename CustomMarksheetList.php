@@ -41,6 +41,12 @@
     .example-modal .modal {
       background: transparent !important;
     }
+    .studentIamge{
+      border : 1px solid #333;
+      padding: 3px;
+      border-radius:50%;
+      cursor:pointer;
+    }
   </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -60,24 +66,24 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">
-              <img src="custom/img/class.png" width="40px" alt="">  
-              ClassRooms</h3>
+              <img src="custom/img/tree.png" width="40px" alt="">  
+              Marksheet List</h3>
+              <button class="btn btn-primary pull-right" id="createDesignBtn">Create Marksheet Design</button>
             </div>
             <div class="box-body">
-              <table id="class_table" class="table table-hover">
+              <table class="table table-hover text-center">
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Class Name</th>
-                  <th>Class Teacher</th>
+                  <th>Marksheet Title</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>
-                <tbody id="classRoomTableBody">
+                <tbody id="designTableBody">
                   
                 </tbody>
               </table>
@@ -97,30 +103,19 @@
 
 
 <!-- Modal -->
-  <div class="modal fade" id="classEditModal">
+<div class="modal fade" id="addDesignModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <form action="" method="post" id="editclassform" autocomplete="off">
+          <form action="" method="post" id="addDesignForm" autocomplete="off">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" style="margin-bottom:10px">Update Class Room</h4>
+              <h4 class="modal-title" style="margin-bottom:10px">Create Marksheet Design</h4>
               <div class="">
                 <div class="form-group">
-                  <label>Class Room Name :</label>
-                  <input type="hidden" id="ClassRoomID" class="form-control" name="ClassRoomID" required>
-                  <input type="text" id="ClassRoomName" class="form-control" name="ClassRoomName" required>
+                  <label>Design Title :</label>
+                  <input type="text" class="form-control" name="MarksheetTitle" required>
                 </div>
-                <div class="form-group">
-                  <label>Section Text :</label>
-                  <input type="hidden" id="SectionID" class="form-control" name="SectionID" required>
-                  <input type="text" id="SectionText" class="form-control" name="SectionText" required>
-                </div>
-                <div class="form-group">
-                  <label>Select Class Teacher :</label>
-                  <select class="form-control select2" id="ClassTeacher" name="ClassTeacher" style="width: 100%;">
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-success">Update Class Info</button>
+                <button type="submit" class="btn btn-primary">Create Design</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
           </form>
@@ -151,12 +146,8 @@
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<script src="custom/js/classes.js"></script>
+<script src="custom/js/CustomMarksheetList.js"></script>
 <!-- page script -->
-<script>
-  $(function () {
-    $('#ClassTeacherSelectBox').select2()
-  })
-</script>
+
 </body>
 </html>
