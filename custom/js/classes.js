@@ -20,8 +20,8 @@ $( document ).ready(function() {
       },
       success: function(result){
         $('#cover-spin').hide();
+        $("#ClassTeacher").html("<option value=''>Select Class Teacher</option>")
         if(result.Status=="OK"){
-          $("#ClassTeacher").html("<option value=''>Select Class Teacher</option>")
           $.each(result.TeacherList, function(i, item) {
             $("#ClassTeacher").append(`<option value="${item.TeacherID}">${item.TeacherName}</option>`);
           });
@@ -56,7 +56,7 @@ $( document ).ready(function() {
               if(item.StudentCount == 0){
                 showStudents = `<a href='javascript:void(0)' title='No Student' class='text-muted h3'><i class='fa fa-user'></i></a>`;
               }else{
-                showStudents = `<a href='ClassWiseStudent?ClassRoomID=${item.ClassRoomID}' title='View Students' class='text-danger h3' id='editClassInfo'><i class='fa fa-user'></i></a>`;
+                showStudents = `<a href='ClassWiseStudent?SectionID=${item.SectionID}' title='View Students' class='text-danger h3' id='editClassInfo'><i class='fa fa-user'></i></a>`;
               }
               $("#classRoomTableBody").append(
                 `<tr>

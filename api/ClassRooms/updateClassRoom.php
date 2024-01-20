@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			if($ClassTeacher == "" || $ClassTeacher == null){
 				$updateSection = mysqli_query($conn, "UPDATE `classrooms_sections` SET `SectionText`='$SectionText', `ClassTeacher` = NULL WHERE SectionID = '$ClassRoomID' AND ClassRoomID = '$ClassRoomID'");
 			}else{
-				$updateSection = mysqli_query($conn, "UPDATE `classrooms_sections` SET `SectionText`='$SectionText', `ClassTeacher` = '$ClassTeacher' WHERE SectionID = '$ClassRoomID' AND ClassRoomID = '$ClassRoomID'");
+				$updateSection = mysqli_query($conn, "UPDATE `classrooms_sections` SET `SectionText`='$SectionText', `ClassTeacher` = '$ClassTeacher' WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID'");
 			}
 			http_response_code(200);
 			header('Content-Type: application/json');

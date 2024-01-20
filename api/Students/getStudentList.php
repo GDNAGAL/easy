@@ -20,6 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($selectstudentlist)>0){
 				while($row = mysqli_fetch_assoc($selectstudentlist)) {
+					$dateofbirth = $row['DateofBirth'];
+					$date = new DateTime($dateofbirth);
+					$row['DateofBirth'] = $date->format('d-m-Y');
 					$row['ClassRoomName'] = $row['ClassRoomName'].' '. $row['SectionText'];
 					$records[] = $row;
 					}

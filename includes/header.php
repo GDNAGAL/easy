@@ -327,7 +327,7 @@ if(isset($_COOKIE['Token'])){
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
-          <a href="" onclick="window.open('index.php','_self')">
+          <a href="javascript:void(0)" onclick="window.open('index.php','_self')">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
             </span>
@@ -347,7 +347,7 @@ if(isset($_COOKIE['Token'])){
           </ul>
         </li>
         <li class="treeview">
-          <a href="" onclick="window.open('teachers','_self')">
+          <a href="javascript:void(0)" onclick="window.open('teachers','_self')">
             <i class="fa fa-users"></i>
             <span>Teachers</span>
             <span class="pull-right-container">
@@ -355,14 +355,14 @@ if(isset($_COOKIE['Token'])){
           </a>
         </li>
         <li class="treeview">
-          <a href="" onclick="window.open('Classes','_self')">
+          <a href="javascript:void(0)" onclick="window.open('Classes','_self')">
             <i class="fa fa-graduation-cap"></i>
             <span>Classes</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-calendar"></i>
             <span>Examination</span>
@@ -376,6 +376,22 @@ if(isset($_COOKIE['Token'])){
             <li><a href="CustomMarksheetList"><i class="fa fa-dot-circle-o"></i> Design Marksheets</a></li>
             <li><a href=""><i class="fa fa-dot-circle-o"></i> Print ResultSheet</a></li>
           </ul>
+        </li> -->
+        <li class="treeview">
+          <a href="javascript:void(0)" onclick="window.open('FillMarksSelectClass','_self')">
+            <i class="fa fa-list-ol"></i>
+            <span>Fill Marks</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="javascript:void(0)" onclick="window.open('CustomMarksheetList','_self')">
+            <i class="fa fa-file-text"></i>
+            <span>Design Marksheet</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
         </li>
         <li class="treeview">
           <a href="#">
@@ -385,6 +401,7 @@ if(isset($_COOKIE['Token'])){
             </span>
           </a>
         </li>
+        
       </ul>
     </section>
     <!-- /.sidebar -->

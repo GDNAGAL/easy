@@ -1,6 +1,6 @@
 $( document ).ready(function() {
   const urlParams = new URLSearchParams(window.location.search);
-  const ClassRoomID = urlParams.get('SectionID');
+  const SectionID = urlParams.get('SectionID');
   getStudentList()
   function getCookie(cookieName) {
     let cookie = {};
@@ -18,7 +18,7 @@ $( document ).ready(function() {
 
 
   function getStudentList(){
-    const dataa = {cls : ClassRoomID};
+    const dataa = {cls : SectionID};
     $("#studentTableBody").html("")
     $.ajax({
           "url": "api/Students/getStudentList",
@@ -37,11 +37,11 @@ $( document ).ready(function() {
               $("#studentTableBody").append(
                 `<tr>
                   <td style="vertical-align: middle;">${item.RollNo}</td>
-                  <td style="vertical-align: middle;"><img class="studentIamge" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="50px" height="50px"/></td>
                   <td style="vertical-align: middle;">${item.StudentName}</td>
                   <td class='text-center' style="vertical-align: middle;">${item.StudentFatherName}</td>
                   <td class='text-center' style="vertical-align: middle;">${item.StudentMotherName}</td>
-                  <td class='text-center' style="vertical-align: middle;">${item.DateofBirth}</td></tr>`
+                  <td class='text-center' style="vertical-align: middle;">${item.DateofBirth}</td>
+                  <td class='text-center' style="vertical-align: middle;"><a href="DownloadMarksheetGA?SectionID=${SectionID}&StudentID=${item.StudentID}" target="_blank"><button class="btn btn-info">Download Marksheet</button></a></td></tr>`
                   );
                 });
               }else if(result.Status=="NOT_FOUND"){

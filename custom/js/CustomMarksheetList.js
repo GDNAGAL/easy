@@ -70,7 +70,7 @@ $( document ).ready(function() {
                 `<tr>
                   <td>${i + 1}</td>
                   <td>${item.MarksheetTitle}</td>
-                  <td><button class="btn btn-info">Customise Design</button></td></tr>`
+                  <td><a href="CustomiseMarksheetDesign"><button class="btn btn-info">Customise Design</button></a></td></tr>`
                   );
                 });
               }else if(result.Status=="NOT_FOUND"){
