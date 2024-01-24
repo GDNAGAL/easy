@@ -30,7 +30,7 @@ $( document ).ready(function() {
   
   //function for get data from database
   function getstudents(cls){
-        // $('#cover-spin').show(0);
+        $('#cover-spin').show(0);
         const dataa = {cls : cls};
         $.ajax({
             "url": "api/Students/getStudentList",

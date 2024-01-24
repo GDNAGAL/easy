@@ -26,6 +26,12 @@ $( document ).ready(function() {
             $("#ClassTeacher").append(`<option value="${item.TeacherID}">${item.TeacherName}</option>`);
           });
         }
+        $("#ClassTeacherAdd").html("<option value=''>Select Class Teacher</option>")
+        if(result.Status=="OK"){
+          $.each(result.TeacherList, function(i, item) {
+            $("#ClassTeacherAdd").append(`<option value="${item.TeacherID}">${item.TeacherName}</option>`);
+          });
+        }
         getClassRoomList()
       },
       error : function(err){
@@ -35,6 +41,7 @@ $( document ).ready(function() {
 
 
       function getClassRoomList(){
+        $('#cover-spin').show(0);
         $("#classRoomTableBody").html("")
         $.ajax({
         type: "POST",
@@ -47,16 +54,31 @@ $( document ).ready(function() {
           if(result.Status=="OK"){
             let showStudents = "";
             let showSubjects = "";
+
+            const uniqueClassRoomIDs = new Set();
+
+            // Filter the array to get objects with unique ClassRoomID
+            const uniqueObjects = result.ClassRoomList.filter(obj => {
+                const isUnique = !uniqueClassRoomIDs.has(obj.ClassRoomID);
+                uniqueClassRoomIDs.add(obj.ClassRoomID);
+                return isUnique;
+            });
+            // console.log(uniqueObjects)
+            $("#classRoomSelect").html("<option value=''>Select Class Room</option>")
+            $.each(uniqueObjects, function(i, item){
+              $("#classRoomSelect").append(`<option value="${item.ClassRoomID}">${item.ClassRoomName}</option>`)
+            })
+
             $.each(result.ClassRoomList, function(i, item) {
               if(item.SubjectCount == 0){
                 showSubjects = `<a href='javascript:void(0)' title='View Subjects' class='text-muted h3'><i class="fa fa-book" aria-hidden="true"></i></a>`;
               }else{
-                showSubjects = `<a href='Subjects?classID=${item.ClassRoomID}' title='View Subjects' class='text-success h3' id='editClassInfo'><i class="fa fa-book" aria-hidden="true"></i></a>`;
+                showSubjects = `<a href='Subjects?classID=${item.ClassRoomID}' title='View Subjects' class='text-success h3'><i class="fa fa-book" aria-hidden="true"></i></a>`;
               }
               if(item.StudentCount == 0){
                 showStudents = `<a href='javascript:void(0)' title='No Student' class='text-muted h3'><i class='fa fa-user'></i></a>`;
               }else{
-                showStudents = `<a href='ClassWiseStudent?SectionID=${item.SectionID}' title='View Students' class='text-danger h3' id='editClassInfo'><i class='fa fa-user'></i></a>`;
+                showStudents = `<a href='ClassWiseStudent?SectionID=${item.SectionID}' title='View Students' class='text-danger h3'><i class='fa fa-user'></i></a>`;
               }
               $("#classRoomTableBody").append(
                 `<tr>
@@ -94,9 +116,11 @@ $( document ).ready(function() {
           $("#ClassRoomName").val("");
           $("#SectionID").val("");
           $("#SectionText").val("");
+          $("#ClassTeacher").val($("#ClassTeacher option:first").val());
+          // $(`#ClassTeacher option[0]`).attr("selected", "selected");
         }
 
-        // Delete Class
+        // Edit Class
         $(document).on("click","#editClassInfo",function(){
           ResetEditModal();
           $("#classEditModal").modal({
@@ -137,5 +161,40 @@ $( document ).ready(function() {
         })
         
 
+
+        // Edit Class
+        $(document).on("click","#addSection",function(){
+          ResetEditModal();
+          $("#addSectionModal").modal({
+            show:true,
+            backdrop: 'static'
+          })
+        })
     
+        $("#addSectionform").on("submit",function(e){
+          e.preventDefault();
+          let data = new FormData(this);
+          $.ajax({
+            type: "POST",
+            data:data,
+            contentType: false,       
+            cache: false,             
+            processData:false,
+            url: 'api/ClassRooms/addSection',
+            headers: {
+                'Authorization': 'Bearer ' + getCookie("Token")
+            },
+            success: function(result){
+              $('#cover-spin').hide();
+              $("#addSectionModal").modal('hide')
+              // success,info,error,warning,trash
+              Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+              getClassRoomList()
+            },
+            error : function(err){
+                $('#cover-spin').hide();
+            }
+            });
+        })
+
   });

@@ -17,13 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			while($classRow = mysqli_fetch_assoc($selectClass)){
 				$SectionID = $classRow['SectionID'];
 				$ClassRoomID = $classRow['ClassRoomID'];
-				$totalPaper = mysqli_num_rows(mysqli_query($conn, "SELECT * From examdesign WHERE ClassRoomID = '$ClassRoomID'"));
-				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE StudentID IN(Select StudentID From students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID') AND MarksObtained IS NOT NULL"));
-				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID'"));
+
+				$totalPaperq = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(PaperID) as totalPaper From examdesign WHERE ClassRoomID = '$ClassRoomID'"));
+				$totalPaperMarksq = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(id) as totalPaperMarks From student_paper_marks WHERE StudentID IN(Select StudentID From students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID') AND MarksObtained IS NOT NULL"));
+				$totalStudentsq = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(StudentID) as totalStudents From students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID'"));
+				
+				$totalPaper = $totalPaperq['totalPaper'];
+				$totalPaperMarks = $totalPaperMarksq['totalPaperMarks'];
+				$totalStudents = $totalStudentsq['totalStudents'];
+
 				$s = $totalPaper * $totalStudents;
 				$c_percent = 0;
 				if($s != 0){
-					$c_percent = ($totalPaperMarks * 100) / ($totalPaper * $totalStudents);
+					$c_percent = ($totalPaperMarks * 100) / $s;
 				}
 				$classRow['CompletedPercent'] = round($c_percent,2);
 				$classRow['Students'] = $totalStudents;

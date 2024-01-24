@@ -178,7 +178,7 @@ input::-webkit-inner-spin-button {
 
                     <div class="row">
                       <div class="col-md-6">
-                        <button class="btn btn-flat btn-success" name="addstudent" id="addstudent">Save Information</button>
+                        <button class="btn btn-primary" name="addstudent" id="addstudent">Save Information</button>
                       </div>
                     </div>
 

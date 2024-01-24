@@ -309,7 +309,7 @@ if(isset($_COOKIE['AToken'])){
         </div>
       </div>
       <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
+      <form action="#" method="get" class="sidebar-form" autocomplete="off">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">

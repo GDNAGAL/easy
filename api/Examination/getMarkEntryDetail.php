@@ -13,15 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$StudentArr = [];
 			
 
+			$studentList = mysqli_query($conn, "SELECT StudentID, RollNo, StudentName From students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID'");
 			$selectSubject = mysqli_query($conn, "SELECT Distinct ed.SubjectID, su.SubjectName FROM examdesign ed JOIN subjects su ON ed.SubjectID = su.SubjectID WHERE ed.ClassRoomID = '$ClassRoomID'");
 			http_response_code(200);
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($selectSubject)>0){
 			while($subjectRow = mysqli_fetch_assoc($selectSubject)){
+
 				$subjectID = $subjectRow['SubjectID'];
-				$totalPaper = mysqli_num_rows(mysqli_query($conn, "SELECT * From examdesign WHERE SubjectID = '$subjectID'"));
-				$totalPaperMarks = mysqli_num_rows(mysqli_query($conn, "SELECT * From student_paper_marks WHERE SubjectID = '$subjectID' AND StudentID IN (SELECT StudentID From Students WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID') AND MarksObtained IS NOT NULL"));
-				$totalStudents = mysqli_num_rows(mysqli_query($conn, "SELECT * From Students WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID'"));
+				$totalPaperq = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(PaperID) as totalPaper From examdesign WHERE SubjectID = '$subjectID'"));
+				$totalPaperMarksq = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(id) as totalPaperMarks From student_paper_marks WHERE SubjectID = '$subjectID' AND StudentID IN (SELECT StudentID From students WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID') AND MarksObtained IS NOT NULL"));
+				$totalStudentsq = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(StudentID) as totalStudents From students WHERE SectionID = '$SectionID' AND ClassRoomID = '$ClassRoomID'"));
+				
+				$totalPaper = $totalPaperq['totalPaper'];
+				$totalPaperMarks = $totalPaperMarksq['totalPaperMarks'];
+				$totalStudents = $totalStudentsq['totalStudents'];
 				$s = $totalPaper * $totalStudents;
 				$c_percent = 0;
 				if($s != 0){
@@ -31,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				
 				$StudentArr = [];
 				$subjectID = $subjectRow['SubjectID'];
-				$studentList = mysqli_query($conn, "SELECT StudentID, RollNo, StudentName From Students WHERE ClassRoomID = '$ClassRoomID' AND SectionID = '$SectionID'");
 				if(mysqli_num_rows($studentList)>0){
 					while($studentRow = mysqli_fetch_assoc($studentList)){
 						$StudentID = $studentRow['StudentID'];

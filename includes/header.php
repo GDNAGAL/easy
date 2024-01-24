@@ -2,6 +2,10 @@
 $url = 'http://localhost:3000/easy';
 if(isset($_COOKIE['Token'])){
   $token = $_COOKIE['Token'];
+  if($token == "undefined"){
+    setcookie("Token", "", time()-3600);
+    header("Location: login");
+  }
   $curl = curl_init();
   curl_setopt_array($curl, array(
     CURLOPT_URL => $url.'/api/getLoginUserData',
@@ -313,7 +317,7 @@ if(isset($_COOKIE['Token'])){
         </div>
       </div>
       <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
+      <form action="#" method="get" class="sidebar-form" autocomplete="off">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">

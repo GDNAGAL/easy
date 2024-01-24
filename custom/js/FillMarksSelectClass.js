@@ -60,6 +60,7 @@ $( document ).ready(function() {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
                 success: function(result){
+                    $('#cover-spin').hide();
                 let CompletedMarksAverage = 0;
                 let ccount = result.ClassRoom.length;
                 let fillbtn = "";
@@ -71,22 +72,22 @@ $( document ).ready(function() {
                         bar = `<div class="progress">
                                         <div class="progress-bar progress-bar-success" style="width: 0%"></div>
                                     </div>`
-                        MarkseetBtn = `<button class="btn btn-sm btn-info btn-flat" disabled>View Marksheets</button>`;
+                        MarkseetBtn = `<button class="btn btn-sm btn-primary" disabled>View Marksheets</button>`;
                     }else if(item.CompletedPercent == 100){
                         bar = `<div class="progress">
                                     <div class="progress-bar progress-bar-success" style="width: ${item.CompletedPercent}%">${item.CompletedPercent}%</div>
                                 </div>`
-                        MarkseetBtn = `<a href="ViewMarksheets?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-info btn-flat">View Marksheets</button></a>`;
+                        MarkseetBtn = `<a href="ViewMarksheets?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-primary">View Marksheets</button></a>`;
                     }else{
                         bar = `<div class="progress progress-striped active">
                                     <div class="progress-bar progress-bar-danger" style="width: ${item.CompletedPercent}%">${item.CompletedPercent}%</div>
                                 </div>`
-                        MarkseetBtn =  `<button class="btn btn-sm btn-info btn-flat" disabled>View Marksheets</button>`;
+                        MarkseetBtn =  `<button class="btn btn-sm btn-primary" disabled>View Marksheets</button>`;
                     }
                     if(item.Students>0){
-                        fillbtn =`<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-success btn-flat">Fill Marks</button></a>`; 
+                        fillbtn =`<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-success">Fill Marks</button></a>`; 
                     }else{
-                        fillbtn = `<button title="No Student in Class." class="btn btn-sm btn-danger btn-flat" disabled>Fill Marks</button>`;
+                        fillbtn = `<button title="No Student in Class." class="btn btn-sm btn-danger" disabled>Fill Marks</button>`;
                     }
                     var rawhtml = `<tr>
                     <td>${i+1}</td>

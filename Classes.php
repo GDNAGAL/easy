@@ -66,6 +66,7 @@
               <h3 class="box-title">
               <img src="custom/img/class.png" width="40px" alt="">  
               ClassRooms</h3>
+              <button class="btn btn-primary pull-right" id="addSection">Add Class Room Section</button>
             </div>
             <div class="box-body">
               <table id="class_table" class="table table-hover">
@@ -120,7 +121,7 @@
                   <select class="form-control select2" id="ClassTeacher" name="ClassTeacher" style="width: 100%;">
                   </select>
                 </div>
-                <button type="submit" class="btn btn-success">Update Class Info</button>
+                <button type="submit" class="btn btn-primary">Update Class Info</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
           </form>
@@ -131,7 +132,39 @@
 
         <!-- Modal End -->
 
+<!-- Modal -->
+<div class="modal fade" id="addSectionModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <form action="" method="post" id="addSectionform" autocomplete="off">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" style="margin-bottom:10px">Add Class Room Section</h4>
+              <div class="">
+                <div class="form-group">
+                  <label>Select Class Room :</label>
+                  <select class="form-control select2" id="classRoomSelect" name="ClassRoomID" style="width: 100%;">
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Section Text :</label>
+                  <input type="text" class="form-control" name="SectionText" required>
+                </div>
+                <div class="form-group">
+                  <label>Select Class Teacher :</label>
+                  <select class="form-control select2" id="ClassTeacherAdd" name="ClassTeacherID" style="width: 100%;">
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Class Room Section</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
+        <!-- Modal End -->
 
 
 <!-- jQuery 3 -->

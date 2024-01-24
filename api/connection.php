@@ -1,8 +1,28 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "easy";
+$type = "TESTDB";   //LIVEDB OR TESTDB OR LOCALDB
+
+if($type == "LOCALDB"){
+
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $db = "easy";
+
+}elseif($type == "TESTDB"){
+
+  $servername = "154.41.233.103";
+  $username = "u664437076_easy";
+  $password = "JY6o8n1T@p";
+  $db = "u664437076_easy";
+
+}elseif($type == "LIVEDB"){
+
+  $servername = "localhost";
+  $username = "root";
+  $password = "";
+  $db = "easy";
+
+}
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db);
