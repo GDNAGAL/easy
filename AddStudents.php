@@ -186,11 +186,26 @@ input::-webkit-inner-spin-button {
               </div>
 
               <div class="col-md-4">
-              <div class="box-header with-border">
-                <h3 class="box-title">
-                <i class="fa fa-upload"></i>  &nbsp;
-                Upload Student File</h3>
-              </div>
+                <div class="box with-border">
+                  <div class="box-body">
+                    <a href="excel.php" class="box-title"><i class="fa fa-download"></i>  Download Excel Sheet.</a><br><br>
+                    <form action="" method="post" id="uploadStudentForm" autocomplete="off">
+                      <div class="form-group">
+                        <label>Select Class :</label>
+                        <select class="form-control select2" id="selectclassup" style="width: 100%;" name="ClassRoomID" required>
+                          <option selected="selected" value="">Select Class</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Upload Sheet :</label>
+                        <input class="form-control" type="file" style="width: 100%;" name="studentDataSheet" accept=".xlsx" required>
+                      </div>
+                      <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Upload Sheet</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
             

@@ -24,7 +24,9 @@ $( document ).ready(function() {
                     $('#cover-spin').hide();
                     $.each(result.ClassRoomList, function(i, item) {
                         $("#selectclass").append(`<option value="${item.SectionID}">${item.ClassRoomName} ${item.SectionText}</option>`);
+                        $("#selectclassup").append(`<option value="${item.SectionID}">${item.ClassRoomName} ${item.SectionText}</option>`);
                     })
+                    
                 },
                 error : function(err){
                     $('#cover-spin').hide();
@@ -34,6 +36,7 @@ $( document ).ready(function() {
 
 
     $("#addstudentform").on("submit",function(e){
+        $('#cover-spin').show(0);
         e.preventDefault();
         let data = new FormData(this);
         $.ajax({
@@ -54,6 +57,33 @@ $( document ).ready(function() {
                 $("#selectclass").val("").change();
                 $("#genderSelectBox").val("").change();
                 $("#categorySelectBox").val("").change();
+            },
+            error : function(err){
+                $('#cover-spin').hide();
+                // success,info,error,warning,trash
+                Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+            }
+      });
+    })
+
+    $("#uploadStudentForm").on("submit",function(e){
+        $('#cover-spin').show(0);
+        e.preventDefault();
+        let data = new FormData(this);
+        $.ajax({
+            type: "POST",
+            data: data,
+            url: 'api/Students/addStudentsd',
+            headers: {
+                'Authorization': 'Bearer ' + getCookie("Token")
+            },
+            contentType: false,       
+            cache: false,             
+            processData:false,
+            success: function(result){
+                $('#cover-spin').hide();
+                // success,info,error,warning,trash
+                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
             },
             error : function(err){
                 $('#cover-spin').hide();
