@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$today = date('Y-m-d');
 			$checkDuplicateSchool = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as sn FROM `schools` WHERE SchoolHeadMobile = '$schoolMobile'"));
 			if($checkDuplicateSchool['sn'] == 0){
-				$addSchool = mysqli_query($conn, "INSERT INTO `schools`(`SchoolName`, `SchoolAddress`, `SchoolHeadName`, `SchoolHeadMobile`, `SchoolRegDate`, `CurrentYear`, `SchoolUserName`, `SchoolPassword`, `SchoolStatus`, `SchoolAddedBy`)  VALUES ('$schoolName','$schoolAddress','$HMName','$schoolMobile','$today','2023','$schoolMobile','$schoolMobile','1','$agentid')");
+				$addSchool = mysqli_query($conn, "INSERT INTO `schools`(`SchoolName`, `SchoolAddress`, `SchoolHeadName`, `SchoolHeadMobile`, `SchoolRegDate`, `CurrentYear`, `SchoolUserName`, `SchoolPassword`, `SchoolStatus`, `SchoolAddedBy`)  VALUES ('$schoolName','$schoolAddress','$HMName','$schoolMobile','$today','2023','$schoolMobile','$schoolMobile','2','$agentid')");
 				
 				http_response_code(200);
 				header('Content-Type: application/json');

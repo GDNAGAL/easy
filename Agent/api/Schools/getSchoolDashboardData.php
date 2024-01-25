@@ -33,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$isExamAdded = false;
 			}
 			$activateSchool = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SchoolStatus FROM `schools` WHERE SchoolID = '$schoolID'"));
-			if($activateSchool['SchoolStatus']==1){
-				$isSchoolActive = true;
-			}else{
+			if($activateSchool['SchoolStatus']==2){
 				$isSchoolActive = false;
+			}else{
+				$isSchoolActive = true;
 			}
 			http_response_code(200);
 			header('Content-Type: application/json');

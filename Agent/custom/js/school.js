@@ -123,8 +123,15 @@ $( document ).ready(function() {
               { 'data': 'SchoolHeadName' },
               { 'data': 'SchoolHeadMobile' },
               { 'data': 'SchoolAddress' },
+              {
+                // Add a button in the last column
+                "render": function ( data, type, row, meta ) {
+                    // var schoolID = row.StatusText;
+                    return `<span class="label label-${row.StatusColor}">${row.StatusText}</span>`;
+                }
+              },
               { 'data': 'SchoolRegDate' },
-              
+              // <span class="label label-success">Coding</span>
               ],
           })
 
