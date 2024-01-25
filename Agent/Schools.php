@@ -70,7 +70,7 @@
                   <th>HM Name</th>
                   <th>Mobile No.</th>
                   <th>Address</th>
-                  <th>Status</th>
+                  <th class="text-center">Status</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>

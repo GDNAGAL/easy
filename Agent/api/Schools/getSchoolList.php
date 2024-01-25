@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if(verifyToken($matches[1])){
             $sid = getAgentID($matches[1]);
 
-			$schoolslist = mysqli_query($conn, "SELECT * FROM `schools` LEFT JOIN school_status ON schools.SchoolStatus = school_status.SchoolStatusID WHERE SchoolStatus = NULL OR SchoolStatus IS NOT NULL");
+			$schoolslist = mysqli_query($conn, "SELECT * FROM `schools` LEFT JOIN school_status ON schools.SchoolStatus = school_status.SchoolStatusID");
 
 			http_response_code(200);
 			header('Content-Type: application/json');

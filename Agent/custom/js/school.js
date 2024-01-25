@@ -127,7 +127,7 @@ $( document ).ready(function() {
                 // Add a button in the last column
                 "render": function ( data, type, row, meta ) {
                     // var schoolID = row.StatusText;
-                    return `<span class="label label-${row.StatusColor}">${row.StatusText}</span>`;
+                    return `<div class="text-center"><span class="label label-${row.StatusColor}">${row.StatusText}</span></div>`;
                 }
               },
               { 'data': 'SchoolRegDate' },

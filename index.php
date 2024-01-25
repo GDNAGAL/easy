@@ -122,7 +122,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php require("includes/footer.php");?>
+
 </div>
 <!-- ./wrapper -->
 
