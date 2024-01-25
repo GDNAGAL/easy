@@ -13,6 +13,39 @@ $( document ).ready(function() {
       return cookie[cookieName];
     }
   
+    $("#uploadStudentForm").on("submit",function(e){
+        e.preventDefault();
+        $('#cover-spin').show(0);
+        let data = new FormData(this);
+        $.ajax({
+            type: "POST",
+            data: data,
+            url: 'api/Students/uploadStudent',
+            headers: {
+                'Authorization': 'Bearer ' + getCookie("Token")
+            },
+            contentType: false,       
+            cache: false,             
+            processData:false,
+            async:true,
+            success: function(result){
+                $('#cover-spin').hide();
+                $('#uploadStudentForm')[0].reset();
+                $("#selectclassup").val($("#selectclassup option:first").val());
+                // success,info,error,warning,trash
+                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+            },
+            error : function(err){
+                $('#cover-spin').hide();
+                // console.log(err)
+                $("#scode").val("")
+                $("#scode").focus()
+                // success,info,error,warning,trash
+                Alert.error(`Error! ${err.responseJSON.Message}`,`${err.responseJSON.Message}`,{displayDuration: 4000})
+            }
+      });
+    })
+
     function getclasslist(){
         $.ajax({
                 type: "POST",
@@ -66,31 +99,5 @@ $( document ).ready(function() {
       });
     })
 
-    $("#uploadStudentForm").on("submit",function(e){
-        $('#cover-spin').show(0);
-        e.preventDefault();
-        let data = new FormData(this);
-        $.ajax({
-            type: "POST",
-            data: data,
-            url: 'api/Students/addStudentsd',
-            headers: {
-                'Authorization': 'Bearer ' + getCookie("Token")
-            },
-            contentType: false,       
-            cache: false,             
-            processData:false,
-            success: function(result){
-                $('#cover-spin').hide();
-                // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
-            },
-            error : function(err){
-                $('#cover-spin').hide();
-                // success,info,error,warning,trash
-                Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
-            }
-      });
-    })
     
   });

@@ -31,7 +31,7 @@ Optional extensions on the jquery.inputmask base
             prevalidator: [{ validator: "[01]", cardinality: 1 }]
         },
         'y': { //basic year
-            validator: "(19|20)\\d{2}",
+            validator: "(19|20)\\d[2]",
             cardinality: 4,
             prevalidator: [
                         { validator: "[12]", cardinality: 1 },

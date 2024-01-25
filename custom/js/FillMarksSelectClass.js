@@ -26,7 +26,6 @@ $( document ).ready(function() {
     })
 
     $("#addExamForm").on("submit",function(e){
-        console.log("submiited")
         e.preventDefault()
         let data = new FormData(this);
         $.ajax({

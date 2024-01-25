@@ -3,15 +3,15 @@ require('xlsxwriter/xlsxwriter.class.php');
 
  $fname='studentData.xlsx';
  $header1 = [ 
-                'Roll No' => 'money',
-                'Admission No.' => 'money',
-                'Student Name' => 'date',
+                'Roll No' => 'string',
+                'Admission No.' => 'string',
+                'Student Name' => 'string',
                 'Father Name' => 'string',
                 'Mother Name' => 'string',
-                'Date of Birth' => 'money',
-                'Category' => 'money',
-                'Mobile No.' => 'money',
-                'Aadhar No.' => 'money',
+                'Date of Birth' => 'date',
+                'Category' => 'string',
+                'Mobile No.' => 'string',
+                'Aadhar No.' => 'string',
             ];
 $data = [];
 $writer = new XLSXWriter();
@@ -19,13 +19,14 @@ $writer->setAuthor('Easy School');
 $headerStyles = [
     'fill' => '#D3D3D3',
     'border' => 'top:thin,bottom:thin,left:thin,right:thin',
+    'auto_size' => true
 ]; 
 $writer->writeSheetHeader('Student Bio', $header1, $headerStyles);
-foreach ($header1 as $column => $type) {
-    $writer->writeSheetRow('Student Bio', [$column], ['auto_size' => true]);
-}
+// foreach ($header1 as $column => $type) {
+//     $writer->writeSheetRow('Student Bio', [$column], ['auto_size' => true]);
+// }
 
-$writer->writeSheet($data, 'Student Bio');  // with headers
+// $writer->writeSheet($data, 'Student Bio');  // with headers
 
 // $writer->writeSheet($data,'Student Bio', $header1);  // with headers
 

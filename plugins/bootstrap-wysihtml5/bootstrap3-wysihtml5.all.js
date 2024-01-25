@@ -4901,7 +4901,7 @@ wysihtml5.browser = (function() {
       IGNORE_URLS_IN        = wysihtml5.lang.array(["CODE", "PRE", "A", "SCRIPT", "HEAD", "TITLE", "STYLE"]),
       /**
        * revision 1:
-       *    /(\S+\.{1}[^\s\,\.\!]+)/g
+       *    /(\S+\.[1][^\s\,\.\!]+)/g
        *
        * revision 2:
        *    /(\b(((https?|ftp):\/\/)|(www\.))[-A-Z0-9+&@#\/%?=~_|!:,.;\[\]]*[-A-Z0-9+&@#\/%=~_|])/gim

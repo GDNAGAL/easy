@@ -9405,7 +9405,7 @@ $.effects = {
 			}
 		}, {
 			// this regex ignores A-F because it's compared against an already lowercased string
-			re: /#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/,
+			re: /#([a-f0-9][2])([a-f0-9][2])([a-f0-9][2])/,
 			parse: function( execResult ) {
 				return [
 					parseInt( execResult[ 1 ], 16 ),

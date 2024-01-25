@@ -61,14 +61,15 @@ input::-webkit-inner-spin-button {
       <section class="content">
         <!-- Default box -->
         <!-- /.box-header -->
-        <div class="box box-default">
+        
+            <div class="row">
+              <div class="col-md-8">
+              <div class="box with-border">
           <div class="box-header with-border">
             <h3 class="box-title">Basic Information</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <div class="row">
-              <div class="col-md-8">
                 <!-- <div class="row"> -->
                 <form action="" method="post" id="addstudentform" autocomplete="off">
                   <div class="row">
@@ -183,16 +184,21 @@ input::-webkit-inner-spin-button {
                     </div>
 
                 </form>
+                </div>
+                </div>
               </div>
 
               <div class="col-md-4">
                 <div class="box with-border">
+                  <div class="box-header">
+                    <h3 class="box-title">Upload Students Data</h3>
+                  </div>
                   <div class="box-body">
-                    <a href="excel.php" class="box-title"><i class="fa fa-download"></i>  Download Excel Sheet.</a><br><br>
+                    <a href="excel.php" onclick="return confirm('Are You Sure Want to Download Sheet.')" class="box-title"><i class="fa fa-download"></i>  Download Excel Sheet.</a><br><br>
                     <form action="" method="post" id="uploadStudentForm" autocomplete="off">
                       <div class="form-group">
                         <label>Select Class :</label>
-                        <select class="form-control select2" id="selectclassup" style="width: 100%;" name="ClassRoomID" required>
+                        <select class="form-control" id="selectclassup" style="width: 100%;" name="ClassRoomID" required>
                           <option selected="selected" value="">Select Class</option>
                         </select>
                       </div>
@@ -201,7 +207,11 @@ input::-webkit-inner-spin-button {
                         <input class="form-control" type="file" style="width: 100%;" name="studentDataSheet" accept=".xlsx" required>
                       </div>
                       <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Upload Sheet</button>
+                        <label>Enter Secrate Code :</label>
+                        <input class="form-control" type="password" placeholder="Enter Secrate Code" id="scode"  name="secrateCode"  required>
+                      </div>
+                      <div class="form-group">
+                        <button class="btn btn-primary" id="uploadsheetbtn" type="submit">Upload Sheet</button>
                       </div>
                     </form>
                   </div>
@@ -209,9 +219,7 @@ input::-webkit-inner-spin-button {
               </div>
             </div>
             
-          </div>
-          <!-- /.box-body -->
-        </div>
+          
               
       </section>
     <!-- /.content -->
