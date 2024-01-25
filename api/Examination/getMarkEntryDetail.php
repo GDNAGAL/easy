@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				}
 				$subjectRow['CompletedPercent'] = round($c_percent,2);
 				
-				$StudentArr = [];
 				$subjectID = $subjectRow['SubjectID'];
 				if(mysqli_num_rows($studentList)>0){
 					while($studentRow = mysqli_fetch_assoc($studentList)){

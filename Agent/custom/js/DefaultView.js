@@ -52,7 +52,7 @@ $("#addSubjectForm").on("submit",function(e){
                 $("#addSubjectModal").modal('hide')
                 $('#addSubjectForm').trigger("reset");
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                Alert.success(`${result.Message}`,{displayDuration: 4000})
                 getSubjectList()
 
             },
@@ -82,7 +82,7 @@ $("#addPaperForm").on("submit",function(e){
                 getPaperList($("#setSubjectID").val())
                 $('#addPaperForm').trigger("reset");
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 2500}) 
+                Alert.success(`${result.Message}`,{displayDuration: 2500}) 
 
             },
             error : function(err){

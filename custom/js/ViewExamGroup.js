@@ -30,7 +30,7 @@ $("#addExamForm").on("submit",function(e){
             success: function(result){
                 $('#cover-spin').hide();
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000});
+                Alert.success(`${result.Message}`,{displayDuration: 4000});
                 $('#addExamForm').trigger("reset");
                 getExamList(ExamGroupID) 
 

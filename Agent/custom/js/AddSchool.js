@@ -34,11 +34,11 @@ $( document ).ready(function() {
         $('#cover-spin').hide();
         if(result.Status == "OK"){
           // success,info,error,warning,trash
-          Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+          Alert.success(`${result.Message}`,{displayDuration: 4000})
           $('#addSchoolform')[0].reset();
         }else if(result.Status == "ERROR"){
           // success,info,error,warning,trash
-          Alert.error(`Failed! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+          Alert.error(`${result.Message}`,{displayDuration: 4000})
           $('#addSchoolform')[0].reset();
         }
       },
@@ -48,7 +48,7 @@ $( document ).ready(function() {
           }
           $('#cover-spin').hide();
           // success,info,error,warning,trash
-          Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+          Alert.error(`UNKNOWN ERROR`,{displayDuration: 4000})
           $('#addSchoolform')[0].reset();
       }
     });

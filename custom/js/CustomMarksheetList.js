@@ -40,7 +40,7 @@ $( document ).ready(function() {
         $("#addDesignModal").modal('hide')
         $('#addDesignForm').trigger("reset");
         // success,info,error,warning,trash
-        Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+        Alert.success(`${result.Message}`,{displayDuration: 4000})
         getMarksheetDesignList()
       },
       error : function(err){

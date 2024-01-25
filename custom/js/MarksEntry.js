@@ -80,12 +80,12 @@ $( document ).ready(function() {
                 },
                 success:function(result){
                   // success,info,error,warning,trash
-                  Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                  Alert.success(`${result.Message}`,{displayDuration: 4000})
                   getlist()
                 },
                 error:function(){
                   success,info,error,warning,trash
-                  Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+                  Alert.error(`UNKNOWN ERROR`,{displayDuration: 4000})
                 }
       })
     }

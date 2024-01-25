@@ -151,7 +151,7 @@ $( document ).ready(function() {
               $('#cover-spin').hide();
               $("#classEditModal").modal('hide')
               // success,info,error,warning,trash
-              Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+              Alert.success(`${result.Message}`,{displayDuration: 4000})
               getClassRoomList()
             },
             error : function(err){
@@ -188,7 +188,7 @@ $( document ).ready(function() {
               $('#cover-spin').hide();
               $("#addSectionModal").modal('hide')
               // success,info,error,warning,trash
-              Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+              Alert.success(`${result.Message}`,{displayDuration: 4000})
               getClassRoomList()
             },
             error : function(err){

@@ -55,13 +55,13 @@ $( document ).ready(function() {
           if(result.Status == "OK"){
             getSubjectList()
             // success,info,error,warning,trash
-            Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+            Alert.success(`${result.Message}`,{displayDuration: 4000})
             $('#addSubjectForm')[0].reset();
             $("#subjectTeacherSelectBox").val("").change();
             $("#subjectTypeSelectBox").val("").change();
           }else if(result.Status == "ERROR"){
             // success,info,error,warning,trash
-            Alert.error(`Failed! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+            Alert.error(`${result.Message}`,{displayDuration: 4000})
             $('#addSubjectForm')[0].reset();
             $("#subjectTeacherSelectBox").val("").change();
             $("#subjectTypeSelectBox").val("").change();
@@ -73,7 +73,7 @@ $( document ).ready(function() {
             }
             $('#cover-spin').hide();
             // success,info,error,warning,trash
-            Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+            Alert.error(`UNKNOWN ERROR`,{displayDuration: 4000})
             $('#addSubjectForm')[0].reset();
             $("#subjectTeacherSelectBox").select2("val", "");
         }

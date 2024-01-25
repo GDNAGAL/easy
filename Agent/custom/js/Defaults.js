@@ -53,7 +53,7 @@ $("#addClassRoomGroupForm").on("submit",function(e){
                 $("#addClassRoomGroupModal").modal('hide')
                 $('#addClassRoomGroupForm').trigger("reset");
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                Alert.success(`${result.Message}`,{displayDuration: 4000})
                 getClassRoomGroupList()  
 
             },
@@ -84,7 +84,7 @@ $("#addClassRoomForm").on("submit",function(e){
                 getClassRoomGroupList()
                 $('#addClassRoomForm').trigger("reset");
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000}) 
+                Alert.success(`${result.Message}`,{displayDuration: 4000}) 
 
             },
             error : function(err){
@@ -114,7 +114,7 @@ $("#addExamForm").on("submit",function(e){
                 $("#addExamModal").modal('hide')
                 $('#addExamForm').trigger("reset");
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000}) 
+                Alert.success(`${result.Message}`,{displayDuration: 4000}) 
             },
             error : function(err){
                 $('#cover-spin').hide();

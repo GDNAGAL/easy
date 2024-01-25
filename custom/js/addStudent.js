@@ -33,7 +33,7 @@ $( document ).ready(function() {
                 $('#uploadStudentForm')[0].reset();
                 $("#selectclassup").val($("#selectclassup option:first").val());
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                Alert.success(`${result.Message}`,{displayDuration: 4000})
             },
             error : function(err){
                 $('#cover-spin').hide();
@@ -41,7 +41,7 @@ $( document ).ready(function() {
                 $("#scode").val("")
                 $("#scode").focus()
                 // success,info,error,warning,trash
-                Alert.error(`Error! ${err.responseJSON.Message}`,`${err.responseJSON.Message}`,{displayDuration: 4000})
+                Alert.error(`${err.responseJSON.Message}`,{displayDuration: 4000})
             }
       });
     })
@@ -85,7 +85,7 @@ $( document ).ready(function() {
             success: function(result){
                 $('#cover-spin').hide();
                 // success,info,error,warning,trash
-                Alert.success(`Success! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                Alert.success(`${result.Message}`,{displayDuration: 4000})
                 $('#addstudentform')[0].reset();
                 $("#selectclass").val("").change();
                 $("#genderSelectBox").val("").change();
@@ -94,7 +94,7 @@ $( document ).ready(function() {
             error : function(err){
                 $('#cover-spin').hide();
                 // success,info,error,warning,trash
-                Alert.error(`Error! UNKNOWN ERROR`,`UNKNOWN ERROR`,{displayDuration: 4000})
+                Alert.error(`UNKNOWN ERROR`,{displayDuration: 4000})
             }
       });
     })
