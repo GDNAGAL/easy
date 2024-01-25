@@ -136,7 +136,7 @@ function getExamList(){
             if(result.Status=="OK"){
                 $("#examTable").html("")
                 $.each(result.ExamList, function(i, item) {
-                    $("#examTable").append(`<tr><td class="text-center">${i + 1}</td><td>${item.ExamText}</td><td class="text-center">${item.ExamTextHindi}</td><td class="text-center"><a href="DefaultView?ClassRoomGroupID=${item.ClassRoomGroupID}"><button class="btn btn-success btn-flat">View</button></a></td></tr>`)
+                    $("#examTable").append(`<tr><td class="text-center">${i + 1}</td><td>${item.ExamText}</td><td class="text-center">${item.ExamTextHindi}</td><td class="text-center"></td></tr>`)
                 });
             }
         },

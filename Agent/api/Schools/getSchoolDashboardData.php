@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$schoolID = $_POST['SchoolID'];
 
 			$classArray = [];
-			$schoolslist = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SchoolName, SchoolHeadName, SchoolHeadMobile, SchoolAddress FROM `schools` WHERE SchoolID = '$schoolID'"));
+			$schoolslist = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM `schools` LEFT JOIN school_status ON schools.SchoolStatus = school_status.SchoolStatusID WHERE SchoolID = '$schoolID'"));
 
 			$classlist = mysqli_query($conn, "SELECT classrooms_sections.ClassRoomID, ClassRoomName, SectionText FROM `classrooms_sections` JOIN `classrooms` ON classrooms_sections.ClassRoomID = classrooms.ClassRoomID WHERE SchoolID = '$schoolID' ORDER by ClassRoomID");
 			if(mysqli_num_rows($classlist)>0){
@@ -32,16 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			}else{
 				$isExamAdded = false;
 			}
-			$activateSchool = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SchoolStatus FROM `schools` WHERE SchoolID = '$schoolID'"));
-			if($activateSchool['SchoolStatus']==2){
+			
+			if($schoolslist['SchoolStatus']==2){
 				$isSchoolActive = false;
 			}else{
 				$isSchoolActive = true;
 			}
+			$status = mysqli_query($conn, "SELECT StatusText,SchoolStatusID FROM `school_status`");
+			while($statusrow = mysqli_fetch_assoc($status)){
+				$statusArr[] = $statusrow;
+			}
 			http_response_code(200);
 			header('Content-Type: application/json');
 			$schoolArray[] = $schoolslist;
-			$data = array ("Status"=> "OK","Message" => "Success", "SchoolList" => $schoolArray, "ClassRooms" => $classArray, "isExamAdded" => $isExamAdded, "isSchoolActive" => $isSchoolActive);
+			$data = array ("Status"=> "OK","Message" => "Success", "SchoolList" => $schoolArray, "ClassRooms" => $classArray, "isExamAdded" => $isExamAdded, "isSchoolActive" => $isSchoolActive, "StatusArr"=>$statusArr);
 			echo json_encode( $data );
 			
 			

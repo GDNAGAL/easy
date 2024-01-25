@@ -93,8 +93,8 @@
                 <thead>
                 <tr>
                   <th class="text-center">#</th>
-                  <th>Class Room Name</th>
-                  <th class="text-center">Class Room Group</th>
+                  <th>Exam Name</th>
+                  <th class="text-center">Exam Name in Hindi</th>
                   <th class="text-center">Action</th>
                 </tr>
                 </thead>

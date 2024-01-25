@@ -88,6 +88,13 @@ $schoolID = $_GET['schoolID'];
                 <li class="list-group-item">
                   <b>Address</b> <a class="pull-right" id="idAddress"></a>
                 </li>
+                <li class="list-group-item">
+                  <b>School Status</b> <span class="pull-right" id="sstatus"></span>
+                  <input type="hidden" id="url" value="<?php echo $url; ?>">
+                </li>
+                <li class="list-group-item" id="lbtn">
+                  
+                </li>
               </ul>
             </div>
           </div>
@@ -96,29 +103,11 @@ $schoolID = $_GET['schoolID'];
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#initialSteps" data-toggle="tab">Account Activation</a></li>
-              <li><a href="#addStudent" data-toggle="tab">Add Students</a></li>
-              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li><a href="#settings" data-toggle="tab">Profile Settings</a></li>
             </ul>
 
 
             <div class="tab-content">
-              <div class="tab-pane" id="addStudent">
-                <table class="table cell-border hover table-bordered" width="100%">
-                  <thead>
-                  <tr>
-                    <th>Class</th>
-                    <th>Roll No.</th>
-                    <th>Student Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Date of Birth</th>
-                    <th>Gender</th>
-                  </tr>
-                  </thead>
-                  <tbody id="studentTableBody">
-                  </tbody>
-                </table>
-              </div>
 
 
               <div class="active tab-pane" id="initialSteps">
@@ -185,54 +174,60 @@ $schoolID = $_GET['schoolID'];
               <!-- /.tab-pane -->
 
               <div class="tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="updateSchoolForm" autocomplete="off">
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
-
+                    <label for="inputName" class="col-sm-2 control-label">School Name</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="Name">
+                      <input type="text" class="form-control" id="schoolName" placeholder="School Name" name="SchoolName">
+                      <input type="hidden" class="form-control" id="sid" name="SchoolID">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <label for="inputEmail" class="col-sm-2 control-label">School Address</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      <input type="text" class="form-control" id="schoolAddress" placeholder="School Address" name="SchoolAddress">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="inputName" class="col-sm-2 control-label">Principal Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                      <input type="text" class="form-control" id="principal" placeholder="Principal Name" name="SchoolHeadName">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                    <label for="inputExperience" class="col-sm-2 control-label">Mobile No.</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                      <input type="text" class="form-control" id="headmobile" placeholder="School Mobile No." name="SchoolHeadMobile">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                    <label for="inputExperience" class="col-sm-2 control-label">School Status</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                      <select class="form-control" id="statusSelect"  name="SchoolStatus"></select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">User Name</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="username" placeholder="Username" name="SchoolUserName">
+                      <span id="validateusername"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputSkills" class="col-sm-2 control-label">Password</label>
+
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="password" placeholder="Password" name="SchoolPassword">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button type="submit" id="updatebtn" class="btn btn-danger">Update School</button>
                     </div>
                   </div>
                 </form>

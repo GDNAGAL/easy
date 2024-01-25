@@ -111,7 +111,7 @@ function getSubjectList(){
             if(result.Status=="OK"){
                 $("#subjectTable").html("")
                 $.each(result.SubjectList, function(i, item) {
-                    $("#subjectTable").append(`<tr><td class="text-center"><input id="selectSubjectID" type="radio" SubjectID="${item.SubjectID}" name="subjectCheckbox"/></td><td>${item.SubjectName}</td><td class="text-center">${item.SubjectType}</td><td class="text-center"><a href="DefaultView?ClassRoomGroupID=${item.ClassRoomGroupID}">Edit</a></td></tr>`)
+                    $("#subjectTable").append(`<tr><td class="text-center"><input id="selectSubjectID" type="radio" SubjectID="${item.SubjectID}" name="subjectCheckbox"/></td><td>${item.SubjectName}</td><td class="text-center">${item.SubjectType}</td><td class="text-center"><a href="javascript:void(0)">Edit</a></td></tr>`)
                 });
             }
         },

@@ -15,6 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			header('Content-Type: application/json');
 			if(mysqli_num_rows($schoolslist)>0){
 				while($row = mysqli_fetch_assoc($schoolslist)) {
+					$datedata = $row['SchoolRegDate'];
+					$date = new DateTime($datedata);
+					$row['SchoolRegDate'] = $date->format('d-m-Y');
 					$records[] = $row;
 					}
 				$data = array ("Status"=> "OK","Message" => "Success", "SchoolList" => $records);

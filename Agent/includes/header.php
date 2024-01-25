@@ -1,11 +1,11 @@
 <?php
-$url = 'http://localhost:3000/easy/Agent/';
+$url = 'http://localhost:3000/easy';
 if(isset($_COOKIE['AToken'])){
   $token = $_COOKIE['AToken'];
   //echo $token;
   $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => $url.'/api/getLoginUserData',
+    CURLOPT_URL => $url.'/Agent/api/getLoginUserData',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,

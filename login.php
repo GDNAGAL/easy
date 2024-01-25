@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 if(isset($_COOKIE['Token'])){
   header("Location: index");
 }
@@ -43,11 +44,11 @@ if(isset($_COOKIE['Token'])){
     <form action="" id="login_form" method="post">
       <span id="validate"></span>
       <div class="form-group has-feedback">
-        <input type="number" autocomplete="off" class="form-control" id="username" placeholder="Mobile No." name="username">
+        <input type="number" autocomplete="off" class="form-control" value="<?php echo $_GET['user']; ?>" id="username" placeholder="Mobile No." name="username">
         <span class=" glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" id="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" id="password" class="form-control" value="<?php echo $_GET['pass']; ?>" placeholder="Password" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

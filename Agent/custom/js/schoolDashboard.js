@@ -21,6 +21,7 @@ $(function(){
 
 
     function getSchoolDashboardData(){
+        $('#cover-spin').show(0)
         let data = new FormData();
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
@@ -34,12 +35,33 @@ $(function(){
             'Authorization': 'Bearer ' + getCookie("AToken")
             },
             success: function(result){
-                getstudents()
                 $('#cover-spin').hide();
                 $("#idSchoolName").html(result.SchoolList[0].SchoolName)
                 $("#idHMName").html(result.SchoolList[0].SchoolHeadName)
                 $("#idMobile").html("+91 "+result.SchoolList[0].SchoolHeadMobile)
                 $("#idAddress").html(result.SchoolList[0].SchoolAddress)
+                $("#sstatus").html(`<span class="label label-${result.SchoolList[0].StatusColor}">${result.SchoolList[0].StatusText}</span>`)
+                //fill inputs
+                $("#sid").val(result.SchoolList[0].SchoolID)
+                $("#schoolName").val(result.SchoolList[0].SchoolName)
+                $("#schoolAddress").val(result.SchoolList[0].SchoolAddress)
+                $("#principal").val(result.SchoolList[0].SchoolHeadName)
+                $("#headmobile").val(result.SchoolList[0].SchoolHeadMobile)
+                $("#username").val(result.SchoolList[0].SchoolUserName)
+                $("#password").val(result.SchoolList[0].SchoolPassword)
+                $("#lbtn").html(`<a href="${$("#url").val()}/login?user=${result.SchoolList[0].SchoolUserName}&pass=${result.SchoolList[0].SchoolPassword}" target="_blank"><button class="btn btn-primary btn-block">Login To School Dashboard</button></a>`)
+                $("#statusSelect").html("")
+                let s = result.SchoolList[0].SchoolStatus;
+                $.each(result.StatusArr, function(i, item) {
+                    if(item.SchoolStatusID == s){
+                        $("#statusSelect").append(`<option value="${item.SchoolStatusID}" selected>${item.StatusText}</option>`);
+                    }else{
+                        $("#statusSelect").append(`<option value="${item.SchoolStatusID}">${item.StatusText}</option>`);
+                    }
+                })
+                
+
+
                 if(result.ClassRooms.length>0){
                     let isSubjects = false;
                     $("#classlist").html('');
@@ -142,7 +164,7 @@ $(function(){
     }
     //create Classrooms
     $(document).on("click","#genrateclassrooms",function(){
-        $('#cover-spin').show()
+        $('#cover-spin').show(0)
         let data = new FormData();
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
@@ -159,7 +181,7 @@ $(function(){
                 if(result.Status=="ERROR"){
                     $('#cover-spin').hide();
                     // success,info,error,warning,trash
-                    Alert.error(`Failed! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                    Alert.error(`${result.Message}`,{displayDuration: 4000})
                     return;
                 }
                 getSchoolDashboardData()
@@ -189,7 +211,7 @@ $(function(){
                 if(result.Status=="ERROR"){
                     $('#cover-spin').hide();
                     // success,info,error,warning,trash
-                    Alert.error(`Failed! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                    Alert.error(`${result.Message}`,{displayDuration: 4000})
                     return;
                 }
                 getSchoolDashboardData()
@@ -219,7 +241,7 @@ $(function(){
                 if(result.Status=="ERROR"){
                     $('#cover-spin').hide();
                     // success,info,error,warning,trash
-                    Alert.error(`Failed! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                    Alert.error(`${result.Message}`,{displayDuration: 4000})
                     return;
                 }
                 getSchoolDashboardData()
@@ -249,7 +271,7 @@ $(function(){
                 if(result.Status=="ERROR"){
                     $('#cover-spin').hide();
                     // success,info,error,warning,trash
-                    Alert.error(`Failed! ${result.Message}`,`${result.Message}`,{displayDuration: 4000})
+                    Alert.error(`${result.Message}`,{displayDuration: 4000})
                     return;
                 }
                 getSchoolDashboardData()
@@ -260,31 +282,68 @@ $(function(){
         });
     })
 
-function getstudents(){
-    //$('#cover-spin').show(0);
-    let data = new FormData()
-    data.append("schoolID",schoolID)
-    $.ajax({
-        "url": "api/getStudentList",
-        "type": "POST",
-        "data": data,
-        contentType: false,       
-        cache: false,             
-        processData:false,
-        headers: {
+    $("#username").on("blur",function(){
+        $('#cover-spin').show(0);
+        $("#updatebtn").prop("disabled",true);
+        $("#validateusername").html("");
+        let data = new FormData();
+        data.append("UserID",$("#username").val());
+        data.append("SchoolID",$("#sid").val());
+        $.ajax({
+            type: "POST",
+            url: 'api/Schools/ValidateUserName',
+            data:data,
+            contentType: false,       
+            cache: false,             
+            processData:false,
+            headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
-        },
-        "success": function (data) {
-            $('#cover-spin').hide();
-            if (data.Status == 'NOT_FOUND') {
-                return ;
-                
-            }else{
-            
+            },
+            success: function(result){
+                $('#cover-spin').hide();
+                $("#updatebtn").prop("disabled",false);
+                $("#validateusername").html(`<span class="text-green"><i class="fa fa-check-circle"></i> ${result.Message}</span>`);
+            },
+            error : function(err){
+                $('#cover-spin').hide();
+                $("#validateusername").html(`<span class="text-danger"><i class="fa fa-check-circle"></i> ${err.responseJSON.Message}</span>`);
             }
-        }
+        });
     })
-}
+
+    $("#updateSchoolForm").on("submit",function(e){
+        e.preventDefault()
+        $('#cover-spin').show(0);
+        let data = new FormData(this);
+        $.ajax({
+            type: "POST",
+            url: 'api/Schools/UpdateSchool',
+            data:data,
+            contentType: false,       
+            cache: false,             
+            processData:false,
+            headers: {
+            'Authorization': 'Bearer ' + getCookie("AToken")
+            },
+            success: function(result){
+                $('#cover-spin').hide();
+                // success,info,error,warning,trash
+                Alert.success(`${result.Message}`,{displayDuration: 7000})
+                getSchoolDashboardData()
+                $("#updatebtn").prop("disabled",false);
+                $("#validateusername").html('');
+
+            },
+            error : function(err){
+                $('#cover-spin').hide();
+                // success,info,error,warning,trash
+                Alert.error(`${err.responseJSON.Message}`,{displayDuration: 4000})
+                getSchoolDashboardData()
+                $("#validateusername").html('');
+            }
+        });
+    })
+
 
 })
 
