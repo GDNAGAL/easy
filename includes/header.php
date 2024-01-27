@@ -1,5 +1,5 @@
 <?php
-$url = 'http://localhost:3000/easy';
+$url = 'https://royalplay.live/';
 if(isset($_COOKIE['Token'])){
   $token = $_COOKIE['Token'];
   if($token == "undefined"){
