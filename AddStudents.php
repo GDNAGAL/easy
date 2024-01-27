@@ -214,6 +214,10 @@ input::-webkit-inner-spin-button {
                         <button class="btn btn-primary" id="uploadsheetbtn" type="submit">Upload Sheet</button>
                       </div>
                     </form>
+                    <div id="rollalert">
+                      <!-- <h5 class="text-danger">Remove The Following Students from Sheet.</h5>
+                      <h5 class="text-danger">Roll No : 101, 102</h5> -->
+                    </div>
                   </div>
                 </div>
               </div>

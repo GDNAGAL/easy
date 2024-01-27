@@ -84,7 +84,7 @@ $( document ).ready(function() {
                         MarkseetBtn =  `<button class="btn btn-sm btn-primary" disabled>View Marksheets</button>`;
                     }
                     if(item.Students>0){
-                        fillbtn =`<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-success">Fill Marks</button></a>`; 
+                        fillbtn =`<a href="MarksEntry?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}&text=${item.ClassRoomName} ${item.SectionText}"><button class="btn btn-sm btn-success">Fill Marks</button></a>`; 
                     }else{
                         fillbtn = `<button title="No Student in Class." class="btn btn-sm btn-danger" disabled>Fill Marks</button>`;
                     }

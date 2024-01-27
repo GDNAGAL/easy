@@ -14,6 +14,7 @@ $( document ).ready(function() {
     }
   
     $("#uploadStudentForm").on("submit",function(e){
+        $("#rollalert").html(``);
         e.preventDefault();
         $('#cover-spin').show(0);
         let data = new FormData(this);
@@ -37,11 +38,16 @@ $( document ).ready(function() {
             },
             error : function(err){
                 $('#cover-spin').hide();
-                // console.log(err)
-                $("#scode").val("")
-                $("#scode").focus()
+                $('#uploadStudentForm')[0].reset();
+                $("#selectclassup").val($("#selectclassup option:first").val());
                 // success,info,error,warning,trash
                 Alert.error(`${err.responseJSON.Message}`,{displayDuration: 4000})
+                if(err.responseJSON.RollAlreadyExist){
+                    $("#rollalert").append(`<h5 class="text-danger">Remove The Following Students from Sheet.</h5>`);
+                    $.each(err.responseJSON.RollAlreadyExist, function(i, item) {
+                        $("#rollalert").append(`<h5 class="text-danger">Roll No : ${item}</h5>`);
+                    })
+                }
             }
       });
     })

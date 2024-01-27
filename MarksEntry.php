@@ -1,3 +1,6 @@
+<?php
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +62,7 @@ input::-webkit-inner-spin-button {
   <section class="content-header">
       <h1>
         Fill Marks 
-        <small>PP 3+ Class</small>
+        <small><?php echo $_GET['text']; ?></small>
       </h1>
       
     </section>

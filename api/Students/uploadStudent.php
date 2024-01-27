@@ -2,7 +2,7 @@
 // Path : api/ClassRooms/addClassRoom
 include("../connection.php");
 include("../../PHPExcel/PHPExcel.php");
-error_reporting(0);
+// error_reporting(0);
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$headers = getallheaders();
 	if (array_key_exists('Authorization', $headers) && preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)){
@@ -25,12 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$worksheet = $excel_obj->getSheet('0');
 				// $data = $worksheet->getCell('A2')->getValue();
 				$highestRow = $worksheet->getHighestRow();
-				if($highestRow>1){
-					$tableName = "student_data";
-					
+				if($highestRow>1){					
 					$temporaryTableName = "TempStudents";
-					//Insert data into the temp table
-					$createTableQuery = "CREATE TEMPORARY TABLE $temporaryTableName (
+					$createTableQuery = "CREATE TEMPORARY TABLE IF NOT EXISTS $temporaryTableName (
+						-- id INT PRIMARY KEY AUTO_INCREMENT,
 						Year INT,
 						SchoolID INT,
 						StudentName VARCHAR(255),
@@ -47,10 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 						StudentMobileNo VARCHAR(15),
 						StudentAadhar VARCHAR(20),
 						StudentPhoto VARCHAR(255)
-					)";
+					)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
+					
 					
 					$conn->query($createTableQuery);
-					
+					$count = 0;
 					// Insert data into the temporary table
 					for ($row = 2; $row <= $highestRow; ++$row) {
 						$rollNo = $worksheet->getCellByColumnAndRow(0, $row)->getValue(); // Assuming Roll No is in column A
@@ -69,49 +68,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 							(Year, SchoolID, StudentName, StudentFatherName, StudentMotherName, DateofBirth, Category, StudentAddress, ClassRoomID, SectionID, AdmissionNo, Gender, RollNo, StudentMobileNo, StudentAadhar, StudentPhoto) 
 							VALUES ('2023', '$sid', '$studentName', '$fatherName', '$motherName', '$dob', '$category', '', '$classRoomID', '$SectionID', '$admissionNo', '', '$rollNo', '$mobile', '$aadhar', NULL)";
 							$conn->query($insertDataQuery);
+							$count++;
 						}
 					}
 					
-					$x = [];
-					$t = mysqli_query($conn, "SELECT * FROM $temporaryTableName");
-					while($tr = mysqli_fetch_assoc($t)){
-						$x[] = $tr;
+					if($count>0){
+						$x = [];
+ 						$rollnos = mysqli_query($conn, "SELECT RollNo FROM `students` WHERE RollNo IN (SELECT RollNo FROM $temporaryTableName) AND SectionID = '$SectionID'");
+						while($rollnosrow = mysqli_fetch_assoc($rollnos)){
+							$x[] = $rollnosrow["RollNo"];
+						}
+
+						if(mysqli_num_rows($rollnos)>0){
+							$dropTableQuery = "DROP TEMPORARY TABLE IF EXISTS $temporaryTableName";
+							$conn->query($dropTableQuery);
+							http_response_code(403);
+							header('Content-Type: application/json');
+							$data = array ("Status"=> "OK","Message" => "Some Students Already Exist", "RollAlreadyExist" => $x);
+							echo json_encode( $data );
+						}else{
+							$insertStudentQuery = "INSERT INTO `students` 
+							(Year, SchoolID, StudentName, StudentFatherName, StudentMotherName, DateofBirth, Category, StudentAddress, ClassRoomID, SectionID, AdmissionNo, Gender, RollNo, StudentMobileNo, StudentAadhar, StudentPhoto) 
+							SELECT * FROM $temporaryTableName";
+							if($conn->query($insertStudentQuery)===TRUE){
+								$dropTableQuery = "DROP TEMPORARY TABLE IF EXISTS $temporaryTableName";
+								$conn->query($dropTableQuery);
+								http_response_code(200);
+								header('Content-Type: application/json');
+								$data = array ("Status"=> "OK","Message" => "Data Uploaded Successfully");
+								echo json_encode( $data );
+
+							 }else{
+								$dropTableQuery = "DROP TEMPORARY TABLE IF EXISTS $temporaryTableName";
+								$conn->query($dropTableQuery);
+								http_response_code(403);
+								header('Content-Type: application/json');
+								$data = array ("Status"=> "OK","Message" => "Data Upload Failed");
+								echo json_encode( $data );
+							}
+						}
+					}else{
+						$dropTableQuery = "DROP TEMPORARY TABLE IF EXISTS $temporaryTableName";
+						$conn->query($dropTableQuery);
+
+						http_response_code(403);
+						header('Content-Type: application/json');
+						$data = array ("Status"=> "OK","Message" => "Sheet have no Data");
+						echo json_encode( $data );
 					}
-					
-					$dropTableQuery = "DROP TEMPORARY TABLE IF EXISTS $temporaryTableName";
-					$conn->query($dropTableQuery);
-					
-					http_response_code(200);
-					header('Content-Type: application/json');
-					$data = array ("Status"=> "OK","Message" => "Data Uploaded Successfully", "data" => $x);
-					echo json_encode( $data );
-					
-					
-					
-					// $addExamGroup = mysqli_query($conn, "INSERT INTO `students`(`Year`, `SchoolID`, `StudentName`, `StudentFatherName`, `StudentMotherName`, `DateofBirth`, `Category`, `StudentAddress`, `ClassRoomID`, `SectionID`, `AdmissionNo`, `Gender`, `RollNo`, `StudentMobileNo`, `StudentAadhar`, `StudentPhoto`)
-					//  VALUES ('2023','$sid','$studentname','$fathername','$mothername','$dob','$category','$address','$classRoomID','$SectionID','$adno','$gender','$rollno','$mobile','$aadhar','')");
-					
 				}else{
 					http_response_code(403);
 					header('Content-Type: application/json');
 					$data = array ("Status"=> "ERROR","Message" => "Sheet have no Data");
 					echo json_encode( $data );
 				}
-		}else{
-			http_response_code(403);
-			header('Content-Type: application/json');
-			$data = array ("Status"=> "ERROR","Message" => "Invalid Secrate Code");
-			echo json_encode( $data );
-		}
-			// http_response_code(200);
-			// header('Content-Type: application/json');
-			// if($addExamGroup == TRUE){
-			// 	$data = array ("Status"=> "OK","Message" => "Student Added Successfully.");
-			// 	echo json_encode( $data );
-			// }else{
-			// 	$data = array ("Status"=> "ERROR","Message" => "Failed");
-			// 	echo json_encode( $data );
-			// }
+			}else{
+				http_response_code(403);
+				header('Content-Type: application/json');
+				$data = array ("Status"=> "ERROR","Message" => "Invalid Secrate Code");
+				echo json_encode( $data );
+			}
 
 		}else{
 			http_response_code(401);
