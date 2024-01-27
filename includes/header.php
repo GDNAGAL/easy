@@ -337,7 +337,7 @@ if(isset($_COOKIE['Token'])){
             </span>
           </a>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="">
             <i class="fa fa-users"></i>
             <span>Students</span>
@@ -349,6 +349,22 @@ if(isset($_COOKIE['Token'])){
             <li><a href="AddStudents"><i class="fa fa-dot-circle-o"></i> Add Students</a></li>
             <li><a href="students"><i class="fa fa-dot-circle-o"></i> View Students</a></li>
           </ul>
+        </li> -->
+        <li class="treeview">
+          <a href="javascript:void(0)" onclick="window.open('AddStudents','_self')">
+            <i class="fa fa-users"></i>
+            <span>Add Students</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a href="javascript:void(0)" onclick="window.open('students','_self')">
+            <i class="fa fa-users"></i>
+            <span>View Students</span>
+            <span class="pull-right-container">
+            </span>
+          </a>
         </li>
         <li class="treeview">
           <a href="javascript:void(0)" onclick="window.open('teachers','_self')">
