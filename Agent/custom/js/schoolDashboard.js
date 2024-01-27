@@ -78,6 +78,7 @@ $(function(){
                         }
                         $("#classlist").append(`<span class="label label-success" style="margin-right:5px">${item.ClassRoomName} (${item.SectionText})</span>`)
                     })
+                    $("#classlist").append(`<button class="btn btn-danger btn-sm" style="margin-top:10px">UNDO</button>`)
                     
                     
                     //subjects
@@ -148,6 +149,7 @@ $(function(){
                     </td>
                 </tr>`);
             })
+            $("#subjectTable").append(`<button class="btn btn-danger btn-sm">UNDO</button>`)
             $("#examlist").html(`<button class="btn btn-danger btn-flat" id="examAddBtn">Add Exam Details</button>`)
             $("#activateAccountlist").html(`<strong class="text-muted">Please Complete Above All Steps.</strong>`)
         }
@@ -159,7 +161,7 @@ $(function(){
             $("#examStatusLogo").addClass("fa fa-check-circle bg-green");
             $("#examHeading").addClass("text-green");
             $("#examStatusIcon").html(`<i class="fa fa-check-circle text-green"></i> <span class="text-green">Completed</span>`);
-            $("#examlist").html(`<strong class="text-muted text-green"><i class="fa fa-check-circle"></i> Exam Added Successfully.</strong>`)
+            $("#examlist").html(`<strong class="text-muted text-green"><i class="fa fa-check-circle"></i> Exam Added Successfully. <button class="btn btn-danger pull-right btn-sm">UNDO</button></strong>`)
             $("#activateAccountlist").html(`<button class="btn btn-danger btn-flat" id="activateAccountBtn">Activate Account</button>`)
     }
     //create Classrooms
