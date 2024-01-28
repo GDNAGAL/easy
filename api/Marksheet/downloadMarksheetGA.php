@@ -12,9 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$SectionID = $_POST['SectionID'];
 			$StudentID = $_POST['StudentID'];
 			if ($StudentID == 'all') {
-				$selectstudentlist = mysqli_query($conn, "SELECT StudentID,StudentName,Gender,StudentFatherName,StudentMotherName,DateofBirth,students.ClassRoomID,students.SectionID,AdmissionNo,RollNo,ClassRoomName,SectionText,StudentPhoto FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID INNER JOIN `classrooms_sections` ON students.SectionID = classrooms_sections.SectionID  WHERE students.SchoolID = '$sid' AND students.SectionID = '$SectionID'");
+				$selectstudentlist = mysqli_query($conn, "SELECT StudentID,StudentName,Gender,StudentFatherName,StudentMotherName,DateofBirth,students.ClassRoomID,students.SectionID,classrooms.ClassIndex,AdmissionNo,RollNo,ClassRoomName,SectionText,StudentPhoto FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID INNER JOIN `classrooms_sections` ON students.SectionID = classrooms_sections.SectionID  WHERE students.SchoolID = '$sid' AND students.SectionID = '$SectionID'");
 			}else{
-				$selectstudentlist = mysqli_query($conn, "SELECT StudentID,StudentName,Gender,StudentFatherName,StudentMotherName,DateofBirth,students.ClassRoomID,students.SectionID,AdmissionNo,RollNo,ClassRoomName,SectionText,StudentPhoto FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID INNER JOIN `classrooms_sections` ON students.SectionID = classrooms_sections.SectionID  WHERE students.SchoolID = '$sid' AND students.SectionID = '$SectionID' AND StudentID = '$StudentID'");
+				$selectstudentlist = mysqli_query($conn, "SELECT StudentID,StudentName,Gender,StudentFatherName,StudentMotherName,DateofBirth,students.ClassRoomID,students.SectionID,classrooms.ClassIndex,AdmissionNo,RollNo,ClassRoomName,SectionText,StudentPhoto FROM `students` INNER JOIN `classrooms` ON students.ClassRoomID = classrooms.ClassRoomID INNER JOIN `classrooms_sections` ON students.SectionID = classrooms_sections.SectionID  WHERE students.SchoolID = '$sid' AND students.SectionID = '$SectionID' AND StudentID = '$StudentID'");
 			}
 
 			http_response_code(200);
