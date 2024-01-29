@@ -56,7 +56,7 @@ $( document ).ready(function() {
     function getclasslist(){
         $.ajax({
                 type: "POST",
-                url: 'api/ClassRooms/getClassRoomList',
+                url: url+'/ClassRooms/getClassRoomList',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
@@ -82,7 +82,7 @@ $( document ).ready(function() {
         $.ajax({
             type: "POST",
             data: data,
-            url: 'api/Students/addStudent',
+            url: url+'/Students/addStudent',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("Token")
             },
