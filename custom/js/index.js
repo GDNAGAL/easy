@@ -33,6 +33,9 @@ $( document ).ready(function() {
       headers: {
         'Authorization': 'Bearer ' + getCookie("Token")
       },
+      xhrFields: {
+        withCredentials: true
+      },
       success: function(result){
         
         $("#totalStudent").html(result.DashboardData.totalstudent)
