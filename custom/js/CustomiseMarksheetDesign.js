@@ -102,7 +102,7 @@ function showVal(a){
   function getPageSize(){
     $("#pageSize").html("")
     $.ajax({
-          "url": "api/getPageSize",
+          "url": url+"/getPageSize",
           "type": "POST",
           headers: {
             'Authorization': 'Bearer ' + getCookie("Token")

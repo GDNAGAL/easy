@@ -56,7 +56,7 @@ $( document ).ready(function() {
   function getMarksheetDesignList(){
     $("#studentTableBody").html("")
     $.ajax({
-          "url": "api/Marksheet/getMarksheetDesignList",
+          "url": url+"/Marksheet/getMarksheetDesignList",
           "type": "POST",
           headers: {
             'Authorization': 'Bearer ' + getCookie("Token")
