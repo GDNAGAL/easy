@@ -1,5 +1,6 @@
 <?php
-$url = 'https://royalplay.live/';
+$url = 'https://api.royalplay.live';
+
 if(isset($_COOKIE['Token'])){
   $token = $_COOKIE['Token'];
   if($token == "undefined"){
@@ -8,7 +9,7 @@ if(isset($_COOKIE['Token'])){
   }
   $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => $url.'/api/getLoginUserData',
+    CURLOPT_URL => $url.'/getLoginUserData',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -427,6 +428,9 @@ if(isset($_COOKIE['Token'])){
     </section>
     <!-- /.sidebar -->
   </aside>
+  <div>
+    <input type="hidden" id="url" value="<?php echo $url; ?>">
+  </div>
 <script>
   if(performance.navigation.type == 2){
    location.reload(true);

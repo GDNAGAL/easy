@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-
+var url = 'https://api.royalplay.live';
 //function for loading button
   function loadbtn(id, text){
     $(id).attr("disabled", true);
@@ -35,7 +35,7 @@ $("#login_form").on('submit', function(e){
   data.append(event.submitter.name, event.submitter.value);
   $.ajax({
     type: "POST", 
-    url: "api/login",              
+    url: `${url}/login`,              
     data: data, 
     contentType: false,       
     cache: false,             
