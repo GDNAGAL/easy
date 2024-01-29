@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
   function getCookie(cookieName) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
