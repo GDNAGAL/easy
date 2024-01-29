@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
   getPageSize()
   function getCookie(cookieName) {
     let cookie = {};

@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-
+  var url = $("#url").val();
   function getCookie(cookieName) {
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
@@ -47,7 +47,7 @@ $( document ).ready(function() {
         contentType: false,       
         cache: false,             
         processData:false,
-        url: 'api/Subjects/addSubject.php',
+        url: url +  '/Subjects/addSubject.php',
         headers: {
             'Authorization': 'Bearer ' + getCookie("Token")
         },
@@ -91,7 +91,7 @@ $( document ).ready(function() {
       contentType: false,       
       cache: false,             
       processData:false,
-      url: 'api/Subjects/getSubjectTypes',
+      url: url +  '/Subjects/getSubjectTypes',
       headers: {
           'Authorization': 'Bearer ' + getCookie("Token")
       },
@@ -116,7 +116,7 @@ $( document ).ready(function() {
     // get Subject Teacher List
     $.ajax({
       type: "POST",
-      url: 'api/Teachers/getTeacherList.php',
+      url: url +  '/Teachers/getTeacherList.php',
       headers: {
           'Authorization': 'Bearer ' + getCookie("Token")
       },
@@ -148,7 +148,7 @@ $( document ).ready(function() {
           contentType: false,       
           cache: false,             
           processData:false,
-          url: 'api/Subjects/getSubjectList',
+          url: url +  '/Subjects/getSubjectList',
           headers: {
             'Authorization': 'Bearer ' + getCookie("Token")
           },

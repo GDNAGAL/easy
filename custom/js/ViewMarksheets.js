@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
   const urlParams = new URLSearchParams(window.location.search);
   const SectionID = urlParams.get('SectionID');
   getStudentList()

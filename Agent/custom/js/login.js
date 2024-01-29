@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-
+  var url = 'https://api.royalplay.live';
 //function for loading button
   function loadbtn(id, text){
     $(id).attr("disabled", true);

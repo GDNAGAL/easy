@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
    let changes = false;
     
    window.addEventListener('keydown', function (event) {
@@ -74,7 +75,7 @@ $( document ).ready(function() {
                 contentType: false,       
                 cache: false,             
                 processData:false,
-                url: 'api/Examination/saveStudentMarks',
+                url: url +  '/Examination/saveStudentMarks',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
@@ -166,7 +167,7 @@ function getObjectByKeyValue(arr, key, value) {
                 contentType: false,       
                 cache: false,             
                 processData:false,
-                url: 'api/Examination/getMarkEntryDetail',
+                url: url +  '/Examination/getMarkEntryDetail',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },

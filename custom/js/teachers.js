@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
   getTeacherList()
   // $('#cover-spin').hide();
   function getCookie(cookieName) {
@@ -54,7 +55,7 @@ $( document ).ready(function() {
       contentType: false,       
       cache: false,             
       processData:false,
-      url: 'api/Teachers/addTeacher.php',
+      url: url +  '/Teachers/addTeacher.php',
       headers: {
           'Authorization': 'Bearer ' + getCookie("Token")
       },
@@ -89,7 +90,7 @@ $( document ).ready(function() {
     $("#teacherListTableBody").html("")
     $.ajax({
       type: "POST",
-    url: 'api/Teachers/getTeacherList',
+    url: url +  '/Teachers/getTeacherList',
     headers: {
         'Authorization': 'Bearer ' + getCookie("Token")
       },

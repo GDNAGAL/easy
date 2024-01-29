@@ -1,5 +1,5 @@
-
 $( document ).ready(function() {
+  var url = $("#url").val();
   getDashboardData();
   function getCookie(cookieName) {
     let cookie = {};

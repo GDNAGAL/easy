@@ -1,4 +1,5 @@
 $(function(){
+    var url = $("#url").val();
     const urlParams = new URLSearchParams(window.location.search);
     const schoolID = urlParams.get('schoolID');
 
@@ -26,7 +27,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: 'api/Schools/getSchoolDashboardData',
+            url: url +  '/Schools/getSchoolDashboardData',
             data:data,
             contentType: false,       
             cache: false,             
@@ -171,7 +172,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: 'api/Schools/createClassRooms',
+            url: url +  '/Schools/createClassRooms',
             data:data,
             contentType: false,       
             cache: false,             
@@ -201,7 +202,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: 'api/Schools/createSubjects',
+            url: url +  '/Schools/createSubjects',
             data:data,
             contentType: false,       
             cache: false,             
@@ -231,7 +232,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: 'api/Schools/createExams',
+            url: url +  '/Schools/createExams',
             data:data,
             contentType: false,       
             cache: false,             
@@ -261,7 +262,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: 'api/Schools/activateSchool',
+            url: url +  '/Schools/activateSchool',
             data:data,
             contentType: false,       
             cache: false,             
@@ -293,7 +294,7 @@ $(function(){
         data.append("SchoolID",$("#sid").val());
         $.ajax({
             type: "POST",
-            url: 'api/Schools/ValidateUserName',
+            url: url +  '/Schools/ValidateUserName',
             data:data,
             contentType: false,       
             cache: false,             
@@ -319,7 +320,7 @@ $(function(){
         let data = new FormData(this);
         $.ajax({
             type: "POST",
-            url: 'api/Schools/UpdateSchool',
+            url: url +  '/Schools/UpdateSchool',
             data:data,
             contentType: false,       
             cache: false,             

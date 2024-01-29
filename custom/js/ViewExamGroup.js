@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const ExamGroupID = urlParams.get('examGroupId');
+var url = $("#url").val();
 getExamList(ExamGroupID)
 function getCookie(cookieName) {
     let cookie = {};
@@ -23,7 +24,7 @@ $("#addExamForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/Examination/addExam',
+            url: url +  '/Examination/addExam',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("Token")
             },
@@ -54,7 +55,7 @@ function getExamList(examgroupid){
         contentType: false,       
         cache: false,             
         processData:false,
-        url: 'api/Examination/getExamsList',
+        url: url +  '/Examination/getExamsList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("Token")
         },

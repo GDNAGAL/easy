@@ -1,3 +1,4 @@
+var url = $("#url").val();
 const urlParams = new URLSearchParams(window.location.search);
 const ClassRoomGroupID = urlParams.get('ClassRoomGroupID');
 const ClassRoomGroupTitle = urlParams.get('Titile');
@@ -43,7 +44,7 @@ $("#addSubjectForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/Default/addSubject',
+            url: url +  '/Default/addSubject',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
@@ -73,7 +74,7 @@ $("#addPaperForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/Default/addPaper',
+            url: url +  '/Default/addPaper',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
@@ -102,7 +103,7 @@ function getSubjectList(){
         contentType: false,       
         cache: false,             
         processData:false,
-        url: 'api/Default/getSubjectList',
+        url: url +  '/Default/getSubjectList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },
@@ -139,7 +140,7 @@ function getPaperList(subjectId){
         contentType: false,       
         cache: false,             
         processData:false,
-        url: 'api/Default/getPaperList',
+        url: url +  '/Default/getPaperList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },
@@ -174,7 +175,7 @@ function getExamList(){
     $('#cover-spin').show();
     $.ajax({
         type: "POST",
-        url: 'api/Default/getExamList',
+        url: url +  '/Default/getExamList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },

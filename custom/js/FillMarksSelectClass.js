@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-   
+    var url = $("#url").val();
     getlist()
 
     function getCookie(cookieName) {
@@ -34,7 +34,7 @@ $( document ).ready(function() {
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/Examination/addExam',
+            url: url +  '/Examination/addExam',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("Token")
             },
@@ -54,7 +54,7 @@ $( document ).ready(function() {
         $("#exambody").html("")
         $.ajax({
                 type: "POST",
-                url: 'api/Examination/getClassWisExamList',
+                url: url +  '/Examination/getClassWisExamList',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },

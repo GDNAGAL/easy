@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
    $('#cover-spin').hide();
   function getCookie(cookieName) {
     let cookie = {};
@@ -26,7 +27,7 @@ $( document ).ready(function() {
       contentType: false,       
       cache: false,             
       processData:false,
-      url: 'api/Schools/addSchool',
+      url: url +  '/Schools/addSchool',
       headers: {
           'Authorization': 'Bearer ' + getCookie("AToken")
       },

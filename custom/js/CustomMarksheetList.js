@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
   const urlParams = new URLSearchParams(window.location.search);
   const ClassRoomID = urlParams.get('ClassRoomID');
   getMarksheetDesignList()
@@ -31,7 +32,7 @@ $( document ).ready(function() {
       contentType: false,       
       cache: false,             
       processData:false,
-      url: 'api/Marksheet/addMarksheetDesign',
+      url: url +  '/Marksheet/addMarksheetDesign',
       headers: {
           'Authorization': 'Bearer ' + getCookie("Token")
       },
