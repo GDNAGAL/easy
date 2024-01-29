@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+    var url = $("#url").val();
     getclasslist()
     function getCookie(cookieName) {
       let cookie = {};
@@ -21,7 +22,7 @@ $( document ).ready(function() {
         $.ajax({
             type: "POST",
             data: data,
-            url: 'api/Students/uploadStudent',
+            url: url+'/Students/uploadStudent',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("Token")
             },
