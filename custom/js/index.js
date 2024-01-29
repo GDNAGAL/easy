@@ -25,7 +25,7 @@ $( document ).ready(function() {
     data.append("getDashboardData", "");
     $.ajax({
       type: "GET", 
-      url: `${url}/Dashboard/getDashboardData`,              
+      url: url + '/Dashboard/getDashboardData',              
       data: data, 
       contentType: false,       
       cache: false,             
