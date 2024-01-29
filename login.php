@@ -39,7 +39,7 @@ if(isset($_COOKIE['Token'])){
 <div class="login-box">
   <div class="login-box-body">
     <div class="login-logo">
-      <b>School </b>Log In
+      <b>School </b>Log In s
     </div>
     <form action="" id="login_form" method="post">
       <span id="validate"></span>
