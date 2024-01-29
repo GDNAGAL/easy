@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+  var url = $("#url").val();
   getDashboardData();
   function getCookie(cookieName) {
     let cookie = {};
@@ -24,7 +25,7 @@ $( document ).ready(function() {
     data.append("getDashboardData", "");
     $.ajax({
       type: "GET", 
-      url: "api/Dashboard/getDashboardData",              
+      url: `${url}/Dashboard/getDashboardData`,              
       data: data, 
       contentType: false,       
       cache: false,             
