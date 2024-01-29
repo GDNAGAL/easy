@@ -14,7 +14,7 @@ $( document ).ready(function() {
 
     $.ajax({
       type: "POST",
-      url: 'api/Teachers/getTeacherList.php',
+      url: url + '/Teachers/getTeacherList.php',
       headers: {
           'Authorization': 'Bearer ' + getCookie("Token")
       },
@@ -45,7 +45,7 @@ $( document ).ready(function() {
         $("#classRoomTableBody").html("")
         $.ajax({
         type: "POST",
-        url: 'api/ClassRooms/getClassRoomList',
+        url: url+'/ClassRooms/getClassRoomList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("Token")
           },
@@ -143,7 +143,7 @@ $( document ).ready(function() {
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/ClassRooms/updateClassRoom',
+            url: url+'/ClassRooms/updateClassRoom',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("Token")
             },
@@ -180,7 +180,7 @@ $( document ).ready(function() {
             contentType: false,       
             cache: false,             
             processData:false,
-            url: 'api/ClassRooms/addSection',
+            url: url+'/ClassRooms/addSection',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("Token")
             },
