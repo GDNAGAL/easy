@@ -60,9 +60,9 @@ $( document ).ready(function() {
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
-                xhrFields: {
-                    withCredentials: true
-                },
+                // xhrFields: {
+                //     withCredentials: true
+                // },
                 success: function(result){
                     $('#cover-spin').hide();
                     $.each(result.ClassRoomList, function(i, item) {
