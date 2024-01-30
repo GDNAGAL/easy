@@ -1,5 +1,5 @@
 <?php
-$appMode = "PRODUCTION";   // TEST PRODUCTION
+$appMode = "TEST";   // TEST PRODUCTION
 
 
 if($appMode == "TEST"){
