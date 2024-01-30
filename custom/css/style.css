@@ -19,7 +19,7 @@
   margin: 5px 20px;
   color: red;
   font-weight: bold;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 @-webkit-keyframes spin {
 	from {-webkit-transform:rotate(0deg);}
