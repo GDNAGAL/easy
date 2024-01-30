@@ -44,7 +44,7 @@ $("#addSubjectForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: url +  '/Default/addSubject',
+            url: url +  '/Agent/Default/addSubject',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
@@ -74,7 +74,7 @@ $("#addPaperForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: url +  '/Default/addPaper',
+            url: url +  '/Agent/Default/addPaper',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
@@ -103,7 +103,7 @@ function getSubjectList(){
         contentType: false,       
         cache: false,             
         processData:false,
-        url: url +  '/Default/getSubjectList',
+        url: url +  '/Agent/Default/getSubjectList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },
@@ -140,7 +140,7 @@ function getPaperList(subjectId){
         contentType: false,       
         cache: false,             
         processData:false,
-        url: url +  '/Default/getPaperList',
+        url: url +  '/Agent/Default/getPaperList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },
@@ -175,7 +175,7 @@ function getExamList(){
     $('#cover-spin').show();
     $.ajax({
         type: "POST",
-        url: url +  '/Default/getExamList',
+        url: url +  '/Agent/Default/getExamList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },

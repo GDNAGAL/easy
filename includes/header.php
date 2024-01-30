@@ -1,5 +1,15 @@
 <?php
-$url = 'https://api.royalplay.live';
+$appMode = "TEST";   // TEST PRODUCTION
+
+
+if($appMode == "TEST"){
+  $appURL = '';
+  $APIurl = 'https://api.royalplay.live';
+
+}elseif ($appMode == "PRODUCTION") {
+  $appURL = '';
+  $APIurl = 'https://api.royalplay.live';
+}
 
 if(isset($_COOKIE['Token'])){
   $token = $_COOKIE['Token'];
@@ -9,7 +19,7 @@ if(isset($_COOKIE['Token'])){
   }
   $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => $url.'/getLoginUserData',
+    CURLOPT_URL => $APIurl.'/getLoginUserData',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -57,6 +67,13 @@ if(isset($_COOKIE['Token'])){
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <?php
+      if($appMode != "PRODUCTION"){
+        echo "<div class='testenv'>
+                Test Environment
+              </div>";
+      }
+      ?> 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
@@ -429,7 +446,7 @@ if(isset($_COOKIE['Token'])){
     <!-- /.sidebar -->
   </aside>
   <div>
-    <input type="hidden" id="url" value="<?php echo $url; ?>">
+    <input type="hidden" id="url" value="<?php echo $APIurl; ?>">
   </div>
 <script>
   if(performance.navigation.type == 2){

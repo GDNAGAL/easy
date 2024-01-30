@@ -35,7 +35,7 @@ $("#login_form").on('submit', function(e){
   data.append(event.submitter.name, event.submitter.value);
   $.ajax({
     type: "POST", 
-    url: "api/login",              
+    url: url +"/Agent/login",              
     data: data, 
     contentType: false,       
     cache: false,             

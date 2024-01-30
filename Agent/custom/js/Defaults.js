@@ -45,7 +45,7 @@ $("#addClassRoomGroupForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: url +  '/Default/addClassRoomGroup',
+            url: url +  '/Agent/Default/addClassRoomGroup',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
@@ -75,7 +75,7 @@ $("#addClassRoomForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: url +  '/Default/addClassRoom',
+            url: url +  '/Agent/Default/addClassRoom',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
@@ -105,7 +105,7 @@ $("#addExamForm").on("submit",function(e){
             contentType: false,       
             cache: false,             
             processData:false,
-            url: url +  '/Default/addExam',
+            url: url +  '/Agent/Default/addExam',
             headers: {
                 'Authorization': 'Bearer ' + getCookie("AToken")
             },
@@ -128,7 +128,7 @@ function getExamList(){
     $('#cover-spin').show();
     $.ajax({
         type: "POST",
-        url: url +  '/Default/getExamList',
+        url: url +  '/Agent/Default/getExamList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },
@@ -151,7 +151,7 @@ function getClassRoomGroupList(){
     $('#cover-spin').show();
     $.ajax({
         type: "POST",
-        url: url +  '/Default/getClassRoomGroupList',
+        url: url +  '/Agent/Default/getClassRoomGroupList',
         headers: {
             'Authorization': 'Bearer ' + getCookie("AToken")
         },

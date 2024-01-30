@@ -22,7 +22,7 @@ $( document ).ready(function() {
     const dataa = {cls : ClassRoomID};
     $("#studentTableBody").html("")
     $.ajax({
-          "url": "api/Students/getStudentList",
+          "url": url+"/Students/getStudentList",
           "type": "POST",
           "data": dataa,
           "datatype": 'json',

@@ -34,7 +34,7 @@ $( document ).ready(function() {
         $('#cover-spin').show(0);
         const dataa = {cls : cls};
         $.ajax({
-            "url": "api/Students/getStudentList",
+            "url": url+"/Students/getStudentList",
             "type": "POST",
             "data": dataa,
             "datatype": 'json',
@@ -95,7 +95,7 @@ $( document ).ready(function() {
     function getclasslist(){
         $.ajax({
                 type: "POST",
-                url: url +  '/ClassRooms/getClassRoomList.php',
+                url: url +  '/ClassRooms/getClassRoomList',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },

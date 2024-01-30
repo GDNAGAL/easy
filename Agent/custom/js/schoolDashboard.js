@@ -27,7 +27,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: url +  '/Schools/getSchoolDashboardData',
+            url: url +  '/Agent/Schools/getSchoolDashboardData',
             data:data,
             contentType: false,       
             cache: false,             
@@ -172,7 +172,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: url +  '/Schools/createClassRooms',
+            url: url +  '/Agent/Schools/createClassRooms',
             data:data,
             contentType: false,       
             cache: false,             
@@ -202,7 +202,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: url +  '/Schools/createSubjects',
+            url: url +  '/Agent/Schools/createSubjects',
             data:data,
             contentType: false,       
             cache: false,             
@@ -232,7 +232,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: url +  '/Schools/createExams',
+            url: url +  '/Agent/Schools/createExams',
             data:data,
             contentType: false,       
             cache: false,             
@@ -262,7 +262,7 @@ $(function(){
         data.append("SchoolID",$("#schoolinputId").val());
         $.ajax({
             type: "POST",
-            url: url +  '/Schools/activateSchool',
+            url: url +  '/Agent/Schools/activateSchool',
             data:data,
             contentType: false,       
             cache: false,             
@@ -294,7 +294,7 @@ $(function(){
         data.append("SchoolID",$("#sid").val());
         $.ajax({
             type: "POST",
-            url: url +  '/Schools/ValidateUserName',
+            url: url +  '/Agent/Schools/ValidateUserName',
             data:data,
             contentType: false,       
             cache: false,             
@@ -320,7 +320,7 @@ $(function(){
         let data = new FormData(this);
         $.ajax({
             type: "POST",
-            url: url +  '/Schools/UpdateSchool',
+            url: url +  '/Agent/Schools/UpdateSchool',
             data:data,
             contentType: false,       
             cache: false,             

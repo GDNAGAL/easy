@@ -56,7 +56,7 @@ $( document ).ready(function() {
       contentType: false,       
       cache: false,             
       processData:false,
-      url: url +  '/Teachers/addTeacher.php',
+      url: url +  '/Agent/Teachers/addTeacher',
       headers: {
           'Authorization': 'Bearer ' + getCookie("AToken")
       },
@@ -91,7 +91,7 @@ $( document ).ready(function() {
     $("#teacherListTableBody").html("")
     $.ajax({
       type: "POST",
-      url: url +  '/Schools/getSchoolList',
+      url: url +  '/Agent/Schools/getSchoolList',
       headers: {
           'Authorization': 'Bearer ' + getCookie("AToken")
         },

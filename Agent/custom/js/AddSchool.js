@@ -27,7 +27,7 @@ $( document ).ready(function() {
       contentType: false,       
       cache: false,             
       processData:false,
-      url: url +  '/Schools/addSchool',
+      url: url +  '/Agent/Schools/addSchool',
       headers: {
           'Authorization': 'Bearer ' + getCookie("AToken")
       },
