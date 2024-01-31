@@ -1,15 +1,5 @@
 <?php
-$appMode = "TEST";   // TEST PRODUCTION
-
-
-if($appMode == "TEST"){
-  $appURL = '';
-  $APIurl = 'https://api.royalplay.live';
-
-}elseif ($appMode == "PRODUCTION") {
-  $appURL = '';
-  $APIurl = 'https://api.royalplay.live';
-}
+require("configData.php");
 
 if(isset($_COOKIE['Token'])){
   $token = $_COOKIE['Token'];

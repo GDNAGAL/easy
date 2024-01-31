@@ -1,15 +1,16 @@
 <?php
-$appMode = "TEST";   // TEST PRODUCTION
+require("../includes/configData.php");
+// $appMode = "TEST";   // TEST PRODUCTION
 
 
-if($appMode == "TEST"){
-  $appURL = '';
-  $APIurl = 'https://api.royalplay.live';
+// if($appMode == "TEST"){
+//   $appURL = '';
+//   $APIurl = 'https://api.royalplay.live';
 
-}elseif ($appMode == "PRODUCTION") {
-  $appURL = '';
-  $APIurl = 'https://api.royalplay.live';
-}
+// }elseif ($appMode == "PRODUCTION") {
+//   $appURL = '';
+//   $APIurl = 'https://api.royalplay.live';
+// }
 if(isset($_COOKIE['AToken'])){
   $token = $_COOKIE['AToken'];
   //echo $token;

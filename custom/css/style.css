@@ -118,7 +118,7 @@
   /* right: 0; */
   opacity: 1;
   line-height: 2;
-  padding: 3px 15px;
+  /* padding: 3px 15px; */
   transition: line-height 200ms, padding 200ms, right 350ms 200ms, opacity 350ms 200ms;
 }
 
