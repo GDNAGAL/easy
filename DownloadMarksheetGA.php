@@ -2,8 +2,8 @@
 ini_set('display_errors', 1);
 // require("fpdf/fpdf.php");
 require_once('tcpdf/tcpdf.php');
+require_once('includes/configData.php');
 
-$url = 'https://royalplay.live/';
 if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['StudentID'])){
   $token = $_COOKIE['Token'];
   $curl = curl_init();
