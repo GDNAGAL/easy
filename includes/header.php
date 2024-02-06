@@ -60,7 +60,7 @@ if(isset($_COOKIE['Token'])){
       <?php
       if($appMode != "PRODUCTION"){
         echo "<div class='testenv'>
-                Test Environment
+                Test Environments
               </div>";
       }
       ?> 
