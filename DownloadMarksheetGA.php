@@ -8,7 +8,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
   $token = $_COOKIE['Token'];
   $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => $url.'/api/Marksheet/downloadMarksheetGA',
+    CURLOPT_URL => $APIurl.'/Marksheet/downloadMarksheetGA',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -39,7 +39,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
 
   }else{
     echo "<script>alert('Something Went Wrong!!!')</script>";
-    echo "<script>window.close();</script>";
+    // echo "<script>window.close();</script>";
   }
 }else{
   header("Location: login");
