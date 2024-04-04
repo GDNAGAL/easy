@@ -4,7 +4,7 @@ $appMode = "PRODUCTION";   // TEST PRODUCTION
 
 if($appMode == "TEST"){
   $appURL = '';
-  $APIurl = 'testapi.royalplay.live';
+  $APIurl = 'https://testapi.royalplay.live';
 
 }elseif ($appMode == "PRODUCTION") {
   $appURL = '';
