@@ -39,7 +39,7 @@ if(isset($_COOKIE['Token'])){
 <div class="login-box">
   <div class="login-box-body">
     <div class="login-logo">
-      <b>School </b>Log In s
+      <b>School </b>Log In
     </div>
     <form action="" id="login_form" method="post">
       <span id="validate"></span>
@@ -53,7 +53,7 @@ if(isset($_COOKIE['Token'])){
       </div>
       <div class="row">
         <div class="col-xs-8">
-          <a href="#">Reset Password</a>
+          <!-- <a href="#">Reset Password</a> -->
         </div>
         <div class="col-xs-4">
           <button type="submit" id="login_submit" class="btn btn-primary btn-block btn-flat" name="login">Log In</button>
