@@ -2,7 +2,9 @@
 error_reporting(0);
 if(isset($_COOKIE['Token'])){
   header("Location: index");
+  exit();
 }
+require("includes/configData.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,7 +64,7 @@ if(isset($_COOKIE['Token'])){
     </form> 
   </div>
 </div>
-
+<input type="hidden" value="<?php echo $APIurl; ?>" id="aurl">
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
