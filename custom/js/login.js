@@ -1,6 +1,6 @@
 $( document ).ready(function() {
-// var url = 'https://api.royalplay.live'; // Prod
-var url = 'https://testapi.royalplay.live'; // Prod
+var url = $("#aurl").val();
+
 //function for loading button
   function loadbtn(id, text){
     $(id).attr("disabled", true);
