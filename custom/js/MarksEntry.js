@@ -117,11 +117,11 @@ $( document ).ready(function() {
       changes = true;
       $(this).removeClass("v-danger");
         $(this).removeClass("v-success");
-      let mm = $(this).attr("MM");
-      let inputVal = $(this).val();
-      if(inputVal<10 && inputVal>0){
-        inputVal = "0"+inputVal;
-      }
+      let mm = Number($(this).attr("MM"));
+      let inputVal = Number($(this).val());
+      // if(inputVal<10 && inputVal>0){
+      //   inputVal = "0"+inputVal;
+      // }
       if(inputVal>mm){
         $(this).addClass("v-danger");
         // alert("Cannot Fill More than Maximum Marks : "+ mm)
