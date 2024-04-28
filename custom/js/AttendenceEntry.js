@@ -42,40 +42,38 @@ $( document ).ready(function() {
 
   
     $(document).on("click","#savebtn", function(){
-      saveData();
+      if($("#totalAtt").val()>0){
+        saveData();
+      }else{
+        alert("Please Enter Total Working Days")
+      }
     })
 
     function saveData(){
       $('#cover-spin').show();
-      activeTab = $("li.active").children().attr("href").split("#")[1];
-
-      let marksArr = new Array();
+      let AttendenceArr = new Array();
       var markInputs = document.querySelectorAll('#markInputBox');
       markInputs.forEach(function(input) {
         let studentid = $(input).attr("studentid");
-        let subjectid = $(input).attr("subjectid");
-        let paperid = $(input).attr("paperid");
-        let marks = input.value;
-        let mm = $(input).attr("mm");
+        let attend = input.value;
         let mobj = {
           "StudentId" : studentid,
-          "SubjectId" : subjectid,
-          "PaperId" : paperid,
-          "Marks" : marks,
-          "ClassRoomID" :ClassRoomID,
+          "Attendence" : attend,
         }
-        marksArr.push(mobj)
+        AttendenceArr.push(mobj)
       });
-      let datajson = JSON.stringify(marksArr);
+      let datajson = JSON.stringify(AttendenceArr);
       let dataa = new FormData();
-      dataa.append("MarksArr", datajson);
+      dataa.append("AttenArr", datajson);
+      dataa.append("TotalWorkDay", $("#totalAtt").val());
+      dataa.append("SectionID", SectionID);
       $.ajax({
                 type: "POST",
                 data: dataa, 
                 contentType: false,       
                 cache: false,             
                 processData:false,
-                url: url +  '/Examination/saveStudentMarks',
+                url: url +  '/Examination/saveAtten',
                 headers: {
                     'Authorization': 'Bearer ' + getCookie("Token")
                 },
@@ -91,55 +89,6 @@ $( document ).ready(function() {
       })
     }
 
-    function disableAllInputs() {
-      var numberInputs = document.querySelectorAll('input[type="number"]');
-      numberInputs.forEach(function(input) {
-        input.disabled = true;
-      });
-    }
-    function enableByPidInputs(pid) {
-      disableAllInputs();
-      let numberInputs = document.querySelectorAll(`[PaperID="${pid}"]`);
-      numberInputs.forEach(function(input) {
-        input.disabled = false;
-      });
-    }
-
-    //Enable Disable inputs
-    $(document).on("change","#enableRadio",function(){
-      enableByPidInputs($(this).attr("ppid"))
-    })
-
-    $(document).on("blur","#markInputBox",function(){
-      if(!changes){
-        $("#subjectTabs").append(`<button class="btn btn-success" id="savebtn" style='float:right' type="submit"><i class="fa fa-save"></i> &nbsp;Save</button>`)
-      }
-      changes = true;
-      $(this).removeClass("v-danger");
-        $(this).removeClass("v-success");
-      let mm = $(this).attr("MM");
-      let inputVal = $(this).val();
-      if(inputVal<10 && inputVal>0){
-        inputVal = "0"+inputVal;
-      }
-      if(inputVal>mm){
-        $(this).addClass("v-danger");
-        // alert("Cannot Fill More than Maximum Marks : "+ mm)
-        $(this).focus();
-        $(this).val('')
-      }else if(inputVal<0){
-        $(this).addClass("v-danger");
-        // alert("Cannot Fill Less than 0")
-        $(this).focus();
-        $(this).val('')
-      }else if(inputVal==0 || inputVal == ""){
-        $(this).removeClass("v-danger");
-        $(this).removeClass("v-success");
-      }else{
-        $(this).removeClass("v-danger");
-        $(this).addClass("v-success");
-      }
-    })
 
     // Assuming you have a form with an ID, let's say 'myForm'
 $("#myForm").submit(function(event) {
@@ -180,11 +129,12 @@ function getObjectByKeyValue(arr, key, value) {
                                   <th style="padding:5px" rowspan="2" class="text-center">Student Name</th>
                                   <th style="padding:5px" rowspan="2" class="text-center">Attendence</th>
                                 </tr><tbody>`;
+                $("#totalAtt").val(result.StudentList[0].TotalAttnDay)
                  $.each(result.StudentList, function(i, item) {
                   table += `<tr>
                             <td class="text-center">${item.RollNo}</td>
                             <td style="padding:5px; padding-right:20px;">${item.StudentName}</td>
-                            <td class="text-center" style="width:100px;padding:4px;"><input id="markInputBox" type="number" value="${0}" StudentID="${item.StudentID}" class="form-control"></td>
+                            <td class="text-center" style="width:100px;padding:4px;"><input id="markInputBox" type="number" value="${item.Present}" StudentID="${item.StudentID}" class="form-control"></td>
                           </tr> `;      
                   })
                   table += `</tbody></table>`;

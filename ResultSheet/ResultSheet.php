@@ -47,6 +47,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['ClassRo
 
 
 
+
   function grade($MAX,$MOB){
     $per = ($MOB/$MAX)*100;
     if ($per >= 90) {
@@ -66,25 +67,34 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['ClassRo
 
   class PDF extends TCPDF
   {
+
+    function TextWithRotation($x, $y, $txt, $txt_angle, $font_angle=0)
+    {
+        $font_angle+=90+$txt_angle;
+        $txt_angle*=M_PI/180;
+        $font_angle*=M_PI/180;
+    
+        $txt_dx=cos($txt_angle);
+        $txt_dy=sin($txt_angle);
+        $font_dx=cos($font_angle);
+        $font_dy=sin($font_angle);
+    
+        $s=sprintf('BT %.2F %.2F %.2F %.2F %.2F %.2F Tm (%s) Tj ET',$txt_dx,$txt_dy,$font_dx,$font_dy,$x*$this->k,($this->h-$y)*$this->k,$txt);
+        if ($this->ColorFlag)
+            $s='q '.$this->TextColor.' '.$s.' Q';
+        $this->_out($s);
+    }
+    
+
     function Header(){
        global $SchoolName, $SchoolAddress;
       // $this->Image("dist/img/logo.jpg", 50, 100, 100, 100, '', '', '', false, 300, '', false, false, 0);
-      $this->SetFont('dejavusans','B',14);
-      $this->Image("dist/img/logo.jpg",10,10,20,25);
-      $this->SetFont('dejavusans','B',24);
+      $this->SetFont('dejavusans','B',20);
       $this->SetY(7);
-      $this->Cell(190,10,$SchoolName,0,1,'C');
-      $this->SetFont('dejavusans','',14);
-      $this->Cell(190,7,$SchoolAddress,0,1,'C');
+      $this->Cell(680,10,$SchoolName.', '.$SchoolAddress,0,1,'C');
       $this->SetFont('dejavusans','B',14);
-      $this->Cell(190,10,"MARKSHEET-2023-24",0,1,'C');
-      $this->SetFont('dejavusans','',10);
-      $this->Cell(190,7,"School Reg. No.  : 2019/BKN/RAJ",0,1,'R');
-      $this->SetFillColor(222,137,137);
-      $this->SetTextColor(255,255,255);
-      $this->Rect(0, 41, 210, 8, 'F');
-      $this->SetXY(10, 41); 
-      $this->Cell(190,8,"Student Profile",0,1,'C',true);
+      $this->Cell(100,10,"Session - 2023-24",0,0,'L');
+      $this->Cell(190,10,"Class  : PP4+",0,1,'L');
     }
     
     function body($Students,$COMSubjects,$OPTSubjects){
@@ -102,12 +112,29 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['ClassRo
           $pic = "custom/img/noimg.jpg";
       }
 
-      $this->SetY(55);
+      $this->SetY(28);
       $this->SetX(10);
       $this->SetFont("dejavusans",'B',10);
-      $this->Cell(30,7,"Student Name",0,0);
-      $this->SetFont('dejavusans','',10);
-      $this->Cell(75,7,":  ".$Students['StudentName'],0,0);
+      $this->Cell(101,7,"Student Details",1,0,'C');
+      $this->Cell(85,7,"Hindi",1,0,'C');
+      $this->Cell(85,7,"English",1,0,'C');
+      $this->Cell(85,7,"Maths",1,0,'C');
+      $this->Cell(85,7,"EVS",1,0,'C');
+      $this->Cell(50,7,"WORK Exp.",1,0,'C');
+      $this->Cell(50,7,"Art EDU.",1,0,'C');
+      $this->Cell(50,7,"Health EDU.",1,0,'C');
+      $this->Cell(15,7,"Total",1,0,'C');
+      $this->Cell(12,7,"%",1,0,'C');
+      $this->Cell(25,7,"Result",1,0,'C');
+      $this->TextWithRotation(50,65,'Attendence',90,-0);
+      $this->Cell(20,7,"Attendence",1,0,'C');
+      $this->Cell(20,7,"Remark",1,1,'C');
+
+      $this->Cell(15,7,"S.No.",1,0,'C');
+      $this->Cell(18,7,"Roll No.",1,0,'C');
+      $this->Cell(68,7,"Student Name",1,0,'C');
+      $this->Cell(68,7,"Half Yearly",1,0,'C');
+      $this->Cell(68,7,"Yearly",1,0,'C');
 
       $this->SetFont('dejavusans','B',10);
       $this->Cell(19,7,"Class",0,0);
