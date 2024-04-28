@@ -105,7 +105,7 @@ input::-webkit-inner-spin-button {
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="custom/js/AttendenceEntry.js"></script>
+<script src="custom/js/AttendenceEntryy.js"></script>
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- page script -->
 
