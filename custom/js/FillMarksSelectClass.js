@@ -80,7 +80,7 @@ $( document ).ready(function() {
                                     <div class="progress-bar progress-bar-success" style="width: ${item.CompletedPercent}%">${item.CompletedPercent}%</div>
                                 </div>`
                         MarkseetBtn = `<a href="ViewMarksheets?ClassRoomID=${item.ClassRoomID}&SectionID=${item.SectionID}"><button class="btn btn-sm btn-primary">View Marksheets</button></a>`;
-                        ResultSheetBtn = `<a target="_blank" href="http://93.127.199.110:5000/Home/ResultSheet/${item.SectionID}"><button class="btn btn-sm btn-info">View ResultSheet</button></a>`;
+                        ResultSheetBtn = `<a target="_blank" href="https://93.127.199.110:5000/Home/ResultSheet/${item.SectionID}"><button class="btn btn-sm btn-info">View ResultSheet</button></a>`;
                         
                     }else{
                         bar = `<div class="progress progress-striped active">
