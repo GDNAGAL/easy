@@ -33,6 +33,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
   if($Status === "OK"){
     $SchoolName = $responseJSON['School']['SchoolName'];
     $SchoolAddress = $responseJSON['School']['SchoolAddress'];
+    $SchoolRegNo = $responseJSON['School']['SchoolRegNo'];
     $Students = $responseJSON['StudentList'];
 
     
@@ -67,7 +68,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
   class PDF extends TCPDF
   {
     function Header(){
-       global $SchoolName, $SchoolAddress;
+       global $SchoolName, $SchoolAddress, $SchoolRegNo;
       // $this->Image("dist/img/logo.jpg", 50, 100, 100, 100, '', '', '', false, 300, '', false, false, 0);
       $this->SetFont('dejavusans','B',14);
       $this->Image("dist/img/logo.jpg",10,10,20,25);
@@ -79,7 +80,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
       $this->SetFont('dejavusans','B',14);
       $this->Cell(190,10,"MARKSHEET-2023-24",0,1,'C');
       $this->SetFont('dejavusans','',10);
-      $this->Cell(190,7,"School Reg. No.  : 2019/BKN/RAJ",0,1,'R');
+      $this->Cell(190,7, ($SchoolRegNo ? "School Reg. No.  : $SchoolRegNo" : ''),0,1,'R');
       $this->SetFillColor(222,137,137);
       $this->SetTextColor(255,255,255);
       $this->Rect(0, 41, 210, 8, 'F');
@@ -255,9 +256,12 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
         }
         if($index==1){
           $this->Cell(12,7,"",0,0,'C');
-          $this->Cell(26,7,"400","RBL",0,'C');
-          $this->Cell(26,7,"200","RB",0,'C');
-          $this->Cell(26,7,"50 %","RB",0,'C');
+          $this->Cell(26,7,$Students['TotalAttnDay'],"RBL",0,'C');
+          $this->Cell(26,7,$Students['Present'],"RB",0,'C');
+          $present = intval($Students['Present']);
+          $totalAttnDay = intval($Students['TotalAttnDay']);
+          $attendancePercentage = ($totalAttnDay > 0) ? (($present / $totalAttnDay) * 100) : 0;
+          $this->Cell(26, 7, $attendancePercentage . "%", "RB", 0, 'C');
         }
         $this->ln(7);
       }

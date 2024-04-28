@@ -72,9 +72,11 @@ input::-webkit-inner-spin-button {
           <div class="row">
         <div class="col-md-12">
           <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs" id="subjectTabs">
-              
-            </ul>
+            <div style="display:flex">
+              <strong>Total Working Days</strong>: 
+              <input type="number" id="totalAtt" style="width:55px; margin-right:10px" class="form-control">
+            </div>
+            <button class="btn btn-success" id="savebtn" style='float:right' type="submit"><i class="fa fa-save"></i> &nbsp;Save</button>
             <div class="tab-content" id="tabcontent">
             </div>
           </div>
