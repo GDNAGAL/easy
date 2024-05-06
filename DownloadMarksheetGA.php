@@ -261,7 +261,12 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
           $present = intval($Students['Present']);
           $totalAttnDay = intval($Students['TotalAttnDay']);
           $attendancePercentage = ($totalAttnDay > 0) ? (($present / $totalAttnDay) * 100) : 0;
-          $this->Cell(26, 7, round($attendancePercentage,2) . "%", "RB", 0, 'C');
+          if($attendancePercentage == 0){
+            $attendancePercentage = "";
+          }else{
+            $attendancePercentage = round($attendancePercentage,2) . "%"
+          }
+          $this->Cell(26, 7, $attendancePercentage, "RB", 0, 'C');
         }
         $this->ln(7);
       }
