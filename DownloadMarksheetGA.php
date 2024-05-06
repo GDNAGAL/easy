@@ -264,7 +264,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
           if($attendancePercentage == 0){
             $attendancePercentage = "";
           }else{
-            $attendancePercentage = round($attendancePercentage,2) . "%"
+            $attendancePercentage = round($attendancePercentage,2) . "%";
           }
           $this->Cell(26, 7, $attendancePercentage, "RB", 0, 'C');
         }
