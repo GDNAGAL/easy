@@ -144,7 +144,7 @@ if(isset($_COOKIE['Token']) && isset($_GET['SectionID']) && isset($_GET['Student
 
 
       //Display Student Image
-      $this->Image($pic,175,55,20,25,"JPG");
+      // $this->Image($pic,175,55,20,25,"JPG");
 
       $this->SetFillColor(222,137,137);
       $this->SetTextColor(255,255,255);
